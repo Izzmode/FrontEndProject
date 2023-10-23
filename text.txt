@@ -1,0 +1,7 @@
+tbd
+
+skapa backend
+mongo db
+strukturera upp hur ett objekt ska se ut
+behöver det vara ordrar? Lägger man till objekten i en array, det är ju bara en åt gången
+inloggning och jwt
