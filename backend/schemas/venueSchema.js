@@ -23,8 +23,14 @@ const venueSchema = mongoose.Schema({
   images: { type: [String] },
   pricePerHour: { type: Number },
   rating: { type: Number },
-})
+  transportation: [
+    {
+      mode: { type: String }, // E.g., "subway", "bus", "car"
+      stop: { type: String }, // E.g., "Trainstation 'T-centralen', 400m from the conference room."
+      distance: { type: String }, // E.g., "400m"
+    },
+  ] 
+});
 
 
-//add car, train
 module.exports = mongoose.model('Venue', venueSchema)

@@ -85,7 +85,19 @@ exports.getBookingById = async (req, res) => {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
 // Get all bookings made by specific user
+//Is this needed??????
 
 exports.getBookingsByUser = async (req, res) => {
 
