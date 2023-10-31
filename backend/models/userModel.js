@@ -5,8 +5,6 @@ const { generateToken } = require('../authentication/auth');
 
  // Add new user
 
- //TBD make it so that email has to be unique
-
  exports.addUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -18,30 +16,33 @@ const { generateToken } = require('../authentication/auth');
     return res.status(400).json({ message: 'You need to enter a password' });
   }
 
+  const user = await User.findOne({ email })
+  if(user){
+    return res.status(404).json({
+      message: "this user already exists"
+    })
+  }
+
   try {
     // Generate a salt
-    //TBD make it sync?
     const salt = await bcrypt.genSalt(10);
 
     // Hash the password
-    //TBD add err and cb? remove async
     const hash = await bcrypt.hash(password, salt);
 
     // Creating a new user with the hashed password in the database
-    //TBD Make a user.create instead? Add a .then?
     const _user = new User({ email, passwordHash: hash });
     const user = await _user.save();
 
     if (!user) {
       return res.status(500).json({ message: 'Something went wrong when creating a new user' });
     }
-
-    // Returning the user object
-    //return a jwt? import from auth?
-    // return res.status(201).json(user);
-      // Generating token
-  return res.status(200).json(generateToken(user))
-  } catch (error) {
+      
+    // Generating token
+      return res.status(200).json(generateToken(user))
+  } 
+  
+  catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Error while creating a new user' });
   }
@@ -69,8 +70,6 @@ exports.login = async (req, res) => {
   // Generating token
   res.status(200).json(generateToken(user))
 
-  // Returning user object
-  // res.status(200).json(user)
 }
 
 
@@ -80,8 +79,10 @@ exports.getUserData = (req, res) => {
 
  User.findById(id)
  .then (user => {
-  res.status(200).json(user)
 
+  //add more things here or find other way to leave out passwordhash
+  const _user = { email: user.email, id: user._id }
+  res.status(200).json(_user)
  
 })
 }
