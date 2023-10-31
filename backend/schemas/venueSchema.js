@@ -23,7 +23,8 @@ const venueSchema = mongoose.Schema({
   images: { type: [String] },
   pricePerHour: { type: Number },
   rating: { type: Number },
-  favourite: { type: Boolean }
 })
 
+
+//add car, train
 module.exports = mongoose.model('Venue', venueSchema)

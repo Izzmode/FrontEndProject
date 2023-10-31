@@ -1,18 +1,21 @@
 const router = require('express').Router();
 const { addBooking, getBookingById, getBookingsByUser, getBookings } = require('../models/bookingModel');
-// const { verifyToken, checkAdmin } = require('../authentication/auth')
+const { verifyToken } = require('../authentication/auth')
 
 
 // Create
-// router.post('/', verifyToken, addOrder)
-router.post('/', addBooking)
+router.post('/', verifyToken, addBooking)
 
-// router.post('/add/:id', addToExistingOrder)
 
 // Read
-router.get('/', getBookings)
-// router.get('/', verifyToken, checkAdmin, getOrders)
+router.get('/', verifyToken, getBookings)
+
+//when you click on a booking to go to bookingdetails?
 router.get('/:id', getBookingById)
+
+
+
+//is this needed? 
 router.get('/user/:id', getBookingsByUser)
 
 

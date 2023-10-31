@@ -1,32 +1,52 @@
 const User = require('../schemas/userSchema');
 const bcrypt = require('bcryptjs');
-// const { generateToken } = require('../authentication/auth');
+const { generateToken } = require('../authentication/auth');
 
 
  // Add new user
 
-exports.addUser = async (req, res) => {
+ //TBD make it so that email has to be unique
+
+ exports.addUser = async (req, res) => {
   const { email, password } = req.body;
 
-  if(!email) res.status(400).json({ message: 'You need to enter an email address' });
-  if(!password) res.status(400).json({ message: 'You need to enter a password' });
+  if (!email) {
+    return res.status(400).json({ message: 'You need to enter an email address' });
+  }
 
-  // Hashing password
-  const salt = await bcrypt.genSalt(10);
-  const hash = await bcrypt.hash(password, salt)
+  if (!password) {
+    return res.status(400).json({ message: 'You need to enter a password' });
+  }
 
-  // Creating new user with hashed password on database
-  const _user = new User({ email, passwordHash: hash })
-  const user = await _user.save()
+  try {
+    // Generate a salt
+    //TBD make it sync?
+    const salt = await bcrypt.genSalt(10);
 
-  if(!user) res.status(500).json({ message: 'Something went wrong when creating new user' });
+    // Hash the password
+    //TBD add err and cb? remove async
+    const hash = await bcrypt.hash(password, salt);
 
-  // Generating token
-  // res.status(201).json(generateToken(user))
+    // Creating a new user with the hashed password in the database
+    //TBD Make a user.create instead? Add a .then?
+    const _user = new User({ email, passwordHash: hash });
+    const user = await _user.save();
 
-    // Returning user object
-    res.status(201).json(user)
-}
+    if (!user) {
+      return res.status(500).json({ message: 'Something went wrong when creating a new user' });
+    }
+
+    // Returning the user object
+    //return a jwt? import from auth?
+    // return res.status(201).json(user);
+      // Generating token
+  return res.status(200).json(generateToken(user))
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Error while creating a new user' });
+  }
+};
+
 
 
 // Log in
@@ -47,8 +67,21 @@ exports.login = async (req, res) => {
   if(!result) return res.status(401).json({ message: 'Incorrect credentials' })
 
   // Generating token
-  // res.status(200).json(generateToken(user))
+  res.status(200).json(generateToken(user))
 
   // Returning user object
+  // res.status(200).json(user)
+}
+
+
+//TBD do not return whole user obj, that returns the hashed password
+exports.getUserData = (req, res) => {
+ const id = req.userId
+
+ User.findById(id)
+ .then (user => {
   res.status(200).json(user)
+
+ 
+})
 }

@@ -6,5 +6,4 @@ const userSchema = mongoose.Schema({
 })
 
 
-//populera bookings och liked venues?
 module.exports = mongoose.model('User', userSchema)
