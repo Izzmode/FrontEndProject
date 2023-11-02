@@ -2,6 +2,7 @@ import React from 'react'
 import VenueCard from '../components/VenueCard'
 import useFetch from '../hooks/useFetch'
 import { useNavigate } from 'react-router-dom'
+import SearchBarOptions from '../components/SearchBarOptions'
 
 const Venues = () => {
 
@@ -12,8 +13,12 @@ const Venues = () => {
 
       return(
     
-        <div className='Venues'>
     
+        <div className='Venues'>
+
+        <SearchBarOptions/>
+    
+          <section className='venues-container'>
           <h1 className="venuesTitle">Venues</h1>
           <ul className='VenueCards-container'>
             {isLoading && <p>Loading...</p>}
@@ -23,6 +28,7 @@ const Venues = () => {
               )) }
     
           </ul>
+          </section>
         </div>
         )
       

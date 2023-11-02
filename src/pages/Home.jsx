@@ -15,7 +15,7 @@ const Home = () => {
         <h1>Innovative Meetings, Easily Booked</h1>
         <p>Welcome to TechSpace Stockholm!</p>
       </section>
-      <section className='popular-venues'>
+      <section className='venues-container'>
         <h2>Popular Venues</h2>
         <ul className='VenueCards-container'>
             {isLoading && <p>Loading...</p>}
