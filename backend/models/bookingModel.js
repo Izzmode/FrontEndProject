@@ -20,11 +20,11 @@ Booking.calculatePrice = async function (booking) {
   // Create new booking
 exports.addBooking = async (req, res) => {
   
-  const { venue, date, startTime, endTime, catering, billing } = req.body;
+  const { venue, date, startTime, endTime, catering } = req.body;
   if(!venue) return res.status(400).json({ message: 'You need to enter venues to your cart' })
 
   console.log(req.userId)
-  // Creating new booking with the logged in user's id as customerId
+  // Creating new booking with the logged in user's id as customerId, change to userId?
   const booking = await Booking.create({
     customerId: req.userId,
     venue,

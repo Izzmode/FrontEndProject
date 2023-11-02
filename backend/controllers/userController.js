@@ -9,6 +9,6 @@ router.post('/login', login);
 
 //Read
 
-router.get('/profile', verifyToken, getUserData)
+// router.get('/profile', verifyToken, getUserData)
 
 module.exports = router;

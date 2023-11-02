@@ -74,15 +74,15 @@ exports.login = async (req, res) => {
 
 
 //TBD do not return whole user obj, that returns the hashed password
-exports.getUserData = (req, res) => {
- const id = req.userId
+// exports.getUserData = (req, res) => {
+//  const id = req.userId
 
- User.findById(id)
- .then (user => {
+//  User.findById(id)
+//  .then (user => {
 
-  //add more things here or find other way to leave out passwordhash
-  const _user = { email: user.email, id: user._id }
-  res.status(200).json(_user)
+//   //add more things here or find other way to leave out passwordhash
+//   const _user = { email: user.email, id: user._id }
+//   res.status(200).json(_user)
  
-})
-}
+// })
+// }

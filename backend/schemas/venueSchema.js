@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 const venueSchema = mongoose.Schema({
   name: { type: String },
-  adress: { type: String },
+  address: { type: String },
+  area: { type: String},
+  longitude: { type: Number },
+  latitude: { type: Number },
   numberOfPeople: { type: Number },
   information: {type: String },
   amenities: [ 
@@ -25,9 +28,9 @@ const venueSchema = mongoose.Schema({
   rating: { type: Number },
   transportation: [
     {
-      mode: { type: String }, // E.g., "subway", "bus", "car"
-      stop: { type: String }, // E.g., "Trainstation 'T-centralen', 400m from the conference room."
-      distance: { type: String }, // E.g., "400m"
+      mode: { type: String }, 
+      stop: { type: String }, 
+      distance: { type: String }, 
     },
   ] 
 });

@@ -11,10 +11,5 @@ router.post('/', addVenue);
 router.get('/', getVenues);
 router.get('/:id', getVenueById);
 
-// Update
-// router.put('/:id', updateProduct);
-
-// Delete
-// router.delete('/:id', deleteProduct);
 
 module.exports = router;

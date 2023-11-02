@@ -3,12 +3,10 @@ const Likes = require('../schemas/likesSchema');
 exports.toggleLike = async (req, res) => {
     const { venueId } = req.body;
 
-    // Ensure a user is authenticated (you can use your `verifyToken` middleware here)
-
     try {
         // Check if the user has already liked the venue
         const existingLike = await Likes.findOne({
-            user: req.userId, // Assuming this is set by your `verifyToken` middleware
+            user: req.userId, 
             venue: venueId,
         });
 
@@ -44,7 +42,6 @@ exports.getLikes = async (req, res) => {
     try{
     
       const likes = await Likes.find({ user: req.userId })
-      // console.log(req.userId)
       //TBD populate more from venue
       .populate({ path: 'venue', select: 'name adress thumbnail' })
     //   .populate({ path: 'bookingStatus', select: 'status' })

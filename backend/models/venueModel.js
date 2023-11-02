@@ -4,19 +4,19 @@ const Venue = require('../schemas/venueSchema');
 
 exports.addVenue = async (req, res) => {
 
-  const { name, adress, numberOfPeople, information, amenities, contact, 
-    website, arrangements, thumbnail, images, pricePerHour, rating, favourite } = req.body;
+  const { name, address, area, longitude, latitude, numberOfPeople, information, amenities, contact, 
+    website, arrangements, thumbnail, images, pricePerHour, rating, transportation } = req.body;
 
   // if(!name) res.status(400).json({ message: 'You need to give the product a name' });
-  // if(!description) res.status(400).json({ message: 'You need to give the product a description' });
-  // if(!price) res.status(400).json({ message: 'You need to give the product a price' });
-  // if(!imageURL) res.status(400).json({ message: 'You need to give the product a imageURL' });
-  // if(!tags) res.status(400).json({ message: 'You need to give the product a tag' });
-  // if(!rating) res.status(400).json({ message: 'You need to give the product a rating' });
-  // if(!review) res.status(400).json({ message: 'You need to give the product a review' });
+  // if(!adress) res.status(400).json({ message: 'You need to give the product a adress' });
+  // if(!numberOfPeople) res.status(400).json({ message: 'You need to add numberOfPeople' });
+  // if(!information) res.status(400).json({ message: 'You need to give the product informationL' });
+  // if(!amenities) res.status(400).json({ message: 'You need to give the product amenities' });
+  // if(!contact) res.status(400).json({ message: 'You need to give the product a contact' });
+  // if(!pricePerHour) res.status(400).json({ message: 'You need to give the product pricePerHour' });
 
-  const venue = await Venue.create({ name, adress, numberOfPeople, information, amenities, contact, 
-    website, arrangements, thumbnail, images, pricePerHour, rating, favourite });
+  const venue = await Venue.create({ name, address, area, longitude, latitude, numberOfPeople, information, amenities, contact, 
+    website, arrangements, thumbnail, images, pricePerHour, rating, transportation });
 
   if(!venue) res.status(500).json({ message: 'Something went wrong when creating new venue' });
 
