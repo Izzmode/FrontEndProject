@@ -4,6 +4,7 @@ import VenueCard from '../components/venueCard/VenueCard'
 import useFetch from '../hooks/useFetch'
 import { useNavigate } from 'react-router-dom'
 import AboutUs from '../components/aboutUs/AboutUs'
+import Testimonials from '../components/testimonials/Testimonials'
 
 
 const Home = () => {
@@ -42,7 +43,7 @@ const Home = () => {
       onClick={ () => navigate('/venues')}
       >SEE ALL VENUES</button>
       </section>
-
+      <Testimonials/>
       <AboutUs/>
     </div>
   )

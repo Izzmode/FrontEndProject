@@ -26,6 +26,10 @@ const venueSchema = mongoose.Schema({
   images: { type: [String] },
   pricePerHour: { type: Number },
   rating: { type: Number },
+  reviews: [ 
+      {text: {type: String},
+      reviewer: {type: String}}
+    ],
   transportation: [
     {
       mode: { type: String }, 

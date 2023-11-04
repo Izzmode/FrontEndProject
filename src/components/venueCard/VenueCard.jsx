@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom'
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import { FaStar, FaUserAlt } from "react-icons/fa"
 import { useState } from 'react'
-import StarRating from '../StarRating'
 import './venueCard.css'
 
 
@@ -20,7 +19,7 @@ const VenueCard = ({ venue }) => {
    
 
   return (
-
+    
     <NavLink to={`/venues/${venue._id}` } style={{ textDecoration: 'none' }}>
 
     <li className='VenueCard' style={{ textDecoration: 'none' }}>

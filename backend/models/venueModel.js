@@ -5,7 +5,7 @@ const Venue = require('../schemas/venueSchema');
 exports.addVenue = async (req, res) => {
 
   const { name, address, area, longitude, latitude, numberOfPeople, information, amenities, contact, 
-    website, arrangements, thumbnail, images, pricePerHour, rating, transportation } = req.body;
+    website, arrangements, thumbnail, images, pricePerHour, rating, reviews, transportation } = req.body;
 
   // if(!name) res.status(400).json({ message: 'You need to give the product a name' });
   // if(!adress) res.status(400).json({ message: 'You need to give the product a adress' });
@@ -16,7 +16,7 @@ exports.addVenue = async (req, res) => {
   // if(!pricePerHour) res.status(400).json({ message: 'You need to give the product pricePerHour' });
 
   const venue = await Venue.create({ name, address, area, longitude, latitude, numberOfPeople, information, amenities, contact, 
-    website, arrangements, thumbnail, images, pricePerHour, rating, transportation });
+    website, arrangements, thumbnail, images, pricePerHour, rating, reviews, transportation });
 
   if(!venue) res.status(500).json({ message: 'Something went wrong when creating new venue' });
 
