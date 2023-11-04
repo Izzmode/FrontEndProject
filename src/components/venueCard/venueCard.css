@@ -1,0 +1,150 @@
+/* ICONS */
+
+.user-icon{
+    display: inline;
+    font-size: 15px;
+  }
+
+  .star-icon{
+    margin-left: .2rem;
+  }
+
+  .heart-icon-filled{
+    position: absolute;
+    top: 7px;
+    right: 5px;
+    z-index: 2;
+    color: #C64FC8;
+    display: none;
+  }
+
+  .heart-icon-filled:hover{
+    color: hsl(299, 52%, 65%);
+  }
+
+  .heart-icon{
+    position: absolute;
+    top: 7px;
+    right: 5px;
+    z-index: 2;
+    display: none;
+  }
+  .heart-icon-filled.active,
+  .heart-icon.active {
+    display: block;
+  }
+
+
+  /* CARD ITSELF */
+
+  .VenueCard{
+    width: 250px;
+    height: 250px;
+    background-color: #2F2F2F;
+    list-style: none;
+    text-decoration: none;
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* IMAGE */
+
+  .VenueCard-img{
+    height: 160px;
+    /* width: 250px; */
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px 8px 0px 0px;
+    z-index: -1;
+    /* filter: sepia(20%); */
+    /* filter: saturate(70%); */
+    opacity: 0.7;
+  }
+
+  .shadow {
+    position: absolute;
+    /* width: 1px;
+    height: 1px; */
+    width: 40px;
+    height: 70px;
+    background: radial-gradient(circle at 100% 0%, #3e3e3e35 50%, transparent 60%);
+    top: 0;
+    right: 0;
+    overflow: hidden;
+    /* box-shadow: -5px 3px 10px 34px rgba(57, 57, 57, 0.362); */
+    /* border-radius: 100px 8px 100px 300px; */
+  }
+
+  /* TEXT */
+
+  .info-wrapper{
+    padding: 0 1rem;
+  }
+  .rating-container{
+    display: flex;
+    align-items:end;
+  }
+
+  .venueAddress{
+    flex: 1;
+    font-size: .7rem;
+  }
+
+  .venueNumOfPeople{
+    font-weight: 400;
+    color:#b8b8b8;
+    margin-left: 5px;
+    display: inline;
+
+  }
+
+  .rating-container, .numOfPeople-container, .venuePrice{
+    padding-top: .5rem;
+  }
+
+  .VenueCard p {
+    font-size: .7rem;
+  }
+
+    /* MEDIA QUERYS */
+
+    @media (max-width: 600px) {
+  
+      .VenueCard {
+        width: 95%;
+        margin: 0 auto;
+      }
+
+      .VenueCard h2, p.venue-rating, p.venueNumOfPeople, p.venuePrice {
+        font-size: 1rem;
+      }
+
+      .star-icon{
+        font-size: 24px;
+      }
+      .user-icon{
+        font-size: 18px;
+      }
+
+
+
+      .bottom-container{
+        display: flex;
+        margin-top: .7rem;
+      }
+
+      .numOfPeople-container{
+        flex:1;
+      }
+    }
+
+  
+
+  
+
+
+
+

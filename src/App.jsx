@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import Home from "./pages/Home"
 import Venues from "./pages/Venues"
 import VenueDetails from "./pages/VenueDetails"
-import Navbar from './components/Navbar'
+import Navbar from './components/navbar/Navbar'
 // import { ProtectedRoute } from './routes/ProtectedRoute'
 // import OrderList from './pages/OrderList'
 import BookingDetails from './pages/BookingDetails'

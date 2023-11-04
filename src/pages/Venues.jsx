@@ -1,5 +1,5 @@
 import React from 'react'
-import VenueCard from '../components/VenueCard'
+import VenueCard from '../components/venueCard/VenueCard'
 import useFetch from '../hooks/useFetch'
 import { useNavigate } from 'react-router-dom'
 import SearchBarOptions from '../components/SearchBarOptions'

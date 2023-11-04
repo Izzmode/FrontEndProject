@@ -1,6 +1,6 @@
 import React from 'react'
 import useFetch from '../hooks/useFetch'
-import VenueCard from '../components/VenueCard'
+import VenueCard from '../components/venueCard/VenueCard'
 import { useLocation } from 'react-router-dom'
 import SearchBarOptions from '../components/SearchBarOptions'
 const SearchedVenues = () => {

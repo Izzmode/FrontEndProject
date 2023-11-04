@@ -1,0 +1,42 @@
+/* NAVBAR */
+
+.Navbar{
+    background-image: url("../../images/masthead_large.jpg");
+    min-height: 380px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* position: absolute; */
+    z-index: -1;
+    width: 100%;
+}
+
+.Navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    margin: 0 auto;
+    padding-top: 1rem;
+  }
+
+  .Navbar .nav-links {
+    overflow: hidden;
+    /* width: 100%; */
+    /* right: 1rem; */
+      display: flex;
+      /* align-items: center; */
+      /* gap: 2rem; */
+  }
+
+  .Navbar .nav-link {
+    text-decoration: none;
+    color: white;
+  }
+
+  .nav-links li {
+    text-align: center;
+    padding: 14px 16px;
+    list-style: none;
+    font-size: 1rem;
+  }

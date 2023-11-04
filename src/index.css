@@ -9,51 +9,9 @@
 
 body{
   background-color: #121212;
+  /* background: linear-gradient(254deg, #252525 11.07%, #171717 84.69%) */
+  /* background: linear-gradient(254deg, #252525 11.07%, #121212 84.69%) */
 }
-
-/* NAVBAR */
-
-.Navbar{
-    background-image: url("./images/masthead_large.jpg");
-    min-height: 380px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* position: absolute; */
-    z-index: -1;
-    width: 100%;
-}
-
-.Navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 95%;
-    margin: 0 auto;
-    padding-top: 1rem;
-  }
-
-  .Navbar .nav-links {
-    overflow: hidden;
-    /* width: 100%; */
-    /* right: 1rem; */
-      display: flex;
-      /* align-items: center; */
-      /* gap: 2rem; */
-  }
-
-  .Navbar .nav-link {
-    text-decoration: none;
-    color: white;
-  }
-
-  .nav-links li {
-    text-align: center;
-    padding: 14px 16px;
-    list-style: none;
-    font-size: 1rem;
-  }
-
   /* HOME */
 
   /* CTA */
@@ -110,6 +68,10 @@ body{
   }
   
   /* HOME FORTSÄTTNING */
+
+  .btn-home{
+    margin: 0 auto;
+  }
   
   .welcome-text{
     text-align: center;
@@ -129,99 +91,115 @@ body{
     align-content: flex-start;
   }
 
+  .pop-venues{
+    font-size: 1rem;
+  }
+
   /* VENUECARD */
 
+  /* //FIXA MEDIAQUERY  1250PX*/
   .VenueCards-container{
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 1rem 0;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     width: 100%;
     max-width: 100%;
   }
 
-  .VenueCard{
-    width: 300px;
-    height: 300px;
-    background-color: #171717;
-    list-style: none;
-    text-decoration: none;
-    color: white;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-    position: relative;
-    overflow: hidden;
+  /* MEDIA QUERYS */
+
+  @media (max-width: 1250px) {
+    .venues-container {
+      width: 90%;
+    }
+
   }
 
+  @media (max-width: 1180px) {
+    .venues-container {
+      width: 95%;
+    }
+  }
 
-  .VenueCard-img{
-    height: 200px;
-    width: 300px;
-    object-fit: cover;
-    border-radius: 8px;
-    z-index: -1;
+  /* @media (max-width: 1120px) {
+    .VenueCards-container{
+      justify-content: center;
+    }
+
+    .pop-venues{
+      margin: 0 auto;
+    }
+  } */
+
+  @media (max-width: 936px) {
+
+    .venues-container {
+      width: 100%;
+    }
+    .VenueCards-container{
+      /* justify-content: center; */
+      justify-content: center;
+    }
+    .pop-venues{
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 836px) {
+    .CTA{
+      width: 95%;
+      /* margin-top: -16rem; */
+      /* height: 300px; */
+    }
+  }
+  @media (max-width: 600px) {
+    .CTA{
+      width: 100%;
+      /* margin-top: -16rem; */
+      margin-top: -20rem;
+      height: 300px;
+    }
+
+    .cta-container{
+      width: 100%
+    }
+
+    .CTA .dropdowns{
+      display: block;
+      justify-content: space-around;
+      width: 100%;
+      /* color: white; */
+      /* font-size: .8rem; */
+      /* font-weight: 200; */
+      /* gap: 2rem; */
+      /* margin-top: 2rem;  */
+    }
+
+    .dropdownOne, .dropdownTwo{
+    padding: .5rem;
+    }
+    .btn-search{
+      width: 90%;
+      padding: 1rem;
+      margin: 0 auto;
+
+    }
+    .css-b62m3t-container, .css-1w51wga-control, .css-b9akh4-control{
+      width: 100% !important;
+      padding: .2rem;
+    }
     
-  }
-
-  .shadow {
-    position: absolute;
-    /* width: 1px;
-    height: 1px; */
-    width: 40px;
-    height: 70px;
-    background: radial-gradient(circle at 100% 0%, #3e3e3e35 50%, transparent 60%);
-    top: 0;
-    right: 0;
-    overflow: hidden;
-    /* box-shadow: -5px 3px 10px 34px rgba(57, 57, 57, 0.362); */
-    /* border-radius: 100px 8px 100px 300px; */
-  }
-  
-
-  .heart-icon-filled{
-    position: absolute;
-    top: 7px;
-    right: 5px;
-    z-index: 2;
-    color: #C64FC8;
-    display: none;
-  }
-
-  .heart-icon-filled:hover{
-    color: hsl(299, 52%, 65%);
-  }
-
-  .heart-icon{
-    position: absolute;
-    top: 7px;
-    right: 5px;
-    z-index: 2;
-    display: none;
-  }
-  .heart-icon-filled.active,
-  .heart-icon.active {
-    display: block;
-  }
-
-  .VenueCard h2{
-    font-size: 1rem;
-    text-decoration: none;
+    .VenueCards-container a {
+      width: 100%;
+    }
 
   }
 
-  .VenueCard p {
-    font-size: .7rem;
-  }
-  .VenueCard li h2 {
-    text-decoration: none;
-  }
-  
-  .VenueCard li p {
-    text-decoration: none;
-  }
+
 
   /* SEARCHBAR OPTIONS */
 
@@ -268,3 +246,38 @@ body{
   label{
     display: block;
   }
+
+  .react-datepicker-popper{
+    background-color: #171717;
+    border-radius: 8px;
+  }
+
+  .react-datepicker{
+    border: none;
+  }
+
+  .react-datepicker__header{
+    background-color: #171717;
+    color: white;
+  }
+
+  .react-datepicker__month-container{
+    background-color:#171717;
+    border: none;
+  }
+
+  .react-datepicker__day, .react-datepicker__day--010{
+ color: white;
+  }
+
+  .react-datepicker__day-name{
+    color: white;
+  }
+
+  .react-datepicker__current-month{
+    color: white;
+  }
+
+
+
+
