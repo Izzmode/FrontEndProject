@@ -35,7 +35,7 @@ const TestimonialCard = ({ data }) => {
             <div className='review-wrapper'>
                 <p className='testp'>{renderStars(data.rating)}</p>
                 {data.reviews.map((review) => (
-                    <div className='text-reviewer' key={review.id}>
+                    <div className='text-reviewer' key={review._id}>
                     <MaxCharachterText text={review.text} maxCharCount={maxCharCount} /> 
                 <p className='p-reviewer'>{review.reviewer}</p>
                 </div>

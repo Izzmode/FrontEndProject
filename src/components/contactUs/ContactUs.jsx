@@ -12,7 +12,7 @@ const ContactUs = () => {
 
 
   return (
-    <div className='ContactUs'>
+    <div className='ContactUs' id='contact-us'>
         <div className='contact-form-wrapper'>
         <div className='wrapper-one-contact'>
             <h2>Contact Us</h2>
@@ -38,7 +38,7 @@ const ContactUs = () => {
             <p>Drottninggatan 56</p>
             <p>123 45 Stockholm</p>
             </div>
-            <Map className='map-contact' longitude={18.06261319757508} latitude={59.336271308593965}/>
+            <Map className='map-contact' longitude={18.062293184656447} latitude={59.33344943795326}/>
             </div>
     </div>
   )

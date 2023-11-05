@@ -22,7 +22,7 @@ const Map = ({ longitude, latitude }) => {
 
   return (
     <div>
-        <div id="map"></div>
+        <div id="map" className='classMap'></div>
     </div>
   )
 }

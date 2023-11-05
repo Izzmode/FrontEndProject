@@ -32,7 +32,7 @@ const Testimonials = () => {
     <div className='Testimonials'>
         <Slider {...settings}>
         {reviewedVenues && reviewedVenues.map(data => (
-            <TestimonialCard data={data} key={data.id}/>
+            <TestimonialCard data={data} key={data._id}/>
         ))}
 
         </Slider>

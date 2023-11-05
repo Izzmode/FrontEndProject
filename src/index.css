@@ -83,11 +83,16 @@ body{
   .btn-home{
     margin: 0 auto;
   }
+
   
   .welcome-text{
     text-align: center;
     color: white;
     margin-top: 3rem;
+  }
+
+  .welcome-text h1{
+    margin-bottom: 1rem;
   }
 
   /* SAMMA CONTAINER I VENUES OCKSÅ */
@@ -290,10 +295,9 @@ body{
   }
 
 
-  #map{
+  .classMap{
     width: 100%;
     height: 300px;
   }
-
 
 

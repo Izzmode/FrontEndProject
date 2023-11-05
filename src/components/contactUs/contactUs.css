@@ -43,6 +43,7 @@
     border: none;
     padding: .3rem;
     border-radius: 8px;
+    color: white;
 }
 .contact-form input{
     margin-bottom: 1rem;

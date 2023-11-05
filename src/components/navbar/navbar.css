@@ -22,9 +22,9 @@
 
   .Navbar .nav-links {
     overflow: hidden;
+    display: flex;
     /* width: 100%; */
     /* right: 1rem; */
-      display: flex;
       /* align-items: center; */
       /* gap: 2rem; */
   }
@@ -38,5 +38,5 @@
     text-align: center;
     padding: 14px 16px;
     list-style: none;
-    font-size: 1rem;
+    font-size: .8rem;
   }

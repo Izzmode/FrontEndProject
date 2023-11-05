@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 // import { useShoppingCart } from '../context/ShoppingCartContext';
 import './navbar.css'
-
-
 
 
 const Navbar = () => {

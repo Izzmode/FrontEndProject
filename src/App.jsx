@@ -1,8 +1,9 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from "./pages/Home"
 import Venues from "./pages/Venues"
-import VenueDetails from "./pages/VenueDetails"
+import VenueDetails from "./pages/venueDetails/VenueDetails"
 import Navbar from './components/navbar/Navbar'
+import Footer from './components/footer/Footer'
 // import { ProtectedRoute } from './routes/ProtectedRoute'
 // import OrderList from './pages/OrderList'
 import BookingDetails from './pages/BookingDetails'
@@ -25,7 +26,8 @@ const App = () => {
 
             <Route path= "/bookings/:id" element ={<BookingDetails/>}/>
             
-            </Routes>
+        </Routes>
+        <Footer/>
     </div>
   )
 }
