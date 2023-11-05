@@ -5,6 +5,7 @@ import useFetch from '../hooks/useFetch'
 import { useNavigate } from 'react-router-dom'
 import AboutUs from '../components/aboutUs/AboutUs'
 import Testimonials from '../components/testimonials/Testimonials'
+import ContactUs from '../components/contactUs/ContactUs'
 
 
 const Home = () => {
@@ -45,6 +46,7 @@ const Home = () => {
       </section>
       <Testimonials/>
       <AboutUs/>
+      <ContactUs/>
     </div>
   )
 }

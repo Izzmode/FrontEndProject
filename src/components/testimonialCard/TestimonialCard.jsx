@@ -25,7 +25,7 @@ const TestimonialCard = ({ data }) => {
 
 
   return (
-    <div>
+    <div key={data.id}>
 
         <div className='testimonial-wrapper'>
             <div className='testimonial-venue'>
