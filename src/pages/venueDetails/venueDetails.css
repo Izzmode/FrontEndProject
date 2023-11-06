@@ -1,3 +1,14 @@
+:root {
+  --background-gradient: linear-gradient(254deg, #252525 11.07%, #171717 84.69%);
+  --background: #121212;
+  --secondary: #171717;
+  --divider: #2F2F2F;
+  --pink: #CE6AD0;
+  --pink-gradiant: linear-gradient(232deg, #DC84DE -0.46%, #CE6AD0 46.2%, #C64FC8 89.11%);
+  --cta-grey: #252525ab;
+  --third-grey: #252525;
+}
+
 .VenueDetails{
     display: flex;
     flex-direction: column;
@@ -37,7 +48,7 @@
   }
 
   .heart-icon-filled-details{
-    color: #C64FC8;
+    color: var(--pink);
     display: none;
     font-size: 25px;
   }
@@ -97,12 +108,20 @@
   .information-containers{
     display: flex;
     color: white;
+    gap: 5rem;
   }
 
   .left-information-container, .right-information-container{
     flex: 1;
     margin-top: 2rem;
   }
+
+  .right-information-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
 
   .left-information-container{
     display: flex;
@@ -139,35 +158,6 @@
     font-weight: 600;
   }
 
-  .accordion-title {
-    display: flex;
-    gap: 1rem;
-    cursor: pointer;
-  }
-  
-  /* .accordion-title:hover {
-    background-color: rgb(110, 110, 110);
-  } */
-  
-  .accordion-title,
-  .accordion-content {
-    padding: 1rem;
-  }
-  
-  .accordion-content {
-    background-color: grey;
-    border-radius: 8px;
-  }
-  
-  @media screen and (max-width: 700px) {
-    body {
-      font-size: 18px;
-    }
-  
-    .accordion {
-      width: 90%;
-    }
-  }
 
   .arr-icons{
     width: 3rem;
@@ -191,6 +181,118 @@
     margin-bottom: 2rem;
   }
 
+  .other-venues >h2{
+    text-align: center;
+  }
+
+  div.other-venues-container{
+    display: flex;
+    justify-content: center;
+  }
+
   .other-venues h2{
     font-size: 1rem;
   }
+
+  .details-contact-left, .details-contact-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* flex: 1; */
+  }
+  .details-contact-left h2, .details-contact-right h2{
+    font-size: 1rem;
+    padding-bottom: .5rem;
+  }
+  .details-contact-left p, .details-contact-right p, .details-contact-left a{
+    font-size: .8rem;
+    font-weight: 200;
+    color: white;
+  }
+
+  a:visited{
+    color: white;
+  }
+  a:active{
+    color: white;
+  }
+  p.contact-name{
+    font-weight: 600;
+  }
+
+  .contact-person{
+    display: flex;
+    background: var(--background-gradient);
+    padding: 1rem;
+    border-radius: 8px;
+    justify-content: space-around;
+
+  }
+
+  .booking-form{
+    width: 100%;
+    padding: 2rem;
+    background-color: var(--third-grey);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .text-section-top, .text-section-bottom{
+    text-align: center;
+  }
+
+  .text-section-bottom p{
+    font-size: .8rem;
+    color: grey;
+  }
+
+  button.btn-book{
+    width: 100%;
+    padding: .7rem 0rem;
+  }
+
+  .form-dropdowns {
+    font-size: .8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+ .form-dropdowns-button{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+ }
+
+ .checkbox-container{
+  display: flex;
+  gap: .7rem;
+  align-items: center;
+ }
+
+ .food-icon{
+  font-size: 25px;
+ }
+
+ .total-top, .total-bottom{
+  display: flex;
+  justify-content: space-between;
+ }
+
+ .total-bottom p, .total-bottom h2{
+  font-size: 1.2rem;
+  font-weight: 600;
+ }
+
+ .total-top p{
+  font-size: .8rem;
+ }
+
+ .total-amount{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+ }
+

@@ -10,32 +10,45 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import { FaWifi, FaParking, FaCoffee, FaWheelchair, FaChalkboard } from "react-icons/fa";
-import { MdOutlineSupportAgent, MdHeadsetMic, MdOutlineVideogameAsset } from "react-icons/md"
+import { MdOutlineSupportAgent, MdHeadsetMic, MdOutlineVideogameAsset, MdDinnerDining } from "react-icons/md"
 import { BsProjector } from "react-icons/bs"
 import { CgScreen } from "react-icons/cg"
 import iconBoardroom from '../../images/icon-boardroom.png'
 import iconStanding from '../../images/icon-standing.png'
 import iconClassroom from '../../images/icon-classroom.png'
 import iconBreakout from '../../images/icon-dining.png'
-
+import Select from 'react-select';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { format } from 'date-fns';
+import QuantityInput from '../../components/inputs/QuantityInput';
+import DateInput from '../../components/inputs/DateInput';
+import TimeInput from '../../components/inputs/TimeInput';
+import Checkbox from '../../components/checkbox/Checkbox';
 
 
 const VenueDetails = () => {
 
   const { id } = useParams();
-  const { data: venues, isLoading, error } = useFetch('http://localhost:9999/api/venues/' + id)
+  const { data: venue, isLoading, error } = useFetch('http://localhost:9999/api/venues/' + id)
   const { data: recVenues } = useFetch('http://localhost:9999/api/venues/')
 
-  const latitude = venues?.latitude;
-  const longitude = venues?.longitude;
+  const latitude = venue?.latitude;
+  const longitude = venue?.longitude;
+
+  const [selectedQuantity, setSelectedQuantity] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [totalAmount, setTotalAmount] = useState(null)
+  const formattedDate = selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '';
 
   const recommendedVenues = recVenues?.filter(data => {
-   if (venues.numberOfPeople <= data.numberOfPeople){
+   if (venue.numberOfPeople <= data.numberOfPeople){
     return true
    }
    return false
   }).slice(0, 4);
-  
+
   const [toggleFavourite, setToggleFavourite] = useState(false)
 
   const handleFavourite = (e) => {
@@ -71,15 +84,22 @@ const VenueDetails = () => {
       Boardroom: iconBoardroom,
       Standing: iconStanding,
       Classroom: iconClassroom,
-      Breakout_Room: iconBreakout
+      Breakout_Rooms: iconBreakout
   }
+
+  const offersCatering = venue?.amenities.filter(am => {
+    if(am.service === 'Catering'){
+    return true
+    }
+    return false
+  })
 
   return (
       <div className='VenueDetails'>
         <section className='details-adress-like'>
           <div className='adress-container'>
-            <h1>{ venues && venues.name}</h1>
-            <p>{ venues && venues.address}</p>
+            <h1>{ venue && venue.name}</h1>
+            <p>{ venue && venue.address}</p>
           </div>
           <div className='like-details'>
             <p>Like</p>
@@ -94,32 +114,31 @@ const VenueDetails = () => {
           </div> 
         </section>
         <div className='top-img-map'>
-          <img src={ venues && venues.thumbnail} alt="image" />
+          <img src={ venue && venue.thumbnail} alt="image" />
           <div className='map-container'>
-            { venues ? <Map latitude={latitude} longitude={longitude}/> : <div>Loading...</div>}
+            { venue ? <Map latitude={latitude} longitude={longitude}/> : <div>Loading...</div>}
           </div>
         </div>
 
         <Slider {...settings}>
-        {venues ? venues.images.map(image => (
+        {venue ? venue.images.map(image => (
           <div className='slider-image-container'>
               <img src={image} className='slider-images-details' ></img>
               </div>
         )) : isLoading}
-
         </Slider>
 
         <div className='information-containers'>
           <div className='left-information-container'>
             <div className='info-container'>
               <h2>Information</h2>
-              <p>{venues && venues.information}</p>
+              <p>{venue && venue.information}</p>
             </div>
 
             <div className='amenities-container'>
               <h2>Amenities</h2>
               <div className='amenity-icons-container'>
-                {venues && venues.amenities.map(am => (
+                {venue && venue.amenities.map(am => (
                   <div key={am.id}>
                     {amenityIcons[am.service]}
                     <p>{am.service.split('_').join(' ')}</p>
@@ -131,12 +150,12 @@ const VenueDetails = () => {
               </p>
             </div>
 
-            <Accordian title={'Equipment'} content={'test'}/>
+            <Accordian title={'Technical Equipment'} content={'test'}/>
 
             <div className='arr-container'>
               <h2>Arrangements</h2>
               <div className='arr-icons-container'>
-                {venues && venues.arrangements.map(arr => (
+                {venue && venue.arrangements.map(arr => (
                   <div key={arr.id}>
                     <img src={seatingIcons[arr.seating]} className='arr-icons'/>
                     <p className='seating-type'>{arr.seating.split('_').join(' ')}</p>
@@ -150,22 +169,77 @@ const VenueDetails = () => {
               <p>Do you have any questions about this locale or its equipment? <br />
               Please contact the venue directly.</p>
             </div>
-
-                
-
-
           </div>
-          <div className='right-information-container'></div>
+
+
+        <div className='right-information-container'>
+
+          <div className='booking-form'>
+            <section className='text-section-top'> 
+              <h2>Book This Venue</h2>
+              <p>From {venue && venue.pricePerHour}SEK/h </p>
+            </section>
+            <div className='booking-form-dropdowns'>
+              <div className='form-dropdowns-button'>
+                <div className="form-dropdowns">
+                  <QuantityInput setSelectedQuantity={setSelectedQuantity} selectedQuantity={selectedQuantity} />
+                  <DateInput setSelectedDate={setSelectedDate} selectedDate={selectedDate} className='test'/>
+                  <TimeInput setSelectedTime={setSelectedTime} selectedTime={selectedTime} setTotalAmount={setTotalAmount} venue={venue}/>
+                </div>
+                {offersCatering && (
+                <div className='checkbox-container'>
+                  <Checkbox label='Add catering to booking'/>
+                  <span>
+                  <MdDinnerDining className='food-icon'/>
+                  </span>
+                </div>
+                )}
+                <div className='total-amount'>
+                  <section className='total-top'>
+                    <p>SEK {venue && venue.pricePerHour} x {selectedTime ? selectedTime.value + ' hours' : '0 hours'}</p>
+                    { totalAmount && <p>SEK {totalAmount}</p>}
+                  </section>
+                  <section className='total-bottom'>
+                    <h2>Total Amount</h2>
+                    {totalAmount && <p>SEK {totalAmount}</p>}
+                  </section>
+                </div>
+              </div>
+            </div>
+            <button className='btn btn-book'>BOOK NOW</button>
+            <section className='text-section-bottom'> 
+              <p>Confirmation and payment options to follow</p>
+              <p>Terms & conditions apply</p>
+            </section>
+          </div>
+
+          <div className='contact-person'>
+            <div className='details-contact-left'>
+              <h2> {venue && venue.name }</h2>
+              <p>{venue && venue.address}</p>
+              <p>123 45 Stockholm</p>
+              <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" target="_blank">Venue website</a>
+            </div>
+            <div className='details-contact-right'>
+              <h2>Contact Person</h2>
+              <p className='contact-name'>{venue && venue.contact.fullName}</p>
+              <p>{venue && venue.contact.email }</p>
+              <p>08 123 456</p>
+            </div>
+          </div>
+
+        </div>
+
       </div>
             <div className='other-venues'>
-            <h2>Other venues you might like</h2>
-            <div className="other-venues-container VenueCards-container">
-              {recommendedVenues && recommendedVenues.map((venue) => (
-              <VenueCard key={venue.id} venue={venue} />
-              ))}
+              <h2>Other venues you might like</h2>
+              <div className="other-venues-container VenueCards-container">
+                {recommendedVenues && recommendedVenues.map((recVenue) => (
+                <VenueCard key={recVenue.id} venue={recVenue} />
+                ))}
+              </div>
             </div>
-            </div>
-      </div>
+    </div>
   )
 }
 

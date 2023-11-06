@@ -1,0 +1,91 @@
+:root {
+  --background-gradient: linear-gradient(254deg, #252525 11.07%, #171717 84.69%);
+  --background: #121212;
+  --secondary: #171717;
+  --divider: #2F2F2F;
+  --pink: #CE6AD0;
+  --pink-gradiant: linear-gradient(232deg, #DC84DE -0.46%, #CE6AD0 46.2%, #C64FC8 89.11%);
+  --cta-grey: #252525ab;
+}
+
+.TimeInput, .DateInput, .QuantityInput, .LocationInput, .PriceInput{
+    width: 100%
+}
+
+
+/* DATEPICKER */
+.react-datepicker-popper{
+    background-color: #171717;
+    border-radius: 8px;
+  }
+
+  div.react-datepicker{
+    border: none;
+    width: 100%;
+  }
+
+  input.date-picker{
+    width: 100%;
+    background-color: var(--secondary);
+    border: none;
+    outline: none;
+    padding: .6rem 1rem;
+    border-radius: 8px;
+    color: white;
+    position: relative;
+    z-index: 1;
+  }
+  
+
+  .react-datepicker__triangle{
+    display: none;
+  }
+
+  .react-datepicker-wrapper{
+    width: 100%;
+  }
+  
+  div.react-datepicker__header{
+    background-color: #171717;
+    color: white;
+  }
+  .react-datepicker__month-container{
+    background-color:#171717;
+    border: none;
+    width: 100%;
+    color: white;
+  }
+
+  div.react-datepicker__day, div.react-datepicker__day--010{
+    color: white;
+  }
+
+  div.react-datepicker__day-name{
+    color: white;
+  }
+
+  div.react-datepicker__current-month{
+    color: white;
+  }
+  .react-datepicker-ignore-onclickoutside, .date-picker{
+    font-weight: 200;
+  }
+
+  /* DROPDOWNS */
+
+  .css-b62m3t-container, .css-1w51wga-control, .css-b9akh4-control{
+    width: 100% !important;
+    padding: .2rem;
+  }
+
+  .css-b62m3t-container{
+    padding: 0;
+  }
+
+  div.css-betzke-control{
+    width: 100%
+  }
+
+  div.css-fswcfb-control{
+    width: 100%;
+  }

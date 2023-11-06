@@ -1,5 +1,18 @@
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,200;0,9..40,400;0,9..40,700;1,9..40,400;1,9..40,700&display=swap');
 
+
+  :root {
+    --background-gradient: linear-gradient(254deg, #252525 11.07%, #171717 84.69%);
+    --background: #121212;
+    --secondary: #171717;
+    --divider: #2F2F2F;
+    --pink: #CE6AD0;
+    --pink-gradiant: linear-gradient(232deg, #DC84DE -0.46%, #CE6AD0 46.2%, #C64FC8 89.11%);
+    --cta-grey: #252525ab;
+  }
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -9,10 +22,7 @@
 
 body{
   background-color: #121212;
-  /* background: linear-gradient(254deg, #252525 11.07%, #171717 84.69%) */
-  /* background: linear-gradient(254deg, #252525 11.07%, #121212 84.69%) */
 }
-  /* HOME */
 
   /* CTA */
 
@@ -57,7 +67,7 @@ body{
   }
 
   .btn-search {
-    background: linear-gradient(232deg, #DC84DE -0.46%, #CE6AD0 46.2%, #C64FC8 89.11%);
+    background: var(--pink-gradiant);
     color: white;
     padding: 0.4rem 2rem;
     border: none;
@@ -68,7 +78,7 @@ body{
   }
 
   .btn {
-    background: linear-gradient(232deg, #DC84DE -0.46%, #CE6AD0 46.2%, #C64FC8 89.11%);
+    background: var(--pink-gradiant);
     color: white;
     padding: 0.4rem 2rem;
     border: none;
@@ -215,6 +225,17 @@ body{
 
   }
 
+  .dropdownTwo{
+    width: 100%;
+  }
+  .dropdownOne{
+    width: 100%;
+  }
+
+  .cta-container{
+    width: 80%;
+  }
+
 
 
   /* SEARCHBAR OPTIONS */
@@ -238,7 +259,7 @@ body{
     color: white;
     font-size: .8rem;
     font-weight: 200;
-    gap: 2rem;
+    gap: 1rem;
     margin-top: 2rem; 
   }
 
@@ -248,35 +269,25 @@ body{
     font-weight: 200;
   }
 
-  .date-picker {
-    background-color:#171717;
-    border: none;
-    outline: none;
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    width: 150px;
-    color: white;
-    margin-top: 2px;
-  }
+
 
   label{
     display: block;
   }
 
-  .react-datepicker-popper{
-    background-color: #171717;
+  /* .react-datepicker-popper{
+    background-color: var(--secondary);
     border-radius: 8px;
   }
 
   .react-datepicker{
     border: none;
-  }
+  } */
 
-  .react-datepicker__header{
-    background-color: #171717;
+  /* .react-datepicker__header{
+    background-color: var(--secondary);
     color: white;
   }
-
   .react-datepicker__month-container{
     background-color:#171717;
     border: none;
@@ -292,7 +303,8 @@ body{
 
   .react-datepicker__current-month{
     color: white;
-  }
+  } */
+
 
 
   .classMap{

@@ -33,7 +33,7 @@ const VenueCard = ({ venue }) => {
       size={25} />
       
       <img src={venue.thumbnail} alt={venue.name} className='VenueCard-img' />
-      <div className="shadow"></div>
+      {/* <div className="shadow"></div> */}
 
       <section className='info-wrapper'>
 

@@ -2,6 +2,8 @@ import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
+import LocationInput from './inputs/LocationInput';
+import QuantityInput from './inputs/QuantityInput'
 
 
 const CallToAction = () => {
@@ -9,19 +11,6 @@ const CallToAction = () => {
   const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(null);
-
-    const optionsLocation = [
-        { value: 'Centrum', label: 'Centrum' },
-        { value: 'Kungsholmen', label: 'Kungsholmen' },
-        { value: 'Solna', label: 'Solna' },
-        { value: 'Södermalm', label: 'Södermalm' },
-      ];
-    const optionsQuantity = [
-        { value: '5-10', label: '5-10 attendees' },
-        { value: '10-30', label: '10-30 attendees' },
-        { value: '30-60', label: '30-60 attendees' },
-        { value: '60+', label: '60+ attendees' },
-      ];
 
       const customStyles = {
         control: (provided) => ({
@@ -57,49 +46,22 @@ const CallToAction = () => {
           }),
       };
 
-      const handleLocationChange = (selectedOption) => {
-        setSelectedLocation(selectedOption);
-      };
-    
-      const handleQuantityChange = (selectedOption) => {
-        setSelectedQuantity(selectedOption);
-      };
-
       const handleSearch = () => {
-      // console.log(isSelected)
       if (selectedLocation && selectedQuantity) {
         // Construct the URL with selected values
         navigate(`/selectvenues?location=${selectedLocation.value}&quantity=${selectedQuantity.value}`);
 
-        // navigate('/selectvenues')
       }}
 
   return (
 
     
     <div className='CTA'>
-        {/* <div className='test'> */}
         <h1>Book Your Next Tech Event Here!</h1>
         <div className='cta-container'>
         <div className="dropdowns">
-            <div className="dropdownOne">
-            <label htmlFor="location">Location</label>
-            <Select 
-            placeholder="Select Location" 
-            options={optionsLocation} 
-            styles={customStyles}
-            onChange={handleLocationChange}
-            value={selectedLocation} />
-            </div>
-            <div className="dropdownTwo">
-                <label htmlFor="quantity">Attendees</label>
-                <Select 
-                placeholder="Quantity" 
-                options={optionsQuantity} 
-                styles={customStyles}
-                onChange={handleQuantityChange} // Add this
-                value={selectedQuantity} />
-            </div>
+          <LocationInput selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation}/>
+          <QuantityInput selectedOption ={selectedQuantity} setSelectedQuantity={setSelectedQuantity}/>
         </div>
         <button className='btn-search' onClick={handleSearch}>SEARCH</button>
         </div>

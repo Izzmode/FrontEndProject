@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import './accordian.css'
 
 const Accordian = ({ title, content }) => {
 
@@ -9,7 +10,7 @@ const Accordian = ({ title, content }) => {
     <div className="accordion">
     <div className="accordion-item">
       <div className="accordion-title" onClick={() => setIsActive(!isActive)}>
-        <div>{title}</div>
+        <div className='accordion-title-div'>{title}</div>
         <div>{isActive ? 'v' : '>'}</div>
       </div>
       {isActive && <div className="accordion-content">{content}</div>}
