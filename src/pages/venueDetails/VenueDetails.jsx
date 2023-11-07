@@ -26,6 +26,7 @@ import DateInput from '../../components/inputs/DateInput';
 import TimeInput from '../../components/inputs/TimeInput';
 import Checkbox from '../../components/checkbox/Checkbox';
 
+//HÄMTA IN DATUM FRÅN PARAMS
 
 const VenueDetails = () => {
 
@@ -94,6 +95,14 @@ const VenueDetails = () => {
     return false
   })
 
+  const accContent = [
+    {  content: 'Barco ClickShare Wireless' },
+    {  content: 'Bose Professional Sound Systems' },
+    {  content: 'Epson BrightLink Pro Interactive Projector' },
+    {  content: 'Cisco Webex Board' },
+  ];
+  
+
   return (
       <div className='VenueDetails'>
         <section className='details-adress-like'>
@@ -150,7 +159,7 @@ const VenueDetails = () => {
               </p>
             </div>
 
-            <Accordian title={'Technical Equipment'} content={'test'}/>
+            <Accordian title={'Technical Equipment'} content={accContent}/>
 
             <div className='arr-container'>
               <h2>Arrangements</h2>
@@ -197,11 +206,11 @@ const VenueDetails = () => {
                 <div className='total-amount'>
                   <section className='total-top'>
                     <p>SEK {venue && venue.pricePerHour} x {selectedTime ? selectedTime.value + ' hours' : '0 hours'}</p>
-                    { totalAmount && <p>SEK {totalAmount}</p>}
+                    { totalAmount && <p>SEK {totalAmount}.00</p>}
                   </section>
                   <section className='total-bottom'>
                     <h2>Total Amount</h2>
-                    {totalAmount && <p>SEK {totalAmount}</p>}
+                    {totalAmount && <p>SEK {totalAmount}.00</p>}
                   </section>
                 </div>
               </div>
