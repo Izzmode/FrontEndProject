@@ -7,12 +7,12 @@ import Accordian from '../../components/accordian/Accordian';
 import useFetch from '../../hooks/useFetch';
 import VenueCard from '../../components/venueCard/VenueCard'
 import { useState } from 'react'
-import { useParams } from 'react-router-dom';
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import { FaWifi, FaParking, FaCoffee, FaWheelchair, FaChalkboard } from "react-icons/fa";
 import { MdOutlineSupportAgent, MdHeadsetMic, MdOutlineVideogameAsset, MdDinnerDining } from "react-icons/md"
 import { BsProjector } from "react-icons/bs"
 import { CgScreen } from "react-icons/cg"
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import iconBoardroom from '../../images/icon-boardroom.png'
 import iconStanding from '../../images/icon-standing.png'
 import iconClassroom from '../../images/icon-classroom.png'
@@ -21,26 +21,53 @@ import Select from 'react-select';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
+import { parseISO } from 'date-fns';
 import QuantityInput from '../../components/inputs/QuantityInput';
 import DateInput from '../../components/inputs/DateInput';
 import TimeInput from '../../components/inputs/TimeInput';
 import Checkbox from '../../components/checkbox/Checkbox';
+import { BookingContext } from '../../context/BookingContext';
+import { createContext, useContext, useReducer } from 'react';
 
 //HÄMTA IN DATUM FRÅN PARAMS
 
 const VenueDetails = () => {
 
+  //CONTEXT
+
+  const { state, dispatch } = useContext(BookingContext);
+
+  const handleUpdateBookingData = (data) => {
+    dispatch({ type: 'UPDATE_BOOKING_DATA', payload: data });
+  }
+
+  const handleCateringChange = () => {
+    dispatch({ type: 'TOGGLE_CATERING', payload: !state.catering });
+  };
+
+  const selectedQuantity = state.selectedQuantity;
+  const selectedDate = state.selectedDate;
+  const selectedTime = state.selectedTime;
+  const totalAmount = state.totalAmount;
+
   const { id } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const params = new URLSearchParams(location.search);
+  const dateParamString = params.get('date');
+  const dateParam = dateParamString === "null" ? null : parseISO(dateParamString);
+
+
   const { data: venue, isLoading, error } = useFetch('http://localhost:9999/api/venues/' + id)
   const { data: recVenues } = useFetch('http://localhost:9999/api/venues/')
 
   const latitude = venue?.latitude;
   const longitude = venue?.longitude;
 
-  const [selectedQuantity, setSelectedQuantity] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
-  const [totalAmount, setTotalAmount] = useState(null)
+  // const [selectedQuantity, setSelectedQuantity] = useState(null);
+  // const [selectedDate, setSelectedDate] = useState(dateParam || null);
+  // const [selectedTime, setSelectedTime] = useState(null);
+  // const [totalAmount, setTotalAmount] = useState(null)
   const formattedDate = selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '';
 
   const recommendedVenues = recVenues?.filter(data => {
@@ -101,6 +128,11 @@ const VenueDetails = () => {
     {  content: 'Epson BrightLink Pro Interactive Projector' },
     {  content: 'Cisco Webex Board' },
   ];
+
+  const handleClick = () => {
+    navigate(`/venues/${id}/confirm?selectedQuantity=${selectedQuantity}&selectedDate=${selectedDate}&selectedTime=${selectedTime}&totalAmount=${totalAmount}&catering=${offersCatering}`);
+  }
+  
   
 
   return (
@@ -191,13 +223,13 @@ const VenueDetails = () => {
             <div className='booking-form-dropdowns'>
               <div className='form-dropdowns-button'>
                 <div className="form-dropdowns">
-                  <QuantityInput setSelectedQuantity={setSelectedQuantity} selectedQuantity={selectedQuantity} />
-                  <DateInput setSelectedDate={setSelectedDate} selectedDate={selectedDate} className='test'/>
-                  <TimeInput setSelectedTime={setSelectedTime} selectedTime={selectedTime} setTotalAmount={setTotalAmount} venue={venue}/>
+                  <QuantityInput venueCapacity={venue && venue.numberOfPeople} />
+                  <DateInput className='test'/>
+                  <TimeInput venue={venue}/>
                 </div>
                 {offersCatering && (
                 <div className='checkbox-container'>
-                  <Checkbox label='Add catering to booking'/>
+                  <Checkbox label='Add catering to booking' checked={state.catering} onChange={handleCateringChange}/>
                   <span>
                   <MdDinnerDining className='food-icon'/>
                   </span>
@@ -215,7 +247,7 @@ const VenueDetails = () => {
                 </div>
               </div>
             </div>
-            <button className='btn btn-book'>BOOK NOW</button>
+            <button className='btn btn-book' onClick={handleClick}>BOOK NOW</button>
             <section className='text-section-bottom'> 
               <p>Confirmation and payment options to follow</p>
               <p>Terms & conditions apply</p>

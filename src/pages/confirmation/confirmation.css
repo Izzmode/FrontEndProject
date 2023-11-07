@@ -1,0 +1,148 @@
+:root {
+    --background-gradient: linear-gradient(254deg, #252525 11.07%, #171717 84.69%);
+    --background: #121212;
+    --secondary: #171717;
+    --divider: #2F2F2F;
+    --pink: #CE6AD0;
+    --pink-gradiant: linear-gradient(232deg, #DC84DE -0.46%, #CE6AD0 46.2%, #C64FC8 89.11%);
+    --cta-grey: #252525ab;
+  }
+
+.Confirmation{
+    width: 90%;
+    color: white;
+    margin: 0 auto;
+    line-height: 1.7;
+    display: flex;
+    flex-direction: column;
+    margin-top: -16rem;
+    background-color: #121212;
+    padding: 2rem;
+}
+
+.Confirmation h2{
+    font-size: 1.2rem;
+}
+
+
+.confirmation-wrapper{
+    display: flex;
+    gap: 3rem;
+    width: 100%
+}
+
+.confirm-left{
+    flex: 1;
+}
+
+.confirm-right{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.confirm-right p {
+    font-size: .8rem;
+}
+
+.confirm-details{
+    background-color: var(--cta-grey);
+    border-radius: 8px 8px 0px 0px;
+}
+
+.confirm-img{
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.confirm-venue{
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 2rem;
+    padding-top: 1rem;
+}
+.confirm-venue a{
+    /* text-decoration: none; */
+    color: white;
+    font-size: .8rem;
+}
+.confirm-venue a:visited{
+    color: white;
+}
+
+.confirm-venue h2, .confirm-contact h2{
+    font-size: 1.2rem;
+}
+
+.confirm-icons, .confirm-contact{
+    padding-inline: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-block: 1rem;
+    gap: 1rem;
+    font-weight: 200;
+}
+
+.confirm-contact{
+    background: var(--background-gradient);
+    border-radius: 0px 0px 8px 8px;
+    padding-inline: 2rem;
+}
+
+.confirm-top{
+    display: flex;
+    gap: 3rem;
+}
+
+.confirm-info-catering{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex: 1;
+}
+.confirm-info-catering h2, .confirm-terms h2{
+ padding-bottom: .5rem;
+}
+
+.confirm-am{
+    display: flex;
+    gap: 1rem;
+    text-align: center;
+}
+
+.confirm-terms{
+    /* padding: 1rem; */
+    flex: 1;
+}
+
+.confirm-comment textarea{
+    width: 100%;
+    height: 150px;
+    padding: 1rem;
+    border-radius: 9px;
+    background-color: var(--cta-grey);
+    color: white;
+    border: none;
+}
+
+.confirm-btns{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    gap: 1rem;
+}
+
+.btn-cancel{
+    background: var(--background-gradient);
+    color: white;
+    padding: 0.4rem 2rem;
+    border: none;
+    border-radius: 10px;
+    align-self: end;
+    margin-top: 1rem;
+    cursor: pointer;
+}

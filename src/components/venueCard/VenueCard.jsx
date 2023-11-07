@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 // import { icons } from 'react-icons'
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import { FaStar, FaUserAlt } from "react-icons/fa"
@@ -16,7 +16,12 @@ const VenueCard = ({ venue }) => {
 
     setToggleFavourite(!toggleFavourite)
    }
+
+   const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const selectedDateParam = searchParams.get('date');
    
+  // <NavLink to={`/venues/${venue._id}?date=${selectedDateParam}` } style={{ textDecoration: 'none' }}>
 
   return (
     

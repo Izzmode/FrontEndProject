@@ -4,13 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import LocationInput from './inputs/LocationInput';
 import QuantityInput from './inputs/QuantityInput'
-
+import { useContext } from 'react';
+import { BookingContext } from '../context/BookingContext';
 
 const CallToAction = () => {
 
   const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(null);
+  const { state, dispatch } = useContext(BookingContext);
+
+  
 
       const customStyles = {
         control: (provided) => ({
@@ -47,10 +51,10 @@ const CallToAction = () => {
       };
 
       const handleSearch = () => {
-      if (selectedLocation && selectedQuantity) {
+      if (selectedLocation && state.selectedQuantity) {
         // Construct the URL with selected values
-        navigate(`/selectvenues?location=${selectedLocation.value}&quantity=${selectedQuantity.value}`);
-
+        navigate(`/selectvenues?location=${selectedLocation.value}&quantity=${state.selectedQuantity.value}`);
+        dispatch({ type: 'RESET_QUANTITY' });
       }}
 
   return (
@@ -61,7 +65,7 @@ const CallToAction = () => {
         <div className='cta-container'>
         <div className="dropdowns">
           <LocationInput selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation}/>
-          <QuantityInput selectedOption ={selectedQuantity} setSelectedQuantity={setSelectedQuantity}/>
+          <QuantityInput />
         </div>
         <button className='btn-search' onClick={handleSearch}>SEARCH</button>
         </div>

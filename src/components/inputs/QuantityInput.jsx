@@ -1,17 +1,19 @@
 import Select from 'react-select';
 import { useState } from 'react'
 import './inputs.css'
+import { useContext } from 'react';
+import { BookingContext } from '../../context/BookingContext';
 
+const QuantityInput = ({ venueCapacity }) => {
 
-
-const QuantityInput = ({ selectedQuantity, setSelectedQuantity }) => {
+  const { state, dispatch } = useContext(BookingContext);
 
   // const [selectedQuantity, setSelectedQuantity] = useState(null);
   const optionsQuantity = [
     { value: '5-10', label: '5-10 attendees' },
-    { value: '10-30', label: '10-30 attendees' },
-    { value: '30-60', label: '30-60 attendees' },
-    { value: '60+', label: '60+ attendees' },
+    { value: '10-30', label: '10-30 attendees', isDisabled: venueCapacity < 10  },
+    { value: '30-60', label: '30-60 attendees', isDisabled: venueCapacity < 30  },
+    { value: '60+', label: '60+ attendees', isDisabled: venueCapacity < 60  },
   ];
 
   const customStyles = {
@@ -24,7 +26,6 @@ const QuantityInput = ({ selectedQuantity, setSelectedQuantity }) => {
       width: '150px',
       marginTop: '2px'
 
-    //   padding: '0.5rem 1rem'
     }),
     indicatorSeparator: () => ({
         display: 'none',
@@ -35,22 +36,23 @@ const QuantityInput = ({ selectedQuantity, setSelectedQuantity }) => {
         borderRadius: '0px 0px 8px 8px',
         
       }),
-      option: (provided, { isSelected, isFocused }) => ({
+      option: (provided, { isSelected, isFocused, isDisabled }) => ({
         ...provided,
         backgroundColor: isSelected ? '#171717' : 'transparent',
         '&:hover': {
-          backgroundColor: isFocused ? '#2F2F2F' : 'transparent', // Add your hover color
+          backgroundColor: isFocused ? '#2F2F2F' : 'transparent',
         },
-        color: isFocused ? 'white' : 'white', // Add your desired color for focused and unfocused options
+        color: isFocused ? 'white' : 'white',
+        ...(isDisabled && { color: 'grey' || 'lightgray' }),
     }),
     singleValue: (provided) => ({
         ...provided,
-        color: 'white', // Text color for selected option
+        color: 'white', 
       }),
   };
 
   const handleQuantityChange = (selectedOption) => {
-    setSelectedQuantity(selectedOption);
+    dispatch({ type: 'UPDATE_BOOKING_DATA', payload: { selectedQuantity: selectedOption } });
   };
   return (
     <div className="QuantityInput">
@@ -60,7 +62,7 @@ const QuantityInput = ({ selectedQuantity, setSelectedQuantity }) => {
         options={optionsQuantity} 
         styles={customStyles}
         onChange={handleQuantityChange}
-        value={selectedQuantity} />
+        value={state.selectedQuantity} />
   </div>
   )
 }

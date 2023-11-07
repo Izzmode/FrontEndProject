@@ -8,11 +8,14 @@ import Footer from './components/footer/Footer'
 // import OrderList from './pages/OrderList'
 import BookingDetails from './pages/BookingDetails'
 import SearchedVenues from './pages/SearchedVenues'
+import Confirmation from './pages/confirmation/Confirmation'
+import { BookingProvider } from './context/BookingContext';
 
 const App = () => {
 
   return (
     <div>
+      <BookingProvider>
         <Navbar />
         <Routes>
             <Route path="/" element= { <Home/>}/>
@@ -20,6 +23,7 @@ const App = () => {
             <Route path="/venues" element= {<Venues />}/>
 
             <Route path="/venues/:id" element= { <VenueDetails/>}/>
+            <Route path="/venues/:id/confirm" element= { <Confirmation/>}/>
             <Route path="/selectvenues" element= { <SearchedVenues/>}/>
 
             {/* <Route path= "/orders" element ={<OrderList/> }/> */}
@@ -28,6 +32,7 @@ const App = () => {
             
         </Routes>
         <Footer/>
+        </BookingProvider>
     </div>
   )
 }

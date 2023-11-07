@@ -11,15 +11,33 @@ const SearchedVenues = () => {
     const selectedQuantity = searchParams.get('quantity');
     const selectedPrice = searchParams.get('price');
     const selectedDate = searchParams.get('date');
-    const maxQuantity = selectedQuantity.split('-')[1]
+    let selectedQuantityNumber;
+    if (selectedQuantity){
+      let maxQuantity;
+
+      if(selectedQuantity.includes('-')){
+       maxQuantity = selectedQuantity.split('-')[1]
+      }
+      else{
+        maxQuantity = selectedQuantity;
+      }
+
+      if (maxQuantity !== undefined) {
+        let selectedQuantityNumber = parseInt(maxQuantity.replace('+', ''), 10);
+      } 
+      else {
+        console.error("The 'quantity' parameter is missing or invalid in the URL.");
+      }
+    } 
+    
+
+    
     
     const { data: venues, isLoading, error } = useFetch('http://localhost:9999/api/venues')
 
     
     const filteredVenues = venues?.filter((venue) => {
-        
-
-        const selectedQuantityNumber = parseInt(maxQuantity.replace('+', ''), 10);
+      
         const selectedPricePerHour = parseInt(selectedPrice, 10);
 
         if (
@@ -34,7 +52,6 @@ const SearchedVenues = () => {
             return false;
         });
         
-        console.log(filteredVenues)
   return (
     <div>
     <SearchBarOptions/>

@@ -1,4 +1,5 @@
-import React from 'react'
+import { useContext } from 'react';
+import { BookingContext } from '../../context/BookingContext';
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -6,7 +7,9 @@ import { format } from 'date-fns';
 import { useState } from 'react';
 import './inputs.css'
 
-const DateInput = ({ selectedDate, setSelectedDate }) => {
+const DateInput = () => {
+
+  const { state, dispatch } = useContext(BookingContext);
 
   const customStyles = {
     control: (provided) => ({
@@ -44,7 +47,7 @@ const DateInput = ({ selectedDate, setSelectedDate }) => {
   };
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    dispatch({ type: 'UPDATE_BOOKING_DATA', payload: { selectedDate: date } });
   };
 
 
@@ -53,7 +56,7 @@ const DateInput = ({ selectedDate, setSelectedDate }) => {
     <div className="DateInput">
         <label htmlFor="date">Date</label>
         <DatePicker
-        selected={selectedDate}
+        selected={state.selectedDate}
         onChange={handleDateChange}
         dateFormat="dd/MM/yyyy" 
         className='date-picker'

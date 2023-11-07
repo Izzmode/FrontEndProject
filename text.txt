@@ -7,3 +7,7 @@ behöver det vara ordrar? Lägger man till objekten i en array, det är ju bara 
 inloggning och jwt
 
 AIzaSyByaZ0G8E4agiR23dGjjVDJQEznJ-YnGA0
+
+
+
+
