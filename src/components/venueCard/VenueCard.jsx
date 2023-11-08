@@ -1,5 +1,4 @@
 import { NavLink, useLocation } from 'react-router-dom'
-// import { icons } from 'react-icons'
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import { FaStar, FaUserAlt } from "react-icons/fa"
 import { useState } from 'react'
@@ -7,8 +6,8 @@ import './venueCard.css'
 
 
 const VenueCard = ({ venue }) => {
-
-    const [toggleFavourite, setToggleFavourite] = useState(false)
+  
+  const [toggleFavourite, setToggleFavourite] = useState(false)
 
    const handleFavourite = (e) => {
     console.log('klickade')
@@ -17,15 +16,15 @@ const VenueCard = ({ venue }) => {
     setToggleFavourite(!toggleFavourite)
    }
 
-   const location = useLocation();
+  const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const selectedDateParam = searchParams.get('date');
-   
-  // <NavLink to={`/venues/${venue._id}?date=${selectedDateParam}` } style={{ textDecoration: 'none' }}>
+
 
   return (
+    <NavLink to={`/venues/${venue._id}?date=${selectedDateParam}` } style={{ textDecoration: 'none' }}>
     
-    <NavLink to={`/venues/${venue._id}` } style={{ textDecoration: 'none' }}>
+    {/* <NavLink to={`/venues/${venue._id}` } style={{ textDecoration: 'none' }}> */}
 
     <li className='VenueCard' style={{ textDecoration: 'none' }}>
       <AiFillHeart 

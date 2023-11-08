@@ -36,6 +36,8 @@ const VenueDetails = () => {
   //CONTEXT
 
   const { state, dispatch } = useContext(BookingContext);
+  // const [showSelectedDate, setShowSelectedDate] = useState(state.selectedDate)
+
 
   const handleUpdateBookingData = (data) => {
     dispatch({ type: 'UPDATE_BOOKING_DATA', payload: data });
@@ -56,19 +58,15 @@ const VenueDetails = () => {
   const params = new URLSearchParams(location.search);
   const dateParamString = params.get('date');
   const dateParam = dateParamString === "null" ? null : parseISO(dateParamString);
-
+  const formattedDate = dateParam ? format(dateParam, 'yyyy-MM-dd') : '';
+  
+  console.log(state.selectedDate)
 
   const { data: venue, isLoading, error } = useFetch('http://localhost:9999/api/venues/' + id)
   const { data: recVenues } = useFetch('http://localhost:9999/api/venues/')
 
   const latitude = venue?.latitude;
   const longitude = venue?.longitude;
-
-  // const [selectedQuantity, setSelectedQuantity] = useState(null);
-  // const [selectedDate, setSelectedDate] = useState(dateParam || null);
-  // const [selectedTime, setSelectedTime] = useState(null);
-  // const [totalAmount, setTotalAmount] = useState(null)
-  const formattedDate = selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '';
 
   const recommendedVenues = recVenues?.filter(data => {
    if (venue.numberOfPeople <= data.numberOfPeople){
@@ -130,9 +128,9 @@ const VenueDetails = () => {
   ];
 
   const handleClick = () => {
-    navigate(`/venues/${id}/confirm?selectedQuantity=${selectedQuantity}&selectedDate=${selectedDate}&selectedTime=${selectedTime}&totalAmount=${totalAmount}&catering=${offersCatering}`);
+    navigate(`/venues/${id}/confirm`);
   }
-  
+  console.log(state.selectedTime?.value)
   
 
   return (

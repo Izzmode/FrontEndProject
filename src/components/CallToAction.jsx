@@ -11,7 +11,6 @@ const CallToAction = () => {
 
   const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [selectedQuantity, setSelectedQuantity] = useState(null);
   const { state, dispatch } = useContext(BookingContext);
 
   
@@ -52,7 +51,6 @@ const CallToAction = () => {
 
       const handleSearch = () => {
       if (selectedLocation && state.selectedQuantity) {
-        // Construct the URL with selected values
         navigate(`/selectvenues?location=${selectedLocation.value}&quantity=${state.selectedQuantity.value}`);
         dispatch({ type: 'RESET_QUANTITY' });
       }}
@@ -69,7 +67,6 @@ const CallToAction = () => {
         </div>
         <button className='btn-search' onClick={handleSearch}>SEARCH</button>
         </div>
-        {/* </div> */}
         </div>
 
   )

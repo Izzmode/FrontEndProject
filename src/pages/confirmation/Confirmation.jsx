@@ -8,13 +8,15 @@ import { CgScreen } from "react-icons/cg"
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { BookingContext } from '../../context/BookingContext';
 import { createContext, useContext, useReducer } from 'react';
+import { parseISO, format } from 'date-fns';
+
 
 
 
 const Confirmation = () => {
 
   const location = useLocation();
-  const { state } = useContext(BookingContext);
+  const { state, dispatch } = useContext(BookingContext);
   const selectedQuantity = state.selectedQuantity;
   const selectedDate = state.selectedDate;
   const selectedTime = state.selectedTime;
@@ -26,11 +28,21 @@ const Confirmation = () => {
   // const selectedTime = searchParams.get('selectedTime');
   // const totalAmount = searchParams.get('totalAmount');
   // const catering = searchParams.get('catering');
+  const date = state.selectedDate === "null" ? null : parseISO(state.selectedDate);
+  // const formattedDate = date ? format(date, 'yyyy-MM-dd') : '';
+
+  console.log(state.selectedDate)
+  console.log(selectedDate)
+  const test = parseISO(selectedDate)
+  console.log(test)
 
   const { id } = useParams();
   const { data: venue, isLoading, error } = useFetch('http://localhost:9999/api/venues/' + id)
 
-  dispatch({ type: 'UPDATE_BOOKING_DATA', payload: { venue } });
+  // useEffect(() => {
+  //   // Only update the context once when the component is mounted
+  //   dispatch({ type: 'UPDATE_BOOKING_DATA', payload: { venue } });
+  // }, []); 
 
   const amenityIcons = {
     Wifi: <FaWifi className='am-icons' />,
@@ -45,6 +57,8 @@ const Confirmation = () => {
     Whiteboards: <FaChalkboard className='am-icons'/>,
     Gaming_Stations: <MdOutlineVideogameAsset className='am-icons'/>
   };
+  console.log(state.selectedDate && state.selectedDate)
+
 
 
   return (
@@ -61,8 +75,8 @@ const Confirmation = () => {
           {venue &&
           <section className='confirm-icons'>
             <p>{venue.address}</p>
-            <p>Time here</p>
-            <p>Date here</p>
+            <p>{state.selectedTime?.label}</p>
+            {/* <p>{formattedDate ? formattedDate : 'hej'}</p> */}
             <p>number of people here</p>
             <p>total amount here</p>
             <p> if catering here</p>
