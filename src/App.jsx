@@ -10,6 +10,7 @@ import BookingDetails from './pages/BookingDetails'
 import SearchedVenues from './pages/SearchedVenues'
 import Confirmation from './pages/confirmation/Confirmation'
 import { BookingProvider } from './context/BookingContext';
+import Profile from './pages/Profile'
 
 const App = () => {
 
@@ -19,16 +20,15 @@ const App = () => {
         <Navbar />
         <Routes>
             <Route path="/" element= { <Home/>}/>
-    
             <Route path="/venues" element= {<Venues />}/>
-
             <Route path="/venues/:id" element= { <VenueDetails/>}/>
             <Route path="/venues/:id/confirm" element= { <Confirmation/>}/>
             <Route path="/selectvenues" element= { <SearchedVenues/>}/>
 
             {/* <Route path= "/orders" element ={<OrderList/> }/> */}
 
-            <Route path= "/bookings/:id" element ={<BookingDetails/>}/>
+            <Route path= "/profile/bookings/:id" element ={<BookingDetails/>}/>
+            <Route path= "/profile" element ={<Profile/>}/>
             
         </Routes>
         <Footer/>

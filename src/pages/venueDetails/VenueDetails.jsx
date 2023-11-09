@@ -6,7 +6,7 @@ import Map from '../../components/Map'
 import Accordian from '../../components/accordian/Accordian';
 import useFetch from '../../hooks/useFetch';
 import VenueCard from '../../components/venueCard/VenueCard'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import { FaWifi, FaParking, FaCoffee, FaWheelchair, FaChalkboard } from "react-icons/fa";
 import { MdOutlineSupportAgent, MdHeadsetMic, MdOutlineVideogameAsset, MdDinnerDining } from "react-icons/md"
@@ -29,15 +29,11 @@ import Checkbox from '../../components/checkbox/Checkbox';
 import { BookingContext } from '../../context/BookingContext';
 import { createContext, useContext, useReducer } from 'react';
 
-//HÄMTA IN DATUM FRÅN PARAMS
-
 const VenueDetails = () => {
 
   //CONTEXT
 
   const { state, dispatch } = useContext(BookingContext);
-  // const [showSelectedDate, setShowSelectedDate] = useState(state.selectedDate)
-
 
   const handleUpdateBookingData = (data) => {
     dispatch({ type: 'UPDATE_BOOKING_DATA', payload: data });
@@ -45,6 +41,8 @@ const VenueDetails = () => {
 
   const handleCateringChange = () => {
     dispatch({ type: 'TOGGLE_CATERING', payload: !state.catering });
+    console.log(state.catering)
+    console.log('clicked')
   };
 
   const selectedQuantity = state.selectedQuantity;
@@ -60,8 +58,6 @@ const VenueDetails = () => {
   const dateParam = dateParamString === "null" ? null : parseISO(dateParamString);
   const formattedDate = dateParam ? format(dateParam, 'yyyy-MM-dd') : '';
   
-  console.log(state.selectedDate)
-
   const { data: venue, isLoading, error } = useFetch('http://localhost:9999/api/venues/' + id)
   const { data: recVenues } = useFetch('http://localhost:9999/api/venues/')
 
@@ -84,12 +80,41 @@ const VenueDetails = () => {
    setToggleFavourite(!toggleFavourite)
   }
 
+  const [nav1, setNav1] = useState(null);
+  const [nav2, setNav2] = useState(null);
+  const [slider1, setSlider1] = useState(null);
+  const [slider2, setSlider2] = useState(null);
+  
+  useEffect(() => {
+
+    setNav1(slider1);
+    setNav2(slider2);
+
+  });
+
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 2
+  };
+  const settingsThumbs = {
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    asNavFor: '.slider-for',
+    dots: true,
+    centerMode: true,
+    swipeToSlide: true,
+    focusOnSelect: true,
+    centerPadding: '10px'
+  };
+  const settingsMain = {
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+    asNavFor: '.slider-nav'
   };
 
   const amenityIcons = {
@@ -130,7 +155,9 @@ const VenueDetails = () => {
   const handleClick = () => {
     navigate(`/venues/${id}/confirm`);
   }
-  console.log(state.selectedTime?.value)
+  
+
+  const allImages = venue ? [venue.thumbnail, ...venue.images] : [];
   
 
   return (
@@ -153,19 +180,55 @@ const VenueDetails = () => {
           </div> 
         </section>
         <div className='top-img-map'>
-          <img src={ venue && venue.thumbnail} alt="image" />
+          
+          
+          <div className="slider-wrapper">
+            <Slider
+              {...settingsMain}
+              asNavFor={nav2}
+              ref={slider => (setSlider1(slider))}
+            >
+            {allImages.map((slide) =>
+
+              <div className="slider-image-container-main" key={slide.id}>
+                <img className="slick-slide-image" src={slide} />
+              </div>
+
+            )}
+
+            </Slider>
+          </div>
+
+          {/* <img src={ venue && venue.thumbnail} alt="image" /> */}
           <div className='map-container'>
             { venue ? <Map latitude={latitude} longitude={longitude}/> : <div>Loading...</div>}
           </div>
         </div>
 
-        <Slider {...settings}>
+        <div className="thumbnail-slider-wrap">
+            <Slider
+              {...settingsThumbs}
+              asNavFor={nav1}
+              ref={slider => (setSlider2(slider))}>
+
+              {allImages.map((slide) =>
+
+                <div className="slider-image-container" key={slide.id} >
+                  <img className="slick-slide-image" src={slide} />
+                </div>
+
+              )}
+
+            </Slider>
+          </div>
+
+        {/* <Slider {...settingsThumbs}>
         {venue ? venue.images.map(image => (
           <div className='slider-image-container'>
               <img src={image} className='slider-images-details' ></img>
               </div>
         )) : isLoading}
-        </Slider>
+        </Slider> */}
 
         <div className='information-containers'>
           <div className='left-information-container'>

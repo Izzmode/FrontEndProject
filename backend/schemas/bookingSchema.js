@@ -13,7 +13,8 @@ const bookingSchema = mongoose.Schema({
   timestamps: true
 })
 
-//lämna bookingNUmber tom så ger mongodb den ett nummer
+//lämna bookingNUmber tom så ger mongodb den ett nummer, eller bara använda id som den får?
+
 
 
 module.exports = mongoose.model('Booking', bookingSchema)

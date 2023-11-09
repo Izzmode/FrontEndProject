@@ -1,9 +1,9 @@
 import './confirmation.css'
 import useFetch from '../../hooks/useFetch';
 import { useState } from 'react'
-import { FaWifi, FaParking, FaCoffee, FaWheelchair, FaChalkboard } from "react-icons/fa";
+import { FaWifi, FaParking, FaCoffee, FaWheelchair, FaChalkboard, FaMapMarkerAlt, FaClock, FaUserAlt, FaCoins } from "react-icons/fa";
 import { MdOutlineSupportAgent, MdHeadsetMic, MdOutlineVideogameAsset, MdDinnerDining } from "react-icons/md"
-import { BsProjector } from "react-icons/bs"
+import { BsProjector, BsCalendarDateFill } from "react-icons/bs"
 import { CgScreen } from "react-icons/cg"
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { BookingContext } from '../../context/BookingContext';
@@ -22,19 +22,21 @@ const Confirmation = () => {
   const selectedTime = state.selectedTime;
   const totalAmount = state.totalAmount;
   const catering = state.catering;
-  // const searchParams = new URLSearchParams(location.search);
-  // const selectedQuantity = searchParams.get('selectedQuantity');
-  // const selectedDate = searchParams.get('selectedDate');
-  // const selectedTime = searchParams.get('selectedTime');
-  // const totalAmount = searchParams.get('totalAmount');
-  // const catering = searchParams.get('catering');
-  const date = state.selectedDate === "null" ? null : parseISO(state.selectedDate);
-  // const formattedDate = date ? format(date, 'yyyy-MM-dd') : '';
+  const date = selectedDate === "null" ? null : new Date(selectedDate);
 
-  console.log(state.selectedDate)
-  console.log(selectedDate)
-  const test = parseISO(selectedDate)
-  console.log(test)
+  let formattedDate;
+  if (!isNaN(date)) {
+    // Format the date as "Month Day, Year"
+      formattedDate = date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  
+    console.log(formattedDate); 
+  } else {
+    console.log("Invalid date");
+  }
 
   const { id } = useParams();
   const { data: venue, isLoading, error } = useFetch('http://localhost:9999/api/venues/' + id)
@@ -57,7 +59,6 @@ const Confirmation = () => {
     Whiteboards: <FaChalkboard className='am-icons'/>,
     Gaming_Stations: <MdOutlineVideogameAsset className='am-icons'/>
   };
-  console.log(state.selectedDate && state.selectedDate)
 
 
 
@@ -74,19 +75,22 @@ const Confirmation = () => {
           </section>
           {venue &&
           <section className='confirm-icons'>
-            <p>{venue.address}</p>
-            <p>{state.selectedTime?.label}</p>
-            {/* <p>{formattedDate ? formattedDate : 'hej'}</p> */}
-            <p>number of people here</p>
-            <p>total amount here</p>
-            <p> if catering here</p>
+            <p className='confirm-catering-icon'><span><FaMapMarkerAlt/> </span><p>{venue.address}</p></p>
+            <p className='confirm-catering-icon'><span><FaClock/> </span><p>{state.selectedTime?.label}</p></p>
+            <p className='confirm-catering-icon'><span><BsCalendarDateFill/> </span><p>{formattedDate && formattedDate}</p></p>
+            <p className='confirm-catering-icon'><span><FaUserAlt/> </span><p>{state.selectedQuantity.label}</p></p>
+            <p className='confirm-catering-icon'><span><FaCoins/> </span><p>{state.totalAmount} SEK</p></p>
+            {state.catering && 
+            <p className='confirm-catering-icon'><span><MdDinnerDining/></span> <p>Catering</p></p>
+          }
+
           </section>
             }
         </div>
       {venue &&
         <div className='confirm-contact'>
           <h2>Contact Person</h2>
-          <p>{venue.contact.fullName}</p>
+          <p className='contact-name'>{venue.contact.fullName}</p>
           <p>{venue.contact.email}</p>
           <p>08 123 456</p>
         </div>}
@@ -110,7 +114,7 @@ const Confirmation = () => {
               There is always coffee, tea and water available.
             </p>
           </div>
-
+          {state.catering &&
           <div className='confirm-catering'>
             <h2>Catering</h2>
             <p>
@@ -118,7 +122,7 @@ const Confirmation = () => {
             You will be contacted by Catering Company within 2 days. 
             If you are not contacted, let us know at catering@techspace.com.
             </p>
-          </div>
+          </div>}
 
         </div>
 

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Select from 'react-select';
 import { BookingContext } from '../../context/BookingContext';
 import './inputs.css';
+import { parseISO, format } from 'date-fns';
 
 
 const TimeInput = ({ venue }) => {
@@ -48,6 +49,8 @@ const TimeInput = ({ venue }) => {
   };
 
   const handleTimeChange = (selectedOption) => {
+    // const newDate = parseISO(selectedOption)
+    // console.log(newDate)
     
     dispatch({ type: 'UPDATE_BOOKING_DATA', payload: { selectedTime: selectedOption } });
     updateTotalAmount(selectedOption.value);

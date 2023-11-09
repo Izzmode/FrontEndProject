@@ -1,6 +1,6 @@
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,200;0,9..40,400;0,9..40,700;1,9..40,400;1,9..40,700&display=swap');
+  /* @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,200;0,9..40,400;0,9..40,700;1,9..40,400;1,9..40,700&display=swap'); */
 
-
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,700&display=swap');
   :root {
     --background-gradient: linear-gradient(254deg, #252525 11.07%, #171717 84.69%);
     --background: #121212;
