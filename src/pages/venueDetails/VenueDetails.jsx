@@ -61,6 +61,8 @@ const VenueDetails = () => {
   const { data: venue, isLoading, error } = useFetch('http://localhost:9999/api/venues/' + id)
   const { data: recVenues } = useFetch('http://localhost:9999/api/venues/')
 
+  console.log(venue?.numberOfPeople)
+
   const latitude = venue?.latitude;
   const longitude = venue?.longitude;
 
@@ -92,22 +94,14 @@ const VenueDetails = () => {
 
   });
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 2
-  };
   const settingsThumbs = {
     slidesToShow: 3,
     slidesToScroll: 1,
     asNavFor: '.slider-for',
-    dots: true,
     centerMode: true,
     swipeToSlide: true,
     focusOnSelect: true,
-    centerPadding: '10px'
+    // centerPadding: '10px'
   };
   const settingsMain = {
     slidesToShow: 1,
@@ -155,6 +149,8 @@ const VenueDetails = () => {
   const handleClick = () => {
     navigate(`/venues/${id}/confirm`);
   }
+
+  //TBD skickar med venue i params, istället lägga till den i BookingContext?
   
 
   const allImages = venue ? [venue.thumbnail, ...venue.images] : [];
@@ -199,7 +195,6 @@ const VenueDetails = () => {
             </Slider>
           </div>
 
-          {/* <img src={ venue && venue.thumbnail} alt="image" /> */}
           <div className='map-container'>
             { venue ? <Map latitude={latitude} longitude={longitude}/> : <div>Loading...</div>}
           </div>
@@ -248,7 +243,9 @@ const VenueDetails = () => {
                  ))}
               </div>
               <p>
-                Our venue is located so that it is accessible to all...
+              Our venue is located so that it is accessible to all. 
+              We offer catering and many different type of aid so that your tech-event will run smoothly. 
+              There is always coffee, tea and water available.
               </p>
             </div>
 
@@ -308,7 +305,11 @@ const VenueDetails = () => {
                 </div>
               </div>
             </div>
-            <button className='btn btn-book' onClick={handleClick}>BOOK NOW</button>
+            <button 
+            className='btn btn-book' 
+            onClick={handleClick}
+            disabled={!selectedQuantity || !selectedDate || !selectedTime}
+            >BOOK NOW</button>
             <section className='text-section-bottom'> 
               <p>Confirmation and payment options to follow</p>
               <p>Terms & conditions apply</p>

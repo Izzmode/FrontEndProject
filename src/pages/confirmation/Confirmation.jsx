@@ -75,13 +75,13 @@ const Confirmation = () => {
           </section>
           {venue &&
           <section className='confirm-icons'>
-            <p className='confirm-catering-icon'><span><FaMapMarkerAlt/> </span><p>{venue.address}</p></p>
-            <p className='confirm-catering-icon'><span><FaClock/> </span><p>{state.selectedTime?.label}</p></p>
-            <p className='confirm-catering-icon'><span><BsCalendarDateFill/> </span><p>{formattedDate && formattedDate}</p></p>
-            <p className='confirm-catering-icon'><span><FaUserAlt/> </span><p>{state.selectedQuantity.label}</p></p>
-            <p className='confirm-catering-icon'><span><FaCoins/> </span><p>{state.totalAmount} SEK</p></p>
+            <p className='confirm-catering-icon'><span><FaMapMarkerAlt/> </span>{venue.address}</p>
+            <p className='confirm-catering-icon'><span><FaClock/> </span>{state.selectedTime?.label}</p>
+            <p className='confirm-catering-icon'><span><BsCalendarDateFill/> </span>{formattedDate && formattedDate}</p>
+            <p className='confirm-catering-icon'><span><FaUserAlt/> </span>{state.selectedQuantity.label}</p>
+            <p className='confirm-catering-icon'><span><FaCoins/> </span>{state.totalAmount} SEK</p>
             {state.catering && 
-            <p className='confirm-catering-icon'><span><MdDinnerDining/></span> <p>Catering</p></p>
+            <p className='confirm-catering-icon'><span><MdDinnerDining/></span>Catering</p>
           }
 
           </section>

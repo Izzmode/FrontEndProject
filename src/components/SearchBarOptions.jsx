@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
@@ -19,7 +19,7 @@ const SearchBarOptions = () => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState(null);
   const formattedDate = state.selectedDate ? format(state.selectedDate, 'yyyy-MM-dd') : '';
-  console.log(formattedDate)
+  // console.log(formattedDate)
 
   const resetDropdowns = () => {
     dispatch({ type: 'RESET_QUANTITY' });
@@ -28,9 +28,12 @@ const SearchBarOptions = () => {
     setSelectedPrice(null)
   };
 
+  useEffect(() => {
+    resetDropdowns();
+  }, []);
+
       const handleSearch = () => {
       if (selectedLocation && state.selectedQuantity && selectedPrice && formattedDate) {
-        resetDropdowns();
         const constructedURL = `/selectvenues?location=${selectedLocation.value}&quantity=${state.selectedQuantity.value}&price=${selectedPrice.value}&date=${formattedDate}`;
         navigate(constructedURL);
       }}

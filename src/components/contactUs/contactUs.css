@@ -11,6 +11,7 @@
 
 .ContactUs label{
     font-size: .7rem;
+    margin-bottom: 5px;
 }
 
 .contact-form-wrapper, .find-us-wrapper{
@@ -28,6 +29,7 @@
   background: linear-gradient(254deg, #252525 11.07%, #171717 84.69%);
   text-align: center;
   padding: 2rem;
+  border-radius: 8px;
 }
 
 .contact-form{
@@ -47,6 +49,7 @@
 }
 .contact-form input{
     margin-bottom: 1rem;
+    padding: .5rem;
 }
 
 .contact-form-wrapper{
@@ -63,7 +66,11 @@
 }
 .contact-form-wrapper p{
     text-align: center;
+    margin: 0 auto;
+    width: 60%;
 }
+
+
 
 .contact-form textarea {
     resize: none;

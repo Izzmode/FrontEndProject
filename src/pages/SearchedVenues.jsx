@@ -18,6 +18,8 @@ const SearchedVenues = () => {
 
       if(selectedQuantity.includes('-')){
        maxQuantity = selectedQuantity.split('-')[1]
+       console.log(maxQuantity)
+
       }
       else{
         maxQuantity = selectedQuantity;
@@ -30,12 +32,14 @@ const SearchedVenues = () => {
         console.error("The 'quantity' parameter is missing or invalid in the URL.");
       }
     } 
-    
+
+    console.log(selectedQuantityNumber)
 
     const { data: venues, isLoading, error } = useFetch('http://localhost:9999/api/venues')
 
-    
     const filteredVenues = venues?.filter((venue) => {
+
+      const selectedQuantityRange = selectedQuantity?.split('-').map(Number);
       
         const selectedPricePerHour = parseInt(selectedPrice, 10);
 
@@ -43,13 +47,15 @@ const SearchedVenues = () => {
             //if the user didnt select a location/q or...
             // if the location of the venue/q matches the one they did select - return true
              (!selectedLocation || venue.area === selectedLocation) &&
-             (!selectedQuantity || selectedQuantityNumber <= venue.numberOfPeople) &&
+             (!selectedQuantity ||
+               (selectedQuantityRange[0] <= venue.numberOfPeople && selectedQuantityRange[1] >= venue.numberOfPeople)) &&
              (!selectedPrice || selectedPricePerHour >= venue.pricePerHour)
             ) {
                 return true;
             }
             return false;
         });
+
         
   return (
     <div>

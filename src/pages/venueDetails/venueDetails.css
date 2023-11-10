@@ -108,7 +108,8 @@
   .left-information-container{
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    justify-content: space-between;
+    /* gap: 3rem; */
   }
 
   .amenity-icons-container{
@@ -235,6 +236,11 @@
     padding: .7rem 0rem;
   }
 
+  .btn-book:disabled {
+    background: linear-gradient(to right, #6a6a6a, #848383); 
+    cursor: not-allowed; 
+  }
+
   .form-dropdowns {
     font-size: .8rem;
     display: flex;
@@ -338,4 +344,8 @@
   object-fit: cover;
   border-radius: 8px;
   opacity: .9;
+}
+
+.thumbnail-slider-wrap{
+  padding-top: 1rem;
 }

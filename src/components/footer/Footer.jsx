@@ -1,9 +1,21 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom';
 import './footer.css'
+import Login from '../login/Login';
+import Register from '../register/Register';
+import { useModal } from '../../context/ModalContext';
+import { useAuth } from '../../context/AuthContext';
 
 
 const Footer = () => {
+
+  const { currentModal, closeModal, openModal } = useModal();
+  const { user, logout } = useAuth();
+
+  const handleLogin = () => {
+    openModal('login')
+  }
+
   return (
     <div className='Footer'>
         <div className='footer-top'>
@@ -14,9 +26,9 @@ const Footer = () => {
                   <li><NavLink to={`/venues`} className='nav-link'>All venues</NavLink></li>
                   <li><a className='nav-link' href="#about-us">About Us</a></li>
                   <li><a className='nav-link' href="#contact-us">Contact Us</a></li>
-                  <li><NavLink to={`/venues`} className="nav-link">Log in</NavLink>
-                  </li>
+                  { !user && <li className="nav-link" onClick={handleLogin}>Login</li>}
                 </ul>
+
 
                 <div className='icons-footer'>
                     <img src="src\images\icon-insta.png" alt="instagram icon" />
@@ -33,6 +45,8 @@ const Footer = () => {
                     <img src="src\images\klarna-logo.png" alt="facebook icon"/>
                 </div>
         </div>
+        {currentModal === 'login' && <Login />}
+        {currentModal === 'registerUser' && <Register />}
     </div>
   )
 }

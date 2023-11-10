@@ -32,6 +32,7 @@
   .Navbar .nav-link {
     text-decoration: none;
     color: white;
+    cursor: pointer;
   }
 
   .nav-links li {
@@ -39,4 +40,17 @@
     padding: 14px 16px;
     list-style: none;
     font-size: .8rem;
+  }
+
+  .nav-user-icon{
+    color: white;
+  }
+
+  .navbar-loggedIn{
+    display: flex;
+    align-items: center ;
+  }
+
+  .nav-user-icon{
+    cursor: pointer;
   }

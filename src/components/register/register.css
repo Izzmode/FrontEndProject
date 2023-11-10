@@ -9,7 +9,7 @@
   }
 
 
-.Login{
+.Register{
     width: 100vw;
     height: 100%;
     background-color:#13131397;
@@ -17,9 +17,7 @@
     position: fixed;
 }
 
-
-
-.login-modal{
+.register-modal{
     background: var(--divider) ;
     width: 70%;
     margin: 0 auto;
@@ -38,7 +36,7 @@
     border-radius: 8px;
 }
 
-.Login form{
+.Register form{
     display: flex;
     flex-direction: column;
     margin-top: 1rem;
@@ -47,33 +45,33 @@
     color: white;
 }
 
-.Login form input{
+.Register form input{
     padding: .6rem;
     color: white;
     border-radius: 8px;
     background-color: #121212;
     border: none;
     margin-block: 5px;
+    width: 100%;
 }
 
-.link-register {
-    display: flex;
-    align-items: center;
-    padding-bottom: .5rem;
-    width: 70%;
-    justify-content: space-between;
-}
-
-.Login h1{
+.Register h1{
     font-size: 1.5rem;
     font-weight: 600;
 }
 
-.Login p {
+.Register p {
     font-size: .8rem;
 }
 
-.register-link{
-    text-decoration: underline;
-    cursor: pointer;
+.password-section{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: .5rem;
 }
+
+.Register .form-group{
+    width: 100%;
+}
+

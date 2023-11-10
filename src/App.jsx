@@ -11,12 +11,16 @@ import SearchedVenues from './pages/SearchedVenues'
 import Confirmation from './pages/confirmation/Confirmation'
 import { BookingProvider } from './context/BookingContext';
 import Profile from './pages/Profile'
+import { ModalProvider } from './context/ModalContext'
+import { AuthProvider } from './context/AuthContext'
 
 const App = () => {
 
   return (
     <div>
       <BookingProvider>
+        <AuthProvider>
+        <ModalProvider>
         <Navbar />
         <Routes>
             <Route path="/" element= { <Home/>}/>
@@ -32,6 +36,8 @@ const App = () => {
             
         </Routes>
         <Footer/>
+        </ModalProvider>
+        </AuthProvider>
         </BookingProvider>
     </div>
   )

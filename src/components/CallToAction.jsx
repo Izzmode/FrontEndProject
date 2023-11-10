@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import LocationInput from './inputs/LocationInput';
@@ -13,7 +13,16 @@ const CallToAction = () => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const { state, dispatch } = useContext(BookingContext);
 
-  
+  const resetDropdowns = () => {
+    dispatch({ type: 'RESET_QUANTITY' });
+    setSelectedLocation(null)
+  };
+
+  useEffect(() => {
+    resetDropdowns();
+  }, []);
+
+
 
       const customStyles = {
         control: (provided) => ({

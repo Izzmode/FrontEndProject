@@ -8,6 +8,10 @@
     --cta-grey: #252525ab;
   }
 
+  .accordion {
+    padding-block: 1rem;
+  }
+
 .accordion-title {
     display: flex;
     gap: 1rem;
