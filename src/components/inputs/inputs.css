@@ -6,6 +6,7 @@
   --pink: #CE6AD0;
   --pink-gradiant: linear-gradient(232deg, #DC84DE -0.46%, #CE6AD0 46.2%, #C64FC8 89.11%);
   --cta-grey: #252525ab;
+  --third-grey: #252525;
 }
 
 .TimeInput, .DateInput, .QuantityInput, .LocationInput, .PriceInput{

@@ -30,6 +30,11 @@ const Register = () => {
         setError('Passwords do not match');
         return;
       }
+
+      if(!formData.emailReg || !formData.passwordReg || !formData.passwordAgain){
+        setError('You need to enter all fields')
+        return;
+      }
       const userData = await registerUser(formData);
       closeModal();
 
@@ -41,8 +46,8 @@ const Register = () => {
   return (
     <div className='Register'>
       <div className='register-modal'>
-        <h1>Register</h1>
-        <p>Welcome to TechSpace!</p>
+        <h1>Sign Up</h1>
+        <p>You're just one step away from joining the TechSpace Community!</p>
 
         <form action="">
             <label htmlFor="email">Email address *</label>
@@ -75,12 +80,15 @@ const Register = () => {
             onChange={handleInputChange}/>
             </div>
             </section>
+            <button 
+            className='btn btn-login' 
+            onClick={handleRegister}
+            disabled={!formData.emailReg || !formData.passwordReg || !formData.passwordAgain} >SIGN UP</button>
         </form>
         {error && <p className="error-message" style={{ color: 'red'}}>{error}</p>}
 
 
-          <button className='btn btn-login' onClick={handleRegister}>REGISTER</button>
-        <button className='btn-dark' onClick={closeModal}>CLOSE</button>
+        <button className='btn-close' onClick={closeModal}>CLOSE</button>
         </div>
 
     </div>

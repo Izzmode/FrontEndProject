@@ -23,7 +23,7 @@ const Login = () => {
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.id]: e.target.value
+      [e.target.name]: e.target.value
     });
   };
 
@@ -50,14 +50,16 @@ const Login = () => {
             <label htmlFor="email">Email address</label>
             <input 
             type="text" 
-            id='email'
+            // id='email'
+            name='email'
             value={formData.email}
             onChange={handleInputChange}/>
 
             <label htmlFor="password">Password</label>
             <input 
             type="password" 
-            id='password' 
+            // id='password' 
+            name='password' 
             value={formData.password}
             onChange={handleInputChange}/>
         </form>
@@ -68,7 +70,7 @@ const Login = () => {
           <p>Don't have an account?<a className='register-link' onClick={handleRegisterClick}> Sign up here</a></p>
           <button className='btn btn-login' onClick={handleLogin}>LOG IN</button>
         </div>
-        <button className='btn-dark' onClick={closeModal}>CLOSE</button>
+        <button className='btn-close' onClick={closeModal}>CLOSE</button>
         </div>
     </div>
   )

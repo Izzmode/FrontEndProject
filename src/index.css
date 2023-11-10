@@ -9,6 +9,8 @@
     --pink: #CE6AD0;
     --pink-gradiant: linear-gradient(232deg, #DC84DE -0.46%, #CE6AD0 46.2%, #C64FC8 89.11%);
     --cta-grey: #252525ab;
+    --third-grey: #252525;
+
   }
 
 
@@ -30,6 +32,19 @@ body{
     border: none;
     border-radius: 10px;
     cursor: pointer;
+}
+.btn-close{
+  background: rgba(13, 13, 13, 0.81);
+  color: white;
+  padding: 0.4rem 2rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.btn-login:disabled{
+  background: rgba(68, 68, 68, 0.615);
+  color: white;
 }
 
   /* CTA */
@@ -320,5 +335,20 @@ body{
     height: 300px;
     border-radius: 0px 0px 8px 8px;
   }
+
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #121212 inset !important;
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s; /* Override Chrome's autofill background transition */
+    background-color: #121212 !important;
+}
+
+/* Target autofill styles for other browsers */
+input:-internal-autofill-selected {
+    /* -webkit-box-shadow: 0 0 0 1000px #121212 inset !important; */
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s; /* Override other browsers' autofill background transition */
+    background-color: #121212 !important;
+}
 
 
