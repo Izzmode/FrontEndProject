@@ -1,6 +1,6 @@
 import './confirmation.css'
 import useFetch from '../../hooks/useFetch';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FaWifi, FaParking, FaCoffee, FaWheelchair, FaChalkboard, FaMapMarkerAlt, FaClock, FaUserAlt, FaCoins } from "react-icons/fa";
 import { MdOutlineSupportAgent, MdHeadsetMic, MdOutlineVideogameAsset, MdDinnerDining } from "react-icons/md"
 import { BsProjector, BsCalendarDateFill } from "react-icons/bs"
@@ -11,18 +11,22 @@ import { createContext, useContext, useReducer } from 'react';
 import { parseISO, format } from 'date-fns';
 
 
-
-
 const Confirmation = () => {
 
+  const hours = localStorage.getItem('hours')
+  const totalAmountLS = localStorage.getItem('totalAmount')
+  const dateLS = localStorage.getItem('date')
+  const attendees = localStorage.getItem('quantity')
+
   const location = useLocation();
+  // const history = useHistory();
   const { state, dispatch } = useContext(BookingContext);
   const selectedQuantity = state.selectedQuantity;
-  const selectedDate = state.selectedDate;
+  // const selectedDate = state.selectedDate;
   const selectedTime = state.selectedTime;
   const totalAmount = state.totalAmount;
   const catering = state.catering;
-  const date = selectedDate === "null" ? null : new Date(selectedDate);
+  const date = dateLS === "null" ? null : new Date(dateLS);
 
   let formattedDate;
   if (!isNaN(date)) {
@@ -61,9 +65,9 @@ const Confirmation = () => {
   };
 
 
-
   return (
     <div className='Confirmation'>
+
       <div className='confirmation-wrapper'>
 
       <section className='confirm-left'>
@@ -76,10 +80,11 @@ const Confirmation = () => {
           {venue &&
           <section className='confirm-icons'>
             <p className='confirm-catering-icon'><span><FaMapMarkerAlt/> </span>{venue.address}</p>
-            <p className='confirm-catering-icon'><span><FaClock/> </span>{state.selectedTime?.label}</p>
-            <p className='confirm-catering-icon'><span><BsCalendarDateFill/> </span>{formattedDate && formattedDate}</p>
-            <p className='confirm-catering-icon'><span><FaUserAlt/> </span>{state.selectedQuantity.label}</p>
-            <p className='confirm-catering-icon'><span><FaCoins/> </span>{state.totalAmount} SEK</p>
+            <p className='confirm-catering-icon'><span><FaClock/> </span>{hours}</p>
+            <p className='confirm-catering-icon'><span><BsCalendarDateFill/> </span>{formattedDate}</p>
+            {/* <p className='confirm-catering-icon'><span><FaUserAlt/> </span>{state.selectedQuantity?.label}</p> */}
+            <p className='confirm-catering-icon'><span><FaUserAlt/> </span>{attendees}</p>
+            <p className='confirm-catering-icon'><span><FaCoins/> </span>{totalAmountLS} SEK</p>
             {state.catering && 
             <p className='confirm-catering-icon'><span><MdDinnerDining/></span>Catering</p>
           }

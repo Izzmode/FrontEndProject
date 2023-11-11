@@ -54,6 +54,8 @@ const TimeInput = ({ venue }) => {
     
     dispatch({ type: 'UPDATE_BOOKING_DATA', payload: { selectedTime: selectedOption } });
     updateTotalAmount(selectedOption.value);
+    localStorage.setItem('hours', selectedOption.label)
+
   };
   
   const updateTotalAmount = (selectedTimeValue) => {
@@ -61,6 +63,8 @@ const TimeInput = ({ venue }) => {
     const numberOfHours = selectedTimeOption ? selectedTimeOption.value : 0;
     const newTotalAmount = venue.pricePerHour * numberOfHours;
     dispatch({ type: 'UPDATE_BOOKING_DATA', payload: { totalAmount: newTotalAmount } });
+    localStorage.setItem('totalAmount', newTotalAmount)
+
   };
 
 

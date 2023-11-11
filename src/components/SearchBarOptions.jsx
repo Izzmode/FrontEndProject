@@ -21,16 +21,16 @@ const SearchBarOptions = () => {
   const formattedDate = state.selectedDate ? format(state.selectedDate, 'yyyy-MM-dd') : '';
   // console.log(formattedDate)
 
-  const resetDropdowns = () => {
-    dispatch({ type: 'RESET_QUANTITY' });
-    dispatch({ type: 'RESET_DATE' });
-    setSelectedLocation(null)
-    setSelectedPrice(null)
-  };
+  // const resetDropdowns = () => {
+  //   dispatch({ type: 'RESET_QUANTITY' });
+  //   dispatch({ type: 'RESET_DATE' });
+  //   setSelectedLocation(null)
+  //   setSelectedPrice(null)
+  // };
 
-  useEffect(() => {
-    resetDropdowns();
-  }, []);
+  // useEffect(() => {
+  //   resetDropdowns();
+  // }, []);
 
       const handleSearch = () => {
       if (selectedLocation && state.selectedQuantity && selectedPrice && formattedDate) {

@@ -28,6 +28,8 @@ import TimeInput from '../../components/inputs/TimeInput';
 import Checkbox from '../../components/checkbox/Checkbox';
 import { BookingContext } from '../../context/BookingContext';
 import { createContext, useContext, useReducer } from 'react';
+import QuantityInputBooking from '../../components/inputs/QuantityInputBooking';
+import DateInputBooking from '../../components/inputs/DateInputBooking';
 
 const VenueDetails = () => {
 
@@ -41,7 +43,6 @@ const VenueDetails = () => {
 
   const handleCateringChange = () => {
     dispatch({ type: 'TOGGLE_CATERING', payload: !state.catering });
-    console.log(state.catering)
     console.log('clicked')
   };
 
@@ -60,8 +61,6 @@ const VenueDetails = () => {
   
   const { data: venue, isLoading, error } = useFetch('http://localhost:9999/api/venues/' + id)
   const { data: recVenues } = useFetch('http://localhost:9999/api/venues/')
-
-  console.log(venue?.numberOfPeople)
 
   const latitude = venue?.latitude;
   const longitude = venue?.longitude;
@@ -281,8 +280,10 @@ const VenueDetails = () => {
             <div className='booking-form-dropdowns'>
               <div className='form-dropdowns-button'>
                 <div className="form-dropdowns">
-                  <QuantityInput venueCapacity={venue && venue.numberOfPeople} />
-                  <DateInput className='test'/>
+                  {/* <QuantityInput venueCapacity={venue && venue.numberOfPeople} /> */}
+                  <QuantityInputBooking venueCapacity={venue && venue.numberOfPeople} />
+                  {/* <DateInput className='test'/> */}
+                  <DateInputBooking className='test'/>
                   <TimeInput venue={venue}/>
                 </div>
                 {offersCatering && (

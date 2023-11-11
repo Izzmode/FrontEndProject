@@ -11,7 +11,7 @@ import { useAuth } from '../../context/AuthContext';
 
 const Navbar = () => {
   const { currentModal, closeModal, openModal } = useModal();
-  const { user, logout } = useAuth();
+  const { jwtToken, logout } = useAuth();
 
   const handleLogin = () => {
     openModal('login')
@@ -33,7 +33,7 @@ const Navbar = () => {
                   <li><NavLink to={`/venues`} className='nav-link'>All venues</NavLink></li>
                   <li><HashLink to={'/#about-us'} className='nav-link'>About</HashLink></li>
          
-                  {user ? ( 
+                  {jwtToken ? ( 
                   <div className='navbar-loggedIn'>
                     <li className="nav-link" onClick={handleLogout}>Logout</li>
                     <NavLink to={`/profile`} className='nav-user-icon'><span> <FaUserAlt className='nav-user-icon'/></span></NavLink>

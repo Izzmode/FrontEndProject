@@ -13,14 +13,14 @@ const CallToAction = () => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const { state, dispatch } = useContext(BookingContext);
 
-  const resetDropdowns = () => {
-    dispatch({ type: 'RESET_QUANTITY' });
-    setSelectedLocation(null)
-  };
+  // const resetDropdowns = () => {
+  //   dispatch({ type: 'RESET_QUANTITY' });
+  //   setSelectedLocation(null)
+  // };
 
-  useEffect(() => {
-    resetDropdowns();
-  }, []);
+  // useEffect(() => {
+  //   resetDropdowns();
+  // }, []);
 
 
 

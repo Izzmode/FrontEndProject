@@ -10,7 +10,7 @@ import { useAuth } from '../../context/AuthContext';
 const Footer = () => {
 
   const { currentModal, closeModal, openModal } = useModal();
-  const { user, logout } = useAuth();
+  const { jwtToken, logout } = useAuth();
 
   const handleLogin = () => {
     openModal('login')
@@ -26,7 +26,7 @@ const Footer = () => {
                   <li><NavLink to={`/venues`} className='nav-link'>All venues</NavLink></li>
                   <li><a className='nav-link' href="#about-us">About Us</a></li>
                   <li><a className='nav-link' href="#contact-us">Contact Us</a></li>
-                  { !user && <li className="nav-link" onClick={handleLogin}>Login</li>}
+                  { !jwtToken && <li className="nav-link" onClick={handleLogin}>Login</li>}
                 </ul>
 
 

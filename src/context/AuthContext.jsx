@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
 
@@ -8,6 +8,8 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [jwtToken, setJwtToken] = useState(null);
+  const [loginComplete, setLoginComplete] = useState(false);
 
     const loginUser = async (formData) => {
 
@@ -29,6 +31,7 @@ export const AuthProvider = ({ children }) => {
         if (res.ok) {
           const userData = await res.text()
           setUser(userData)
+          setJwtToken(userData)
           localStorage.setItem('token', userData)
 
         } else {
@@ -38,6 +41,8 @@ export const AuthProvider = ({ children }) => {
       catch(error) {
       console.error('Login error:', error.message);
       throw error; 
+    } finally {
+      setLoginComplete(true);
     }
   };
 
@@ -62,6 +67,7 @@ export const AuthProvider = ({ children }) => {
         //regUser data is the jwt in stringform
         const regUser = await res.text()
         setUser(regUser)
+        setJwtToken(regUser)
         localStorage.setItem('token', regUser)
 
       } else {
@@ -79,22 +85,23 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     // Your logout logic here.
-    setUser(null);
+    // setUser(null);
+    setJwtToken(null);
     localStorage.removeItem('token');
   };
 
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const storedToken = localStorage.getItem('token');
 
-    if (token) {
-      setUser({ token });
+    if (storedToken) {
+      setJwtToken( storedToken );
     }
   }, []); 
 
 
   return (
-    <AuthContext.Provider value={{ user, loginUser, registerUser, logout }}>
+    <AuthContext.Provider value={{ user, jwtToken, loginUser, registerUser, logout, loginComplete }}>
       {children}
     </AuthContext.Provider>
   );
