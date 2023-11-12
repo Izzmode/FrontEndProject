@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,700&display=swap');
+:root {
+  --background-gradient: linear-gradient(254deg, #252525 11.07%, #171717 84.69%);
+  --background: #121212;
+  --secondary: #171717;
+  --divider: #2F2F2F;
+  --pink: #CE6AD0;
+  --pink-gradiant: linear-gradient(232deg, #DC84DE -0.46%, #CE6AD0 46.2%, #C64FC8 89.11%);
+  --cta-grey: #252525ab;
+  --third-grey: #252525;
+
+}
+
+.BookingConfirmation{
+    height: 100vh;
+}
+
+.confirmation-modal{
+    width: 65%;
+    background: var(--background-gradient);
+    margin: 0 auto;
+    text-align: center;
+    padding: 3rem;
+    border-radius: 8px;
+    margin-top: -16rem;
+}
+
+.icon-check{
+    color: var(--pink);
+    font-size: 50px;
+    margin-bottom: 1rem;
+
+}
+
+.confirmation-modal section{
+    color: white;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.confirmation-modal p{
+    font-size: .8rem;
+    margin-bottom: 2rem;
+}
+
+.confirmation-modal h1{
+    font-weight: 600;
+    margin-bottom: 1rem;
+}

@@ -32,19 +32,7 @@ import QuantityInputBooking from '../../components/inputs/QuantityInputBooking';
 import DateInputBooking from '../../components/inputs/DateInputBooking';
 
 const VenueDetails = () => {
-
-  //CONTEXT
-
   const { state, dispatch } = useContext(BookingContext);
-
-  const handleUpdateBookingData = (data) => {
-    dispatch({ type: 'UPDATE_BOOKING_DATA', payload: data });
-  }
-
-  const handleCateringChange = () => {
-    dispatch({ type: 'TOGGLE_CATERING', payload: !state.catering });
-    console.log('clicked')
-  };
 
   const selectedQuantity = state.selectedQuantity;
   const selectedDate = state.selectedDate;
@@ -54,6 +42,8 @@ const VenueDetails = () => {
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
+
+  //the idea is to add the date they searched for, but not working? Check again now you changed inputs
   const params = new URLSearchParams(location.search);
   const dateParamString = params.get('date');
   const dateParam = dateParamString === "null" ? null : parseISO(dateParamString);
@@ -146,12 +136,12 @@ const VenueDetails = () => {
   ];
 
   const handleClick = () => {
-    navigate(`/venues/${id}/confirm`);
+    navigate(`/venues/${id}/booking-summary`);
   }
 
   //TBD skickar med venue i params, istället lägga till den i BookingContext?
   
-
+  // adding thumbnal and images to display in slider
   const allImages = venue ? [venue.thumbnail, ...venue.images] : [];
   
 
@@ -288,7 +278,7 @@ const VenueDetails = () => {
                 </div>
                 {offersCatering && (
                 <div className='checkbox-container'>
-                  <Checkbox label='Add catering to booking' checked={state.catering} onChange={handleCateringChange}/>
+                  <Checkbox label='Add catering to booking'/>
                   <span>
                   <MdDinnerDining className='food-icon'/>
                   </span>

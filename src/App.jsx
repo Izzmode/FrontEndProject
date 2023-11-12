@@ -8,11 +8,12 @@ import ProtectedRoute from './routes/ProtectedRoute'
 // import OrderList from './pages/OrderList'
 import BookingDetails from './pages/BookingDetails'
 import SearchedVenues from './pages/SearchedVenues'
-import Confirmation from './pages/confirmation/Confirmation'
+import BookingSummary from './pages/bookingSummary/BookingSummary'
 import { BookingProvider } from './context/BookingContext';
-import Profile from './pages/Profile'
+import Profile from './pages/profile/Profile'
 import { ModalProvider } from './context/ModalContext'
 import { AuthProvider } from './context/AuthContext'
+import BookingConfirmation from './pages/bookingConfirmation/BookingConfirmation'
 
 const App = () => {
 
@@ -27,10 +28,16 @@ const App = () => {
             <Route path="/venues" element= {<Venues />}/>
             <Route path="/venues/:id" element= { <VenueDetails/>}/>
             
-            <Route path="/venues/:id/confirm" element= { 
+            <Route path="/venues/:id/booking-summary" element= { 
             <ProtectedRoute>
-            <Confirmation/>
+            <BookingSummary/>
             </ProtectedRoute>}/>
+
+            <Route path="/bookings/confirmation" element= { 
+            <ProtectedRoute>
+            <BookingConfirmation/>
+            </ProtectedRoute>}/>
+
             <Route path="/selectvenues" element= { <SearchedVenues/>}/>
 
             {/* <Route path= "/orders" element ={<OrderList/> }/> */}

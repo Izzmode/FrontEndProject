@@ -1,0 +1,26 @@
+
+
+.Profile{
+    height: 100vh;
+    margin: 0 auto;
+    margin-top: -16rem;
+    width: 85%;
+    color: white;
+}
+
+.profile-greeting{
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-greeting h1{
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.profile-edit{
+    display: flex;
+    gap: .5rem;
+    align-items: baseline;
+}
+

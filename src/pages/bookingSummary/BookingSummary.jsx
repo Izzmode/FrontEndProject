@@ -1,4 +1,4 @@
-import './confirmation.css'
+import './bookingSummary.css'
 import useFetch from '../../hooks/useFetch';
 import { useState, useEffect } from 'react'
 import { FaWifi, FaParking, FaCoffee, FaWheelchair, FaChalkboard, FaMapMarkerAlt, FaClock, FaUserAlt, FaCoins } from "react-icons/fa";
@@ -11,23 +11,27 @@ import { createContext, useContext, useReducer } from 'react';
 import { parseISO, format } from 'date-fns';
 
 
-const Confirmation = () => {
-
+const BookingSummary = () => {
+ 
+  //Getting the values the user chose in VenueDetails booking from localStorage
   const hours = localStorage.getItem('hours')
   const totalAmountLS = localStorage.getItem('totalAmount')
   const dateLS = localStorage.getItem('date')
   const attendees = localStorage.getItem('quantity')
+  const catering = localStorage.getItem('catering') ? true : false;
+  const navigate = useNavigate();
 
+  // const catering = state.catering;
+  //delete some of this if you're not gonna use context
   const location = useLocation();
-  // const history = useHistory();
   const { state, dispatch } = useContext(BookingContext);
-  const selectedQuantity = state.selectedQuantity;
+  // const selectedQuantity = state.selectedQuantity;
   // const selectedDate = state.selectedDate;
-  const selectedTime = state.selectedTime;
-  const totalAmount = state.totalAmount;
-  const catering = state.catering;
+  // const selectedTime = state.selectedTime;
+  // const totalAmount = state.totalAmount;
   const date = dateLS === "null" ? null : new Date(dateLS);
 
+  //formatting the date to a more "readable" one
   let formattedDate;
   if (!isNaN(date)) {
     // Format the date as "Month Day, Year"
@@ -45,6 +49,51 @@ const Confirmation = () => {
   const { id } = useParams();
   const { data: venue, isLoading, error } = useFetch('http://localhost:9999/api/venues/' + id)
 
+  const addBooking = async () =>{
+    try{
+
+      const booking = {
+        venue: id,
+        totalPrice: totalAmountLS ,
+        date: date,
+        hours: hours,
+        catering: catering
+      }
+
+      //ändra i authcontext när jag lägger till token i localstorage???
+
+      // const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token').replace(/['"]+/g, '');
+      console.log(token)
+
+      const res = await fetch('http://localhost:9999/api/bookings', {
+        method: 'POST',
+        body: JSON.stringify(booking),
+        headers: {
+          'content-type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      })
+      if (res.ok) {
+        //regUser data is the jwt in stringform
+        const newBooking = await res.json()
+        navigate('/bookings/confirmation')
+        
+
+      } else {
+        console.error('Failed to create booking:', res.status);
+      }
+
+
+    }
+    catch(error){
+      console.error('Error creating booking:', error);
+    }
+  }
+  
+
+  //commented out for now, but do I want to keep booking detail?
+  //Do i want to add venue, or add something else here?
   // useEffect(() => {
   //   // Only update the context once when the component is mounted
   //   dispatch({ type: 'UPDATE_BOOKING_DATA', payload: { venue } });
@@ -85,7 +134,7 @@ const Confirmation = () => {
             {/* <p className='confirm-catering-icon'><span><FaUserAlt/> </span>{state.selectedQuantity?.label}</p> */}
             <p className='confirm-catering-icon'><span><FaUserAlt/> </span>{attendees}</p>
             <p className='confirm-catering-icon'><span><FaCoins/> </span>{totalAmountLS} SEK</p>
-            {state.catering && 
+            {catering && 
             <p className='confirm-catering-icon'><span><MdDinnerDining/></span>Catering</p>
           }
 
@@ -119,7 +168,7 @@ const Confirmation = () => {
               There is always coffee, tea and water available.
             </p>
           </div>
-          {state.catering &&
+          {catering &&
           <div className='confirm-catering'>
             <h2>Catering</h2>
             <p>
@@ -153,10 +202,10 @@ const Confirmation = () => {
                  </div>
                  <section className='confirm-btns'>
         <button className='btn-cancel'>CANCEL</button>
-        <button className='btn btn-confirm'>CONFIRM BOOKING</button>
+        <button className='btn btn-confirm' onClick={addBooking}>CONFIRM BOOKING</button>
         </section>
     </div>
   )
 }
 
-export default Confirmation
+export default BookingSummary

@@ -1,0 +1,59 @@
+
+
+.CurrentBookingsCard{
+    width: 100%;
+    /* height: 400px; */
+    /* background-color: var(--divider); */
+    background-color: var(--third-grey);
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border-radius: 8px;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.CurrentBookingsCard .left{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+    font-size: .8rem;
+}
+
+.bookings-price, .booking-venue-name{
+   font-weight: 600;
+}
+
+.CBC-address{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+}
+
+.booking-number{
+    color: grey;
+    font-size: .7rem;
+}
+
+.CurrentBookingsCard .middle{
+    display: flex;
+    flex-direction: column;
+    font-size: .8rem;
+    gap: .5rem;
+    align-items: end;
+}
+
+.CurrentBookingsCard .middle {
+    display: flex;
+}
+
+.CurrentBookingsCard img {
+    width: 270px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+
+}
+

@@ -2,25 +2,25 @@ const Booking = require('../schemas/bookingSchema');
 
 
 //function for calculation the total price for booking
-Booking.calculatePrice = async function (booking) {
+// Booking.calculatePrice = async function (booking) {
 
-  // Fetch the venue object based on the ObjectId reference
-  const populatedBooking = await Booking.findById(booking._id).populate('venue');
-  const venue = populatedBooking.venue;
+//   // Fetch the venue object based on the ObjectId reference
+//   const populatedBooking = await Booking.findById(booking._id).populate('venue');
+//   const venue = populatedBooking.venue;
 
-  const durationInHours = (booking.endTime - booking.startTime) / 3600000; // Milliseconds to hours
+//   const durationInHours = (booking.endTime - booking.startTime) / 3600000; // Milliseconds to hours
   
-    // Calculate the total price
-    const totalPrice = venue.pricePerHour * durationInHours;
+//     // Calculate the total price
+//     const totalPrice = venue.pricePerHour * durationInHours;
   
-    return totalPrice;
-  };
+//     return totalPrice;
+//   };
 
 
   // Create new booking
 exports.addBooking = async (req, res) => {
   
-  const { venue, date, startTime, endTime, catering } = req.body;
+  const { venue, date, hours, catering, totalPrice } = req.body;
   if(!venue) return res.status(400).json({ message: 'You need to enter venues to your cart' })
 
   console.log(req.userId)
@@ -29,26 +29,24 @@ exports.addBooking = async (req, res) => {
     customerId: req.userId,
     venue,
     date,
-    startTime,
-    endTime,
-    catering
+    hours,
+    catering,
+    totalPrice
   })
 
   if(!booking) return res.status(500).json({ message: 'Something went wrong when creating booking' })
 
   //saving the total price by running the function
-  const totalPrice = await Booking.calculatePrice(booking);
+  // const totalPrice = await Booking.calculatePrice(booking);
   
 
   // Add the totalPrice to the booking object
-  booking.totalPrice = totalPrice;
-
-  console.log(totalPrice)
-
+  // booking.totalPrice = totalPrice;
+  
   // Save the booking with the totalPrice
   await booking.save();
-
-
+  
+  
   res.status(201).json(booking)
 }
 
@@ -58,7 +56,7 @@ exports.getBookings = async (req, res) => {
 
       const bookings = await Booking.find({ customerId: req.userId })
       //TBD populate more from venue
-      .populate({ path: 'venue', select: 'name adress thumbnail' })
+      .populate({ path: 'venue', select: 'name address thumbnail' })
     //   .populate({ path: 'bookingStatus', select: 'status' })
 
       if(!bookings) res.status(500).json({ message: 'Something went wrong when getting bookings' })
