@@ -1,7 +1,7 @@
 
 
 .Profile{
-    height: 100vh;
+    /* height: 100vh; */
     margin: 0 auto;
     margin-top: -16rem;
     width: 85%;
@@ -21,6 +21,26 @@
 .profile-edit{
     display: flex;
     gap: .5rem;
-    align-items: baseline;
+    align-items: end;
 }
 
+.hej{
+    background-color: var(-);
+}
+
+
+.Profile section h2{
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.current-bookings-total, .prev-bookings-total{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.current-bookings-total p, .profile-greeting p, .prev-bookings-total p {
+    font-size: .8rem;
+}

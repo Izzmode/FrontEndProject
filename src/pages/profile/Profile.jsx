@@ -15,11 +15,6 @@ const Profile = () => {
   const token = localStorage.getItem('token');
   const cleanedToken = token.replace(/^"(.*)"$/, '$1');
 
-  // const headers = {
-  //   'Authorization': `Bearer ${token}`,
-  //   'Content-Type': 'application/json',
-  // };
-
   useEffect(() => {
 
   fetch('http://localhost:9999/api/bookings', {
@@ -53,22 +48,31 @@ const Profile = () => {
       const bookingDate = new Date(booking.date);
       console.log(bookingDate)
       return bookingDate >= currentDate;
-      return true
     }
   })
 
-  console.log(currentBookings)
+  const previousBookings = bookings?.filter(booking => {
+    if(booking.date){
 
+      const bookingDate = new Date(booking.date);
+      console.log(bookingDate)
+      return bookingDate <= currentDate;
+    }
+  })
 
 
   return (
     <div className='Profile'>
       <section className='profile-greeting'>
         <h1>Hello!</h1>
-        <div className='profile-edit'> <span><MdOutlineEdit/></span> <p>Edit profile</p></div>
+        <div className='profile-edit'> <p><MdOutlineEdit/></p> <p>Edit profile</p></div>
+        {/* <div className='profile-edit'> <span><MdOutlineEdit/></span> <p>Edit profile</p></div> */}
       </section>
       <section className='profile-current-bookings'>
+        <div className='current-bookings-total'>
         <h2>Current Bookings</h2>
+        <p>{currentBookings?.length} Bookings </p>
+        </div>
         {currentBookings && currentBookings.map(booking => (
           <CurrentBookingsCard booking={booking}/>
         ))}
@@ -78,7 +82,14 @@ const Profile = () => {
 
       </section>
       <section className='profile-prev-bookings'>
+        <div className='prev-bookings-total'>
       <h2>Previous Bookings</h2>
+      <p>{previousBookings?.length} Bookings </p>
+      </div>
+
+      {previousBookings && previousBookings.map(booking => (
+          <CurrentBookingsCard booking={booking} style={{ backgroundColor: '#171717', border: '1px solid #2f2f2f'}}/>
+        ))}
 
       </section>
 

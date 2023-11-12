@@ -6,7 +6,7 @@ import Navbar from './components/navbar/Navbar'
 import Footer from './components/footer/Footer'
 import ProtectedRoute from './routes/ProtectedRoute'
 // import OrderList from './pages/OrderList'
-import BookingDetails from './pages/BookingDetails'
+import BookingDetails from './pages/bookingDetails/BookingDetails'
 import SearchedVenues from './pages/SearchedVenues'
 import BookingSummary from './pages/bookingSummary/BookingSummary'
 import { BookingProvider } from './context/BookingContext';
@@ -42,7 +42,7 @@ const App = () => {
 
             {/* <Route path= "/orders" element ={<OrderList/> }/> */}
 
-            <Route path= "/profile/bookings/:id" element ={
+            <Route path= "/bookings/:id" element ={
             <ProtectedRoute>
             <BookingDetails/>
             </ProtectedRoute>}/>

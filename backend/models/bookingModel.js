@@ -27,6 +27,7 @@ exports.addBooking = async (req, res) => {
   // Creating new booking with the logged in user's id as customerId, change to userId?
   const booking = await Booking.create({
     customerId: req.userId,
+    bookingNumber,
     venue,
     date,
     hours,
@@ -56,7 +57,7 @@ exports.getBookings = async (req, res) => {
 
       const bookings = await Booking.find({ customerId: req.userId })
       //TBD populate more from venue
-      .populate({ path: 'venue', select: 'name address thumbnail' })
+      .populate({ path: 'venue', select: 'name address thumbnail area' })
     //   .populate({ path: 'bookingStatus', select: 'status' })
 
       if(!bookings) res.status(500).json({ message: 'Something went wrong when getting bookings' })

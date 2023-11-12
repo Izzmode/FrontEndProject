@@ -1,7 +1,8 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 import './currentBookingsCard.css'
 
-const CurrentBookingsCard = ({ booking }) => {
+const CurrentBookingsCard = ({ booking, style }) => {
 
     const bookingDate = booking.date;
 
@@ -17,15 +18,14 @@ const CurrentBookingsCard = ({ booking }) => {
         day: 'numeric',
       });
     
-      console.log(formattedDate); 
     } else {
       console.log("Invalid date");
     }
 
     
   return (
-    
-    <div className='CurrentBookingsCard'>
+    <NavLink to={`/bookings/${booking._id}` } style={{ textDecoration: 'none' }}>
+    <div className='CurrentBookingsCard' style={style}>
 
         <section className='left'>
             <p className='booking-number'>Booking Number #{booking.bookingNumber}</p>
@@ -44,6 +44,7 @@ const CurrentBookingsCard = ({ booking }) => {
         </section>
         <img src={booking.venue.thumbnail} alt="" />
     </div>
+    </NavLink>
   )
 }
 
