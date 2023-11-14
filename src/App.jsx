@@ -14,6 +14,7 @@ import Profile from './pages/profile/Profile'
 import { ModalProvider } from './context/ModalContext'
 import { AuthProvider } from './context/AuthContext'
 import BookingConfirmation from './pages/bookingConfirmation/BookingConfirmation'
+// import { LikeProvider } from './context/LikeContext'
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
       <BookingProvider>
         <AuthProvider>
         <ModalProvider>
+          {/* <LikeProvider> */}
         <Navbar />
         <Routes>
             <Route path="/" element= { <Home/>}/>
@@ -54,6 +56,7 @@ const App = () => {
             
         </Routes>
         <Footer/>
+        {/* </LikeProvider> */}
         </ModalProvider>
         </AuthProvider>
         </BookingProvider>

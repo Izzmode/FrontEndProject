@@ -59,3 +59,11 @@
     display: flex;
     gap: 1rem;
 }
+
+.no-venues{
+    margin-bottom: 2rem;
+}
+
+.profile-liked-venues{
+    margin-top: 2rem;
+}

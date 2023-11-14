@@ -3,9 +3,12 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import { FaStar, FaUserAlt } from "react-icons/fa"
 import { useEffect, useState } from 'react'
 import './venueCard.css'
+// import { useLike } from '../../context/LikeContext'
 
 
-const VenueCard = ({ venue, isLiked }) => {
+const VenueCard = ({ venue }) => {
+
+  // const { likes, setLikes } = useLike();
   
     const [toggleFavourite, setToggleFavourite] = useState(false)
     
@@ -14,13 +17,75 @@ const VenueCard = ({ venue, isLiked }) => {
     const searchParams = new URLSearchParams(location.search);
     const selectedDateParam = searchParams.get('date');
 
-   useEffect(() => {
+  //  useEffect(() => {
 
-     if(isLiked){
-       setToggleFavourite(isLiked)
-     }
-   }, [])
+  //    if(isLiked){
+  //      setToggleFavourite(isLiked)
+  //    }
+  //  }, [])
    
+  //   const fetchUserLikes = async => {
+
+  //   try{
+  //     const res = await fetch('http://localhost:9999/api/likes', {
+  //       method: 'GET',
+  //       headers: {
+  //         'Authorization': `Bearer ${token}`,
+  //         'Content-Type': 'application/json',
+  //       },
+  //     });
+ 
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! Status: ${res.status}`);
+  //       }
+    
+  //       const data = await res.json();
+  //       return data.map(like => like.venue);
+
+      
+  //   } 
+  //   catch (error){
+ 
+  //     console.error('Error fetching likes:', error);
+  //     return [];
+  //   }
+  // }
+
+  const fetchUserLikes = async () => {
+  
+    try {
+      const response = await fetch('http://localhost:9999/api/likes', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      return data.map(like => like.venue);
+    } catch (error) {
+      console.error('Error fetching likes:', error);
+      return [];
+    }
+  };
+
+
+  const [isLiked, setIsLiked] = useState(false);
+
+  useEffect(() => {
+    fetchUserLikes().then(userLikes => {
+      const isVenueLiked = userLikes.some(like => like._id === venue?._id);
+      setIsLiked(isVenueLiked);
+    });
+  }, [venue]);
+  
+    // Rest of your VenueCard component remains the same
+  
     
     const token = localStorage.getItem('token').replace(/['"]+/g, '');
 
@@ -40,8 +105,7 @@ const VenueCard = ({ venue, isLiked }) => {
       });
 
       if (response.ok) {
-        // The like/unlike operation was successful
-        setToggleFavourite(!toggleFavourite);
+        setIsLiked(prevIsLiked => !prevIsLiked);
         console.log('Toggle success');
       } else {
         // Handle the error case
@@ -57,37 +121,43 @@ const VenueCard = ({ venue, isLiked }) => {
 
 
   return (
-    <NavLink to={`/venues/${venue._id}?date=${selectedDateParam}` } style={{ textDecoration: 'none' }}>
+    
+    <NavLink to={`/venues/${venue?._id}?date=${selectedDateParam}` } style={{ textDecoration: 'none' }}>
     
     {/* <NavLink to={`/venues/${venue._id}` } style={{ textDecoration: 'none' }}> */}
 
     <li className='VenueCard' style={{ textDecoration: 'none' }}>
-      <AiFillHeart 
-      className={`heart-icon-filled ${toggleFavourite ? 'active' : ''}`}
-      onClick={handleFavourite} 
-      size={25}/>
-      <AiOutlineHeart 
-      className={`heart-icon ${!toggleFavourite ? 'active' : ''}`} 
-      onClick={handleFavourite}
-      size={25} />
+    {isLiked ? (
+        <AiFillHeart
+          className={`heart-icon-filled active`}
+          onClick={handleFavourite}
+          size={25}
+        />
+      ) : (
+        <AiOutlineHeart
+          className={`heart-icon active`}
+          onClick={handleFavourite}
+          size={25}
+        />
+      )}
       
-      <img src={venue.thumbnail} alt={venue.name} className='VenueCard-img' />
+      <img src={venue?.thumbnail} alt={venue?.name} className='VenueCard-img' />
       {/* <div className="shadow"></div> */}
 
       <section className='info-wrapper'>
 
         <div className='rating-container'>
-          <h2 className='venueAddress'>{venue.address}</h2>
-          <p className='venue-rating'>{venue.rating}</p>
+          <h2 className='venueAddress'>{venue?.address}</h2>
+          <p className='venue-rating'>{venue?.rating}</p>
           <FaStar className='star-icon'/>
         </div>
         <div className='bottom-container'>
           <div className='numOfPeople-container'>
             <FaUserAlt className='user-icon'/>
-            <p className='venueNumOfPeople'>{venue.numberOfPeople}</p>
+            <p className='venueNumOfPeople'>{venue?.numberOfPeople}</p>
           </div>
 
-          <p className='venuePrice'>From {venue.pricePerHour}SEK/h</p>
+          <p className='venuePrice'>From {venue?.pricePerHour}SEK/h</p>
         </div>
       </section>
     </li>

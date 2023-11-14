@@ -18,8 +18,8 @@ const Profile = () => {
   // const limitedBookingsToShow = showAllBookings
   // ? bookings
   // : currentBookings?.slice(0, 3);
-
-
+  
+  console.log(likes)
   const token = localStorage.getItem('token');
   const cleanedToken = token.replace(/^"(.*)"$/, '$1');
 
@@ -40,7 +40,6 @@ const Profile = () => {
     })
     .then(data => {
       setBookings(data)
-      console.log(data);
     })
     .catch(error => {
       console.error('Error fetching bookings:', error);
@@ -65,7 +64,6 @@ const Profile = () => {
       })
       .then(data => {
         setLikes(data)
-        console.log(data);
       })
       .catch(error => {
         console.error('Error fetching likes:', error);
@@ -79,7 +77,6 @@ const Profile = () => {
     if(booking.date){
 
       const bookingDate = new Date(booking.date);
-      console.log(bookingDate)
       return bookingDate >= currentDate;
     }
   })
@@ -88,7 +85,6 @@ const Profile = () => {
     if(booking.date){
 
       const bookingDate = new Date(booking.date);
-      console.log(bookingDate)
       return bookingDate <= currentDate;
     }
   })
@@ -109,11 +105,14 @@ const Profile = () => {
         <div className='profile-edit'> <p><MdOutlineEdit/></p> <p>Edit profile</p></div>
         {/* <div className='profile-edit'> <span><MdOutlineEdit/></span> <p>Edit profile</p></div> */}
       </section>
+
       <section className='profile-current-bookings'>
         <div className='current-bookings-total'>
         <h2>Current Bookings</h2>
         <p>{currentBookings?.length} Bookings </p>
         </div>
+        {currentBookings && currentBookings.length > 0 ?
+        <>
         {limitedBookingsToShow &&
           limitedBookingsToShow
             .sort((a, b) => new Date(a.date) - new Date(b.date)) // Sort bookings based on date
@@ -125,21 +124,32 @@ const Profile = () => {
             SHOW ALL
           </button>
         )}
+        </>
+      : <p className='no-venues'>You have no current bookings</p> }
       </section>
       <section className='profile-liked-venues'>
-      <h2 className='h2-profile'>Liked Venues</h2>
-      <div className='profile-like-wrapper'>
-      {likes && likes.map(like => (
-          <VenueCard venue={like.venue} isLiked={true}/>
-        ))}
-        </div>
+      <div className='prev-bookings-total'>
+
+        <h2 className='h2-profile'>Liked Venues</h2>
+        <p>{likes?.length || 0 } Likes </p>
+      </div>
+        {likes && likes.length > 0 ? (
+          <div className='profile-like-wrapper'>
+            {likes.filter(like => like.venue).map(like => (
+              <VenueCard key={like._id} venue={like.venue} isLiked={true} />
+            ))}
+          </div>
+        ) : (
+          <p className='no-venues'>You have no liked venues</p>
+        )}
       </section>
       <section className='profile-prev-bookings'>
         <div className='prev-bookings-total'>
       <h2>Previous Bookings</h2>
       <p>{previousBookings?.length} Bookings </p>
       </div>
-
+      {previousBookings && previousBookings.length > 0 ?
+        <>
       {limitedOldBookingsToShow && 
         limitedOldBookingsToShow
         .sort((a, b) => new Date(b.date) - new Date(a.date))
@@ -154,6 +164,8 @@ const Profile = () => {
             SHOW ALL
           </button>
         )}
+        </>
+      : <p className='no-venues'>You have no previous bookings</p> }
 
       </section>
 
