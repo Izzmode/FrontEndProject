@@ -11,8 +11,6 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 const BookingDetails = () => {
 
   const { id } = useParams();
-
-
   const [booking, setBooking] = useState(null)
 
   useEffect(() => {
@@ -89,6 +87,33 @@ const BookingDetails = () => {
   };
 
 
+  const addToCalendar = (bookingDetails) => {
+    const { title, description, startDateTime, endDateTime, location } = bookingDetails;
+  
+    const startDate = new Date(startDateTime).toISOString().replace(/-|:|\.\d+/g, '');
+  
+    const calendarEvent = `BEGIN:VCALENDAR
+    VERSION:2.0
+    BEGIN:VEVENT
+    DTSTART:${startDate}
+    LOCATION:${location}
+    END:VEVENT
+    END:VCALENDAR`;
+  
+    const calendarData = new Blob([calendarEvent], { type: 'text/calendar;charset=utf-8' });
+    const calendarFileURL = window.URL.createObjectURL(calendarData);
+  
+    const link = document.createElement('a');
+    link.href = calendarFileURL;
+    link.setAttribute('download', 'event.ics');
+    document.body.appendChild(link);
+    link.click();
+  };
+  const bookingDetails = {
+    startDateTime: booking?.date, // Replace with the actual start time in ISO format
+    location: booking?.venue.address
+  };  
+
   return (
     <div className='BookingDetails'>
       <section className='booking-top'>
@@ -97,7 +122,7 @@ const BookingDetails = () => {
           <p>{formattedDateTwo} - {booking?.hours}</p>
         </div>
         <div>
-          <button className='btn btn-add-to-calender'><FaCalendarCheck/>  ADD TO CALENDER</button>
+          <button className='btn btn-add-to-calender' onClick={() => addToCalendar(bookingDetails)}><FaCalendarCheck/>  ADD TO CALENDER</button>
         </div>
       </section>
 

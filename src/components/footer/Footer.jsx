@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import './footer.css'
 import Login from '../login/Login';
 import Register from '../register/Register';
@@ -24,8 +25,8 @@ const Footer = () => {
             </Link>
             <ul className="nav-links">
                   <li><NavLink to={`/venues`} className='nav-link'>All venues</NavLink></li>
-                  <li><a className='nav-link' href="#about-us">About Us</a></li>
-                  <li><a className='nav-link' href="#contact-us">Contact Us</a></li>
+                  <li><HashLink to={'/#about-us'} className='nav-link' href="#about-us">About Us</HashLink></li>
+                  <li><HashLink to={'/#contact-us'} className='nav-link' href="#contact-us">Contact Us</HashLink></li>
                   { !jwtToken && <li className="nav-link" onClick={handleLogin}>Login</li>}
                 </ul>
 

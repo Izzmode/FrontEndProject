@@ -14,6 +14,7 @@ const Profile = () => {
   const [likes, setLikes] = useState(null)
   const [showAllBookings, setShowAllBookings] = useState(false);
   const [showAllOldBookings, setShowAllOldBookings] = useState(false);
+  const [showAllLikes, setShowAllLikes] = useState(false);
 
   // const limitedBookingsToShow = showAllBookings
   // ? bookings
@@ -97,6 +98,13 @@ const Profile = () => {
   ? previousBookings
   : previousBookings?.slice(0, 3);
 
+  const limitedLikesToShow = showAllLikes
+  ? likes
+  : likes?.slice(0, 4);
+
+  console.log(previousBookings)
+  console.log(likes)
+
 
   return (
     <div className='Profile'>
@@ -105,6 +113,7 @@ const Profile = () => {
         <div className='profile-edit'> <p><MdOutlineEdit/></p> <p>Edit profile</p></div>
         {/* <div className='profile-edit'> <span><MdOutlineEdit/></span> <p>Edit profile</p></div> */}
       </section>
+
 
       <section className='profile-current-bookings'>
         <div className='current-bookings-total'>
@@ -127,22 +136,37 @@ const Profile = () => {
         </>
       : <p className='no-venues'>You have no current bookings</p> }
       </section>
+
+
+
       <section className='profile-liked-venues'>
       <div className='prev-bookings-total'>
 
         <h2 className='h2-profile'>Liked Venues</h2>
         <p>{likes?.length || 0 } Likes </p>
       </div>
+     
         {likes && likes.length > 0 ? (
           <div className='profile-like-wrapper'>
-            {likes.filter(like => like.venue).map(like => (
+             { limitedLikesToShow &&
+              limitedLikesToShow
+            .filter(like => like.venue).map(like => (
               <VenueCard key={like._id} venue={like.venue} isLiked={true} />
             ))}
+
+          {!showAllLikes && likes?.length > 4 && (
+          <button className='btn btn-show-more' onClick={() => setShowAllLikes(true)}>
+            SHOW ALL
+          </button>
+        )}
           </div>
         ) : (
           <p className='no-venues'>You have no liked venues</p>
         )}
       </section>
+
+
+
       <section className='profile-prev-bookings'>
         <div className='prev-bookings-total'>
       <h2>Previous Bookings</h2>

@@ -52,25 +52,28 @@ const VenueCard = ({ venue }) => {
   // }
 
   const fetchUserLikes = async () => {
-  
-    try {
-      const response = await fetch('http://localhost:9999/api/likes', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+    if (token) {
+      try {
+        const response = await fetch('http://localhost:9999/api/likes', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data.map(like => like.venue);
+      } catch (error) {
+        console.error('Error fetching likes:', error);
+        return [];
       }
-  
-      const data = await response.json();
-      return data.map(like => like.venue);
-    } catch (error) {
-      console.error('Error fetching likes:', error);
-      return [];
+    } else {
+      return []; // Return an empty array if there's no token (user is not logged in)
     }
   };
 
@@ -87,7 +90,7 @@ const VenueCard = ({ venue }) => {
     // Rest of your VenueCard component remains the same
   
     
-    const token = localStorage.getItem('token').replace(/['"]+/g, '');
+    const token = localStorage.getItem('token')?.replace(/['"]+/g, '');
 
     const handleFavourite = async (e) => {
       console.log('klickade')

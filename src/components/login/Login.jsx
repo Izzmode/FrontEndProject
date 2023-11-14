@@ -7,14 +7,7 @@ const Login = () => {
 
   const { closeModal, openModal } = useModal();
   const { loginUser } = useAuth();
-
-  const handleRegisterClick = () => {
-    closeModal();
-    openModal('registerUser');
-  };
-
   const [error, setError] = useState(null);
-
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -32,13 +25,20 @@ const Login = () => {
       const userData = await loginUser(formData);
       // If login is successful, close the modal
       closeModal();
+      window.location.reload();
     } catch (error) {
       // If there's an error, set the error state
       setError('Invalid credentials');
     }
   };
 
-  
+  const handleRegisterClick = () => {
+    closeModal();
+    openModal('registerUser');
+  };
+
+
+
 
   return (
     <div className='Login'>

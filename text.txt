@@ -11,12 +11,25 @@ AIzaSyByaZ0G8E4agiR23dGjjVDJQEznJ-YnGA0
 "email@email.test"
 test
 
-bolla med cathja om föra med info från venue details till booking confirmation
-
-ändra. Jag vill ju inte att om jag går till home och ändrar attendees, alltså ändrar value, att det ändras i booking confirmation om
-jag går tillbaka.
-Så skapa en "säker på att du vill lämna bokning?"
+klara
+* styla liked venues
+* fixa add to calender
 
 
+
+* fixa like inne på venuedetails
+* gör alla sidor responsiva
+* fixa slider till venuedetails popular venues 
+* Snygga till koden
+* ta bort root
+* fixa färg till text
+* fixa stylingen på date i sökning, kanske går om jag nu har annan cta i booking.
+* kolla hur det ser ut i firefox.
+* lägg till more options
+* lägg till filtrering/sortering
+* Lägg till edit profile
+* Lägg till mer venues i backend
+* gör technical equipment dropdown snyggare
+* ta bort all console.log
 
 

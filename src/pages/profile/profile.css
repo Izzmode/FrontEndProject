@@ -35,7 +35,7 @@
     margin-bottom: 1rem;
 }
 
-.profile-prev-bookings, .profile-current-bookings {
+.profile-prev-bookings, .profile-current-bookings, .profile-liked-venues {
     display: flex;
     flex-direction: column;
 }
@@ -57,6 +57,7 @@
 
 .profile-like-wrapper{
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
 }
 
