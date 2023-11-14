@@ -3,6 +3,7 @@ import './profile.css'
 import { MdOutlineEdit } from 'react-icons/md'
 import { useEffect } from 'react'
 import CurrentBookingsCard from '../../components/currentBookingsCard/CurrentBookingsCard'
+import VenueCard from '../../components/venueCard/VenueCard'
 
 //import bookings from database
 //create current booking card and map out
@@ -10,6 +11,13 @@ import CurrentBookingsCard from '../../components/currentBookingsCard/CurrentBoo
 const Profile = () => {
 
   const [bookings, setBookings] = useState(null)
+  const [likes, setLikes] = useState(null)
+  const [showAllBookings, setShowAllBookings] = useState(false);
+  const [showAllOldBookings, setShowAllOldBookings] = useState(false);
+
+  // const limitedBookingsToShow = showAllBookings
+  // ? bookings
+  // : currentBookings?.slice(0, 3);
 
 
   const token = localStorage.getItem('token');
@@ -40,6 +48,31 @@ const Profile = () => {
 
   }, [])
 
+  useEffect(() => {
+
+    fetch('http://localhost:9999/api/likes', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${cleanedToken}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        setLikes(data)
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('Error fetching likes:', error);
+      });
+  
+    }, [])
+  
 
   const currentDate = new Date();
   const currentBookings = bookings?.filter(booking => {
@@ -60,6 +93,14 @@ const Profile = () => {
     }
   })
 
+  const limitedBookingsToShow = showAllBookings
+  ? currentBookings
+  : currentBookings?.slice(0, 3);
+
+  const limitedOldBookingsToShow = showAllOldBookings
+  ? previousBookings
+  : previousBookings?.slice(0, 3);
+
 
   return (
     <div className='Profile'>
@@ -73,13 +114,25 @@ const Profile = () => {
         <h2>Current Bookings</h2>
         <p>{currentBookings?.length} Bookings </p>
         </div>
-        {currentBookings && currentBookings.map(booking => (
-          <CurrentBookingsCard booking={booking}/>
-        ))}
+        {limitedBookingsToShow &&
+          limitedBookingsToShow
+            .sort((a, b) => new Date(a.date) - new Date(b.date)) // Sort bookings based on date
+            .map((booking) => (
+              <CurrentBookingsCard key={booking._id} booking={booking} />
+            ))}
+          {!showAllBookings && currentBookings?.length > 3 && (
+          <button className='btn btn-show-more' onClick={() => setShowAllBookings(true)}>
+            SHOW ALL
+          </button>
+        )}
       </section>
       <section className='profile-liked-venues'>
-      <h2>Liked Venues</h2>
-
+      <h2 className='h2-profile'>Liked Venues</h2>
+      <div className='profile-like-wrapper'>
+      {likes && likes.map(like => (
+          <VenueCard venue={like.venue} isLiked={true}/>
+        ))}
+        </div>
       </section>
       <section className='profile-prev-bookings'>
         <div className='prev-bookings-total'>
@@ -87,9 +140,20 @@ const Profile = () => {
       <p>{previousBookings?.length} Bookings </p>
       </div>
 
-      {previousBookings && previousBookings.map(booking => (
-          <CurrentBookingsCard booking={booking} style={{ backgroundColor: '#171717', border: '1px solid #2f2f2f'}}/>
+      {limitedOldBookingsToShow && 
+        limitedOldBookingsToShow
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .map(booking => (
+          <CurrentBookingsCard 
+          key={booking._id} 
+          booking={booking} 
+          style={{ backgroundColor: '#171717', border: '1px solid #2f2f2f'}}/>
         ))}
+          {!showAllOldBookings && previousBookings?.length > 3 && (
+          <button className='btn btn-show-more' onClick={() => setShowAllOldBookings(true)}>
+            SHOW ALL
+          </button>
+        )}
 
       </section>
 

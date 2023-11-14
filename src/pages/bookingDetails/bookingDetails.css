@@ -1,0 +1,147 @@
+.BookingDetails{
+    margin: 0 auto;
+    margin-top: -16rem;
+    width: 85%;
+    color: white;
+}
+
+.BookingDetails-wrapper{
+    background-color: var(--secondary);
+    padding: 3rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+.booking-top{
+    display: flex;
+    justify-content: space-between;
+}
+
+.booking-nr h1{
+font-weight: 600;
+}
+
+/* .btn-add-to-calender {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+} */
+
+.booking-details-venue-top{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+}
+
+.booking-details-bottom{
+    display: flex;
+    line-height: 1.6;
+    gap: 3rem;
+}
+.bottom-left h2{
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+.booking-details-terms h2{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.booking-details-terms p {
+    font-size: .9rem;
+    margin-top: 1rem;
+}
+
+.bottom-left p{
+    font-size: .9rem;
+    margin-top: 1rem;
+}
+
+
+.bottom-left{
+    flex: 3;
+}
+.bottom-right{
+    flex:4;
+}
+
+.booking-img-large{
+    object-fit: cover;
+    height: 300px;
+    flex: 2;
+    border-radius: 8px;
+    /* width: 550px; */
+
+}
+
+.booking-img-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.booking-img-container img{
+    object-fit: cover;
+    /* width: 250px; */
+    height: 140px;
+    border-radius: 8px;
+}
+
+.top-right{
+    display: flex;
+    gap: 1rem;
+    flex: 2;
+}
+.top-left{
+    margin-right: 1rem;
+    flex: 1;
+}
+
+.top-left h2{
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+.top-left, .booking-details-icons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.booking-details-icons{
+    height: 100%;
+    /* gap: 1rem; */
+}
+.booking-details-icons p, .booking-details-icons a{
+font-size: .9rem;
+}
+
+
+
+.booking-details-contact{
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(254deg, #252525 11.07%, #191919 84.69%); 
+    border-radius: 8px;
+    padding-inline: 2rem;
+    padding-block: 1rem;
+    margin-top: 2em;
+}
+
+.booking-details-contact h2{
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+}
+
+.booking-details-contact p, .booking-details-contact a{
+    font-size: .9rem;
+    font-weight: 300;
+}
+
+.booking-details-contact a, .booking-details-contact .contact-name {
+    font-weight: 600;
+}
+

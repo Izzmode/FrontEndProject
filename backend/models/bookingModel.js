@@ -18,38 +18,62 @@ const Booking = require('../schemas/bookingSchema');
 
 
   // Create new booking
-exports.addBooking = async (req, res) => {
+// exports.addBooking = async (req, res) => {
   
-  const { venue, date, hours, catering, totalPrice } = req.body;
-  if(!venue) return res.status(400).json({ message: 'You need to enter venues to your cart' })
+//   const { venue, date, hours, catering, totalPrice } = req.body;
+//   if(!venue) return res.status(400).json({ message: 'You need to enter venues to your cart' })
 
-  console.log(req.userId)
-  // Creating new booking with the logged in user's id as customerId, change to userId?
-  const booking = await Booking.create({
+//   console.log(req.userId)
+//   // Creating new booking with the logged in user's id as customerId, change to userId?
+//   const booking = await Booking.create({
+//     customerId: req.userId,
+//     venue,
+//     date,
+//     hours,
+//     catering,
+//     totalPrice
+//   })
+
+//   if(!booking) return res.status(500).json({ message: 'Something went wrong when creating booking' })
+
+//   await booking.save();
+  
+  
+//   res.status(201).json(booking)
+// }
+
+exports.addBooking = async (req, res) => {
+  const { venue, date, hours, catering, totalPrice } = req.body;
+  if (!venue) return res.status(400).json({ message: 'You need to enter venues to your cart' });
+
+  console.log(req.userId);
+
+  // Creating a new booking with the logged-in user's id as customerId, change to userId?
+  const booking = new Booking({
     customerId: req.userId,
-    bookingNumber,
     venue,
     date,
     hours,
     catering,
-    totalPrice
-  })
+    totalPrice,
+    bookingNumber: generateUniqueBookingNumber(), // Call the function to generate a unique booking number
+  });
 
-  if(!booking) return res.status(500).json({ message: 'Something went wrong when creating booking' })
+  try {
+    // Save the booking
+    await booking.save();
+    res.status(201).json(booking);
+  } catch (error) {
+    console.error('Error creating booking:', error);
+    res.status(500).json({ message: 'Something went wrong when creating booking' });
+  }
+};
 
-  //saving the total price by running the function
-  // const totalPrice = await Booking.calculatePrice(booking);
-  
-
-  // Add the totalPrice to the booking object
-  // booking.totalPrice = totalPrice;
-  
-  // Save the booking with the totalPrice
-  await booking.save();
-  
-  
-  res.status(201).json(booking)
-}
+// Function to generate a unique booking number
+const generateUniqueBookingNumber = () => {
+  // For simplicity, you can use a timestamp-based approach
+  return Math.floor(Date.now() / 1000);
+};
 
 exports.getBookings = async (req, res) => {
 
@@ -77,7 +101,7 @@ exports.getBookings = async (req, res) => {
 exports.getBookingById = async (req, res) => {
 
   const booking = await Booking.findById(req.params.id)
-
+  .populate({ path: 'venue', select: 'name address thumbnail area numberOfPeople amenities contact thumbnail images' })
   if(!booking) res.status(404).json({ message: 'Could not find booking' })
 
   res.status(200).json(booking)

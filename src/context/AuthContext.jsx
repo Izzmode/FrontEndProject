@@ -1,4 +1,8 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { jwtDecode } from "jwt-decode";
+
+
+
 
 const AuthContext = createContext();
 
@@ -90,13 +94,26 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
   };
 
+  
+
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
 
     if (storedToken) {
-      setJwtToken( storedToken );
+       // Decode the token to get its expiration date
+    const decodedToken = jwtDecode(storedToken);
+    const expirationDate = new Date(decodedToken.exp * 1000);
+    // Check if the token is expired
+    if (expirationDate <= new Date()) {
+      // Token is expired, remove it from local storage
+      localStorage.removeItem('token');
+      setJwtToken(null);
+    } else {
+      // Token is still valid
+      setJwtToken(storedToken);
     }
+  }
   }, []); 
 
 

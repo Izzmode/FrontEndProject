@@ -29,10 +29,15 @@
 }
 
 
-.Profile section h2{
+.profile-prev-bookings h2, .profile-current-bookings h2, .h2-profile{
     font-size: 1rem;
     font-weight: 500;
     margin-bottom: 1rem;
+}
+
+.profile-prev-bookings, .profile-current-bookings {
+    display: flex;
+    flex-direction: column;
 }
 
 .current-bookings-total, .prev-bookings-total{
@@ -43,4 +48,14 @@
 
 .current-bookings-total p, .profile-greeting p, .prev-bookings-total p {
     font-size: .8rem;
+}
+
+.btn-show-more{
+    /* width: 50%; */
+    margin: 0 auto;
+}
+
+.profile-like-wrapper{
+    display: flex;
+    gap: 1rem;
 }
