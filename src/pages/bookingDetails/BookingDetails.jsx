@@ -4,8 +4,8 @@ import { FaWifi, FaParking, FaCoffee, FaWheelchair, FaChalkboard, FaMapMarkerAlt
 import { MdOutlineSupportAgent, MdHeadsetMic, MdOutlineVideogameAsset, MdDinnerDining } from "react-icons/md"
 import { BsProjector, BsCalendarDateFill } from "react-icons/bs"
 import { CgScreen } from "react-icons/cg"
-
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import Map from '../../components/Map'
 
 
 const BookingDetails = () => {
@@ -222,7 +222,29 @@ const BookingDetails = () => {
               </div>
         
       </section>
-      <section className='booking-venue-location'></section>
+      <section className='booking-venue-location'>
+        <div className='venue-location-text'>
+          <h2>Venue Location</h2>
+          <p>{booking?.venue.address}, {booking?.venue.area}</p>
+        </div>
+        <div className='booking-venue-location'>
+              <div className='booking-details-transportation'>
+                <div className='img-transport'><img src={booking?.venue.images[2]} alt="" /></div>
+                  <div className='transport-wrapper'>
+                  <p>Directions</p>
+                  <div className='transport-icon-wrapper'>
+                    <p>mappa</p>
+                    <p>ut</p>
+                    <p>här</p>
+                  </div>
+                  </div>
+              </div>
+              <div className='booking-details-map'>
+                <Map longitude={booking?.venue.longitude} latitude={booking?.venue.latitude}/>
+              </div>
+              <div className='booking-details-billing'></div>
+        </div>
+      </section>
       </div>
     </div>
   )

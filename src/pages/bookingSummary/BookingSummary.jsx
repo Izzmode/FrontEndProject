@@ -1,14 +1,10 @@
 import './bookingSummary.css'
 import useFetch from '../../hooks/useFetch';
-import { useState, useEffect } from 'react'
 import { FaWifi, FaParking, FaCoffee, FaWheelchair, FaChalkboard, FaMapMarkerAlt, FaClock, FaUserAlt, FaCoins } from "react-icons/fa";
 import { MdOutlineSupportAgent, MdHeadsetMic, MdOutlineVideogameAsset, MdDinnerDining } from "react-icons/md"
 import { BsProjector, BsCalendarDateFill } from "react-icons/bs"
 import { CgScreen } from "react-icons/cg"
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { BookingContext } from '../../context/BookingContext';
-import { createContext, useContext, useReducer } from 'react';
-import { parseISO, format } from 'date-fns';
 
 
 const BookingSummary = () => {
@@ -19,17 +15,9 @@ const BookingSummary = () => {
   const dateLS = localStorage.getItem('date')
   const attendees = localStorage.getItem('quantity')
   const catering = localStorage.getItem('catering') ? true : false;
-  const navigate = useNavigate();
-
-  // const catering = state.catering;
-  //delete some of this if you're not gonna use context
-  const location = useLocation();
-  const { state, dispatch } = useContext(BookingContext);
-  // const selectedQuantity = state.selectedQuantity;
-  // const selectedDate = state.selectedDate;
-  // const selectedTime = state.selectedTime;
-  // const totalAmount = state.totalAmount;
   const date = dateLS === "null" ? null : new Date(dateLS);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   //formatting the date to a more "readable" one
   let formattedDate;
@@ -90,14 +78,6 @@ const BookingSummary = () => {
       console.error('Error creating booking:', error);
     }
   }
-  
-
-  //commented out for now, but do I want to keep booking detail?
-  //Do i want to add venue, or add something else here?
-  // useEffect(() => {
-  //   // Only update the context once when the component is mounted
-  //   dispatch({ type: 'UPDATE_BOOKING_DATA', payload: { venue } });
-  // }, []); 
 
   const amenityIcons = {
     Wifi: <FaWifi className='am-icons' />,
@@ -131,7 +111,6 @@ const BookingSummary = () => {
             <p className='confirm-catering-icon'><span><FaMapMarkerAlt/> </span>{venue.address}</p>
             <p className='confirm-catering-icon'><span><FaClock/> </span>{hours}</p>
             <p className='confirm-catering-icon'><span><BsCalendarDateFill/> </span>{formattedDate}</p>
-            {/* <p className='confirm-catering-icon'><span><FaUserAlt/> </span>{state.selectedQuantity?.label}</p> */}
             <p className='confirm-catering-icon'><span><FaUserAlt/> </span>{attendees}</p>
             <p className='confirm-catering-icon'><span><FaCoins/> </span>{totalAmountLS} SEK</p>
             {catering && 

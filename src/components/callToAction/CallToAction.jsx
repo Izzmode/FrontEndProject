@@ -1,27 +1,14 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Select from 'react-select';
-import LocationInput from './inputs/LocationInput';
-import QuantityInput from './inputs/QuantityInput'
-import { useContext } from 'react';
-import { BookingContext } from '../context/BookingContext';
+import LocationInput from '../inputs/LocationInput'
+import QuantityInput from '../inputs/QuantityInput'
+import './callToAction.css'
 
 const CallToAction = () => {
 
   const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const { state, dispatch } = useContext(BookingContext);
-
-  const resetDropdowns = () => {
-    dispatch({ type: 'RESET_QUANTITY' });
-    setSelectedLocation(null)
-  };
-
-  useEffect(() => {
-    resetDropdowns();
-  }, []);
-
+  const [selectedQuantity, setSelectedQuantity] = useState(null);
 
 
       const customStyles = {
@@ -59,9 +46,8 @@ const CallToAction = () => {
       };
 
       const handleSearch = () => {
-      if (selectedLocation && state.selectedQuantity) {
-        navigate(`/selectvenues?location=${selectedLocation.value}&quantity=${state.selectedQuantity.value}`);
-        dispatch({ type: 'RESET_QUANTITY' });
+      if (selectedLocation && selectedQuantity) {
+        navigate(`/selectvenues?location=${selectedLocation.value}&quantity=${selectedQuantity.value}`);
       }}
 
   return (
@@ -72,7 +58,7 @@ const CallToAction = () => {
         <div className='cta-container'>
         <div className="dropdowns">
           <LocationInput selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation}/>
-          <QuantityInput />
+          <QuantityInput selectedQuantity={selectedQuantity} setSelectedQuantity={setSelectedQuantity}/>
         </div>
         <button className='btn-search' onClick={handleSearch}>SEARCH</button>
         </div>

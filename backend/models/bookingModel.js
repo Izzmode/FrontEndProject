@@ -101,14 +101,14 @@ exports.getBookings = async (req, res) => {
 exports.getBookingById = async (req, res) => {
 
   const booking = await Booking.findById(req.params.id)
-  .populate({ path: 'venue', select: 'name address thumbnail area numberOfPeople amenities contact thumbnail images' })
+  .populate({ path: 'venue'})
   if(!booking) res.status(404).json({ message: 'Could not find booking' })
 
   res.status(200).json(booking)
 }
 
 
-
+// , select: 'name address thumbnail area numberOfPeople amenities contact thumbnail images' 
 
 
 

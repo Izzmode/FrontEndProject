@@ -31,12 +31,17 @@ const ContactUs = () => {
         <div className='find-us-wrapper'>
         <div className='find-us'>
             <h2>Find Us</h2>
+            <div className='address-phone-wrapper'>
+            <div className='contact-phone'>
             <h3>Phone</h3>
             <p>08 321 123</p>
-
+            </div>
+            <div className='contact-address'>
             <h3 className='h3adress'>Address</h3>
             <p>Drottninggatan 56</p>
             <p>123 45 Stockholm</p>
+            </div>
+            </div>
             </div>
             <Map className='map-contact' longitude={18.062293184656447} latitude={59.33344943795326}/>
             </div>

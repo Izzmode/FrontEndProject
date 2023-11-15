@@ -17,27 +17,23 @@ import iconBoardroom from '../../images/icon-boardroom.png'
 import iconStanding from '../../images/icon-standing.png'
 import iconClassroom from '../../images/icon-classroom.png'
 import iconBreakout from '../../images/icon-dining.png'
-import Select from 'react-select';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
 import { parseISO } from 'date-fns';
-import QuantityInput from '../../components/inputs/QuantityInput';
-import DateInput from '../../components/inputs/DateInput';
 import TimeInput from '../../components/inputs/TimeInput';
 import Checkbox from '../../components/checkbox/Checkbox';
-import { BookingContext } from '../../context/BookingContext';
-import { createContext, useContext, useReducer } from 'react';
 import QuantityInputBooking from '../../components/inputs/QuantityInputBooking';
 import DateInputBooking from '../../components/inputs/DateInputBooking';
 
 const VenueDetails = () => {
-  const { state, dispatch } = useContext(BookingContext);
 
-  const selectedQuantity = state.selectedQuantity;
-  const selectedDate = state.selectedDate;
-  const selectedTime = state.selectedTime;
-  const totalAmount = state.totalAmount;
+  const [totalAmount, setTotalAmount] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedHours, setSelectedHours] = useState(null);
+  const [selectedQuantity, setSelectedQuantity] = useState(null);
+
+
+  // const formattedDate = selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '';
 
   const { id } = useParams();
   const location = useLocation();
@@ -139,9 +135,7 @@ const VenueDetails = () => {
     navigate(`/venues/${id}/booking-summary`);
   }
 
-  //TBD skickar med venue i params, istället lägga till den i BookingContext?
-  
-  // adding thumbnal and images to display in slider
+  // adding thumbnail and images to display in slider
   const allImages = venue ? [venue.thumbnail, ...venue.images] : [];
   
 
@@ -270,11 +264,9 @@ const VenueDetails = () => {
             <div className='booking-form-dropdowns'>
               <div className='form-dropdowns-button'>
                 <div className="form-dropdowns">
-                  {/* <QuantityInput venueCapacity={venue && venue.numberOfPeople} /> */}
-                  <QuantityInputBooking venueCapacity={venue && venue.numberOfPeople} />
-                  {/* <DateInput className='test'/> */}
-                  <DateInputBooking className='test'/>
-                  <TimeInput venue={venue}/>
+                  <QuantityInputBooking venueCapacity={venue && venue.numberOfPeople} selectedQuantity={selectedQuantity} setSelectedQuantity={setSelectedQuantity}/>
+                  <DateInputBooking className='test' selectedDate={selectedDate} setSelectedDate={setSelectedDate}/>
+                  <TimeInput venue={venue} selectedHours={selectedHours} setSelectedHours={setSelectedHours} setTotalAmount={setTotalAmount}/> 
                 </div>
                 {offersCatering && (
                 <div className='checkbox-container'>
@@ -286,7 +278,7 @@ const VenueDetails = () => {
                 )}
                 <div className='total-amount'>
                   <section className='total-top'>
-                    <p>SEK {venue && venue.pricePerHour} x {selectedTime ? selectedTime.value + ' hours' : '0 hours'}</p>
+                    <p>SEK {venue && venue.pricePerHour} x {selectedHours ? selectedHours.value + ' hours' : '0 hours'}</p>
                     { totalAmount && <p>SEK {totalAmount}.00</p>}
                   </section>
                   <section className='total-bottom'>
@@ -299,7 +291,7 @@ const VenueDetails = () => {
             <button 
             className='btn btn-book' 
             onClick={handleClick}
-            disabled={!selectedQuantity || !selectedDate || !selectedTime}
+            disabled={!selectedQuantity || !selectedDate || !selectedHours}
             >BOOK NOW</button>
             <section className='text-section-bottom'> 
               <p>Confirmation and payment options to follow</p>

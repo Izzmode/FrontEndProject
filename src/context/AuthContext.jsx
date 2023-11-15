@@ -11,7 +11,6 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
   const [jwtToken, setJwtToken] = useState(null);
   const [loginComplete, setLoginComplete] = useState(false);
 
@@ -33,8 +32,9 @@ export const AuthProvider = ({ children }) => {
         })
       
         if (res.ok) {
+
+          //change this??
           const userData = await res.text()
-          setUser(userData)
           setJwtToken(userData)
           localStorage.setItem('token', userData)
 
@@ -70,7 +70,6 @@ export const AuthProvider = ({ children }) => {
       if (res.ok) {
         //regUser data is the jwt in stringform
         const regUser = await res.text()
-        setUser(regUser)
         setJwtToken(regUser)
         localStorage.setItem('token', regUser)
 
@@ -88,8 +87,6 @@ export const AuthProvider = ({ children }) => {
   
 
   const logout = () => {
-    // Your logout logic here.
-    // setUser(null);
     setJwtToken(null);
     localStorage.removeItem('token');
   };
@@ -118,7 +115,7 @@ export const AuthProvider = ({ children }) => {
 
 
   return (
-    <AuthContext.Provider value={{ user, jwtToken, loginUser, registerUser, logout, loginComplete }}>
+    <AuthContext.Provider value={{ jwtToken, loginUser, registerUser, logout, loginComplete }}>
       {children}
     </AuthContext.Provider>
   );

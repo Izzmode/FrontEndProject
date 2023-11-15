@@ -3,13 +3,10 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import { FaStar, FaUserAlt } from "react-icons/fa"
 import { useEffect, useState } from 'react'
 import './venueCard.css'
-// import { useLike } from '../../context/LikeContext'
 
 
 const VenueCard = ({ venue }) => {
 
-  // const { likes, setLikes } = useLike();
-  
     const [toggleFavourite, setToggleFavourite] = useState(false)
     
 
@@ -17,39 +14,6 @@ const VenueCard = ({ venue }) => {
     const searchParams = new URLSearchParams(location.search);
     const selectedDateParam = searchParams.get('date');
 
-  //  useEffect(() => {
-
-  //    if(isLiked){
-  //      setToggleFavourite(isLiked)
-  //    }
-  //  }, [])
-   
-  //   const fetchUserLikes = async => {
-
-  //   try{
-  //     const res = await fetch('http://localhost:9999/api/likes', {
-  //       method: 'GET',
-  //       headers: {
-  //         'Authorization': `Bearer ${token}`,
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
- 
-  //       if (!response.ok) {
-  //         throw new Error(`HTTP error! Status: ${res.status}`);
-  //       }
-    
-  //       const data = await res.json();
-  //       return data.map(like => like.venue);
-
-      
-  //   } 
-  //   catch (error){
- 
-  //     console.error('Error fetching likes:', error);
-  //     return [];
-  //   }
-  // }
 
   const fetchUserLikes = async () => {
     if (token) {

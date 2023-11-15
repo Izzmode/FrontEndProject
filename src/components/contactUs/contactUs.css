@@ -20,10 +20,6 @@
     border-radius: 8px;
 }
 
-.find-us-wrapper{
-    flex: 1;
-}
-
 
 .find-us{
   background: linear-gradient(254deg, #252525 11.07%, #171717 84.69%);
@@ -41,7 +37,7 @@
 
 .contact-form input, .contact-form textarea{
     width: 100%;
-    background-color: #171717;
+    background-color: var(--secondary);
     border: none;
     padding: .3rem;
     border-radius: 8px;
@@ -53,7 +49,7 @@
 }
 
 .contact-form-wrapper{
-    background-color:#252525;
+    background-color: var(--third-grey);
     width: 100%;
     flex: 2;
 }
@@ -69,8 +65,6 @@
     margin: 0 auto;
     width: 60%;
 }
-
-
 
 .contact-form textarea {
     resize: none;
@@ -93,9 +87,60 @@
 .h3adress{
     margin-top: 1rem;
 }
-/* .wrapper-one-contact h2{
-    font-size: 1.2rem;
-    font-weight: 600;
-    padding-bottom: .5rem;
-} */
 
+
+@media (max-width: 600px) {
+    .ContactUs{
+        display: flex;
+        flex-direction: column;
+        width: 95%;
+        margin: 0 auto;
+        justify-content: center;
+        color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 3rem;
+    }
+
+    .ContactUs label{
+        font-size: 1rem;
+    }
+
+    .contact-form input{
+        margin-bottom: 1rem;
+        padding: .9rem;
+    }
+
+    .wrapper-one-contact{
+        width: 100%;
+    }
+
+    .contact-form-wrapper p{
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .ContactUs button{
+        width: 100%;
+        padding: .8rem;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+
+
+      .address-phone-wrapper{
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        align-items: baseline;
+      }
+      .address-phone-wrapper p{
+        font-size: 1rem;
+        text-align: start;
+      }
+      .address-phone-wrapper h3{
+        font-size: 1.2rem;
+        text-align: start;
+      }
+}

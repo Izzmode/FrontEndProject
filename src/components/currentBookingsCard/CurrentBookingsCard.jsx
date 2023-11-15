@@ -5,7 +5,6 @@ import './currentBookingsCard.css'
 const CurrentBookingsCard = ({ booking, style }) => {
 
     const bookingDate = booking.date;
-
     const date = bookingDate === "null" ? null : new Date(bookingDate);
 
     //formatting the date to a more "readable" one

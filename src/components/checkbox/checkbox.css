@@ -32,10 +32,3 @@ input.checked {
   .checkbox-wrapper input[type="checkbox"]:disabled + span {
     color: #c0c0c0;
   }
-/* 
-
-  
-  .checkbox-wrapper label {
-    position: relative;
-    bottom: 0;
-  }  */

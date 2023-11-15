@@ -53,7 +53,6 @@ const Register = () => {
             <label htmlFor="email">Email address *</label>
             <input 
             type="text" 
-            // id='emailReg'
             name='emailReg'
             value={formData.emailReg}
             onChange={handleInputChange}/>
@@ -63,7 +62,6 @@ const Register = () => {
             <label htmlFor="password">Password *</label>
             <input 
             type="password" 
-            // id='passwordReg' 
             name='passwordReg' 
             value={formData.passwordReg}
             onChange={handleInputChange}/>

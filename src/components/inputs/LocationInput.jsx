@@ -6,14 +6,12 @@ import './inputs.css'
 const LocationInput = ({ selectedLocation, setSelectedLocation }) => {
 
 
-
     const optionsLocation = [
         { value: 'Centrum', label: 'Centrum' },
         { value: 'Kungsholmen', label: 'Kungsholmen' },
         { value: 'Solna', label: 'Solna' },
         { value: 'Södermalm', label: 'Södermalm' },
       ];
-
 
       const customStyles = {
         control: (provided) => ({
@@ -52,8 +50,7 @@ const LocationInput = ({ selectedLocation, setSelectedLocation }) => {
       const handleLocationChange = (selectedOption) => {
         setSelectedLocation(selectedOption);
       };
-
-
+ 
 
   return (
     <div className="LocationInput">

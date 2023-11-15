@@ -1,13 +1,8 @@
-import React, { useContext } from 'react';
 import Select from 'react-select';
-import { BookingContext } from '../../context/BookingContext';
 import './inputs.css';
-import { parseISO, format } from 'date-fns';
 
 
-const TimeInput = ({ venue }) => {
-
-   const { state, dispatch } = useContext(BookingContext);
+const TimeInput = ({ venue, selectedHours, setSelectedHours, setTotalAmount }) => {
 
   const optionsTime = [
     { value: 4, label: '08 - 12 AM' },
@@ -48,12 +43,9 @@ const TimeInput = ({ venue }) => {
       }),
   };
 
-  const handleTimeChange = (selectedOption) => {
-    // const newDate = parseISO(selectedOption)
-    // console.log(newDate)
-    
-    dispatch({ type: 'UPDATE_BOOKING_DATA', payload: { selectedTime: selectedOption } });
+  const handleTimeChange = (selectedOption) => {    
     updateTotalAmount(selectedOption.value);
+    setSelectedHours(selectedOption)
     localStorage.setItem('hours', selectedOption.label)
 
   };
@@ -62,7 +54,7 @@ const TimeInput = ({ venue }) => {
     const selectedTimeOption = optionsTime.find(option => option.value === selectedTimeValue);
     const numberOfHours = selectedTimeOption ? selectedTimeOption.value : 0;
     const newTotalAmount = venue.pricePerHour * numberOfHours;
-    dispatch({ type: 'UPDATE_BOOKING_DATA', payload: { totalAmount: newTotalAmount } });
+    setTotalAmount(newTotalAmount)
     localStorage.setItem('totalAmount', newTotalAmount)
 
   };
@@ -76,7 +68,7 @@ const TimeInput = ({ venue }) => {
         options={optionsTime} 
         styles={customStyles}
         onChange={handleTimeChange}
-        value={state.selectedTime} />
+        value={selectedHours} />
   </div>
   )
 }

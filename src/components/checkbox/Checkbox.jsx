@@ -8,21 +8,6 @@ const Checkbox = ({ label, checked, onChange }) => {
     localStorage.getItem('catering') === true ? true : false
   );
 
-  // const handleCheckboxChange = () => {
-  //   const newCheckedValue = !isChecked;
-  //   setIsChecked(newCheckedValue);
-  //   onChange(newCheckedValue); // Notify the parent component of the change
-  // };
-
-  // const [checkedCatering, setCheckedCatering] = useState(false)
-
-  // const handleCheckboxChange = () => {
-  //   setIsChecked(!isChecked)
-  //   const updatedValue = !isChecked
-  //   localStorage.setItem('catering', updatedValue )
-  //   console.log(updatedValue)
-  // };
-
   useEffect(() => {
     // Update localStorage whenever the state changes
     localStorage.setItem('catering', isChecked);
@@ -40,7 +25,6 @@ const Checkbox = ({ label, checked, onChange }) => {
       type="checkbox" 
       checked={isChecked} 
       onChange={handleCheckboxChange}
-      // onChange={() => setIsChecked((prev) => !prev)} 
       className={isChecked ? 'checked' : ''}/>
       <span>{label}</span>
     </label>

@@ -5,14 +5,11 @@ import { useNavigate } from 'react-router-dom'
 import SearchBarOptions from '../components/SearchBarOptions'
 
 const Venues = () => {
-
-    
     
       const { data: venues, isLoading, error } = useFetch('http://localhost:9999/api/venues')
       const navigate = useNavigate();
 
       return(
-    
     
         <div className='Venues'>
 

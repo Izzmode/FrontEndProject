@@ -11,7 +11,7 @@ import { useAuth } from '../../context/AuthContext';
 const Footer = () => {
 
   const { currentModal, closeModal, openModal } = useModal();
-  const { jwtToken, logout } = useAuth();
+  const { jwtToken } = useAuth();
 
   const handleLogin = () => {
     openModal('login')

@@ -5,25 +5,20 @@ import VenueDetails from "./pages/venueDetails/VenueDetails"
 import Navbar from './components/navbar/Navbar'
 import Footer from './components/footer/Footer'
 import ProtectedRoute from './routes/ProtectedRoute'
-// import OrderList from './pages/OrderList'
 import BookingDetails from './pages/bookingDetails/BookingDetails'
 import SearchedVenues from './pages/SearchedVenues'
 import BookingSummary from './pages/bookingSummary/BookingSummary'
-import { BookingProvider } from './context/BookingContext';
 import Profile from './pages/profile/Profile'
 import { ModalProvider } from './context/ModalContext'
 import { AuthProvider } from './context/AuthContext'
 import BookingConfirmation from './pages/bookingConfirmation/BookingConfirmation'
-// import { LikeProvider } from './context/LikeContext'
 
 const App = () => {
 
   return (
     <div>
-      <BookingProvider>
         <AuthProvider>
         <ModalProvider>
-          {/* <LikeProvider> */}
         <Navbar />
         <Routes>
             <Route path="/" element= { <Home/>}/>
@@ -56,10 +51,8 @@ const App = () => {
             
         </Routes>
         <Footer/>
-        {/* </LikeProvider> */}
         </ModalProvider>
         </AuthProvider>
-        </BookingProvider>
     </div>
   )
 }

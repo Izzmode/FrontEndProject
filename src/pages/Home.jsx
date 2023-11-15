@@ -1,5 +1,5 @@
 import React from 'react'
-import CallToAction from '../components/CallToAction'
+import CallToAction from '../components/callToAction/CallToAction'
 import VenueCard from '../components/venueCard/VenueCard'
 import useFetch from '../hooks/useFetch'
 import { useNavigate } from 'react-router-dom'

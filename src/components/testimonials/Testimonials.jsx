@@ -4,7 +4,6 @@ import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import TestimonialCard from '../testimonialCard/TestimonialCard';
-import { FaStar } from "react-icons/fa"
 import useFetch from '../../hooks/useFetch';
 
 
@@ -14,7 +13,26 @@ const Testimonials = () => {
         infinite: true,
         speed: 500,
         slidesToShow: 2,
-        slidesToScroll: 2
+        slidesToScroll: 2,
+        responsive: [
+          {
+            breakpoint: 1171,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              infinite: true,
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 1,
+              dots: true,
+              swipeToSlide: true,
+              arrows: false,
+            }
+          }
+        ]
       };
 
   const { data: venues, isLoading, error } = useFetch('http://localhost:9999/api/venues')

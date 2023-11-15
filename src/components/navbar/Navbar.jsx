@@ -1,5 +1,4 @@
 import { Link, NavLink } from 'react-router-dom';
-import { FaShoppingCart } from 'react-icons/fa';
 import { HashLink } from 'react-router-hash-link';
 import {  FaUserAlt } from "react-icons/fa";
 import './navbar.css'

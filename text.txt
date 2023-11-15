@@ -14,14 +14,15 @@ test
 klara
 * styla liked venues
 * fixa add to calender
-
-
-
 * fixa like inne på venuedetails
+* ta bort root
+* Snygga till koden
+
+
+
+* ta bort all console.log
 * gör alla sidor responsiva
 * fixa slider till venuedetails popular venues 
-* Snygga till koden
-* ta bort root
 * fixa färg till text
 * fixa stylingen på date i sökning, kanske går om jag nu har annan cta i booking.
 * kolla hur det ser ut i firefox.
@@ -30,6 +31,8 @@ klara
 * Lägg till edit profile
 * Lägg till mer venues i backend
 * gör technical equipment dropdown snyggare
-* ta bort all console.log
+* fixa token
+* fixa så att när man försöker access protected route att man hindrar navigeringen
+* fixa hamburgarmeny vid mobile
 
 

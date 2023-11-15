@@ -1,14 +1,9 @@
 import Select from 'react-select';
-import { useState } from 'react'
 import './inputs.css'
-import { useContext } from 'react';
-import { BookingContext } from '../../context/BookingContext';
 
-const QuantityInputBooking = ({ venueCapacity }) => {
+const QuantityInputBooking = ({ venueCapacity, selectedQuantity, setSelectedQuantity }) => {
 
-  const { state, dispatch } = useContext(BookingContext);
 
-  // const [selectedQuantity, setSelectedQuantity] = useState(null);
   const optionsQuantity = [
     { value: '5-10', label: '5-10 attendees' },
     { value: '10-30', label: '10-30 attendees', isDisabled: venueCapacity < 10  },
@@ -52,7 +47,7 @@ const QuantityInputBooking = ({ venueCapacity }) => {
   };
 
   const handleQuantityChange = (selectedOption) => {
-    dispatch({ type: 'UPDATE_BOOKING_DATA', payload: { selectedQuantity: selectedOption } });
+    setSelectedQuantity(selectedOption)
     localStorage.setItem('quantity', selectedOption.label)
   };
   return (
@@ -63,7 +58,7 @@ const QuantityInputBooking = ({ venueCapacity }) => {
         options={optionsQuantity} 
         styles={customStyles}
         onChange={handleQuantityChange}
-        value={state.selectedQuantity} />
+        value={selectedQuantity} />
   </div>
   )
 }

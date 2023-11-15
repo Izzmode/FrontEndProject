@@ -5,11 +5,18 @@
     color: white;
 }
 
-.BookingDetails-wrapper{
+/* .BookingDetails-wrapper{
     background-color: var(--secondary);
     padding: 3rem;
     border-radius: 8px;
     margin-top: 2rem;
+} */
+
+.booking-venue-details{
+    background-color: var(--secondary);
+    padding: 3rem;
+    border-radius: 8px;
+    margin-top: 2rem; 
 }
 
 .booking-top{
@@ -143,5 +150,29 @@ font-size: .9rem;
 
 .booking-details-contact a, .booking-details-contact .contact-name {
     font-weight: 600;
+}
+
+.img-transport img{
+   /* width: 300px; */
+   width: 100%;
+   object-fit: cover;
+   height: 230px;
+   border-radius: 8px;
+}
+
+.booking-details-transportation{
+    display: flex;
+    gap: 1rem;
+}
+
+.transport-wrapper{
+    display: flex;
+    flex-direction: column;
+    background: var(--background-gradient);
+    flex: 3;
+    border-radius: 8px;
+}
+.img-transport{
+    flex: 2;
 }
 

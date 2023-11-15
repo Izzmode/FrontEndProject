@@ -153,15 +153,14 @@ const Profile = () => {
             .filter(like => like.venue).map(like => (
               <VenueCard key={like._id} venue={like.venue} isLiked={true} />
             ))}
-
+          </div>
+        ) : (
+          <p className='no-venues'>You have no liked venues</p>
+        )}
           {!showAllLikes && likes?.length > 4 && (
           <button className='btn btn-show-more' onClick={() => setShowAllLikes(true)}>
             SHOW ALL
           </button>
-        )}
-          </div>
-        ) : (
-          <p className='no-venues'>You have no liked venues</p>
         )}
       </section>
 

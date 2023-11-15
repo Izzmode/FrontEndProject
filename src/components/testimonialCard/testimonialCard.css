@@ -42,7 +42,7 @@
     padding-top: .5rem;
   }
 
-  .p-reviewer{
+  .p-reviewer{ 
     font-weight: 200;
   }
 
@@ -53,4 +53,35 @@
 .viewMoreOrLess{
   color:#5f5f5f;
   display: block;
+}
+
+
+@media (max-width: 1171px) {
+  .testimonial-wrapper{
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+}
+@media (max-width: 935px) {
+  .testimonial-wrapper{
+    width: 100%;
+    margin-bottom: 2rem;
+}
+}
+
+@media (max-width: 600px) {
+
+  .testimonial-wrapper{
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 2rem;
+      margin-left: 0rem;
+      margin-right: 0rem;
+  }
+
+  .review-wrapper{
+    font-size: 1rem;
+  }
+    
 }
