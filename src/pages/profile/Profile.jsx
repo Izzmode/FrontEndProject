@@ -20,7 +20,6 @@ const Profile = () => {
   // ? bookings
   // : currentBookings?.slice(0, 3);
   
-  console.log(likes)
   const token = localStorage.getItem('token');
   const cleanedToken = token.replace(/^"(.*)"$/, '$1');
 
@@ -101,9 +100,6 @@ const Profile = () => {
   const limitedLikesToShow = showAllLikes
   ? likes
   : likes?.slice(0, 4);
-
-  console.log(previousBookings)
-  console.log(likes)
 
 
   return (

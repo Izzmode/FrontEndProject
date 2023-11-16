@@ -34,5 +34,5 @@ klara
 * fixa token
 * fixa så att när man försöker access protected route att man hindrar navigeringen
 * fixa hamburgarmeny vid mobile
-
+* fixa protectedroute
 

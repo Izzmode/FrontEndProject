@@ -6,6 +6,8 @@ import Login from '../login/Login';
 import Register from '../register/Register';
 import { useModal } from '../../context/ModalContext';
 import { useAuth } from '../../context/AuthContext';
+import techspaceLogo from '../../images/techspace-logo.png';
+
 
 
 const Navbar = () => {
@@ -27,7 +29,7 @@ const Navbar = () => {
               {currentModal === 'registerUser' && <Register />}
               <div className="container">
                 <Link to="/">
-                  <h1><img src="src\images\techspace-logo.png" alt="techspace" width="120" height="30" /></h1>
+                  <h1><img src={techspaceLogo} alt="techspace" width="120" height="30" /></h1>
                 </Link>
                 <ul className="nav-links">
                   <li><NavLink to={`/venues`} className='nav-link'>All venues</NavLink></li>

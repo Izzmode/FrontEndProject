@@ -2,8 +2,6 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { jwtDecode } from "jwt-decode";
 
 
-
-
 const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -13,6 +11,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [jwtToken, setJwtToken] = useState(null);
   const [loginComplete, setLoginComplete] = useState(false);
+  const [user, setUser] = useState(false)
 
     const loginUser = async (formData) => {
 
@@ -36,6 +35,7 @@ export const AuthProvider = ({ children }) => {
           //change this??
           const userData = await res.text()
           setJwtToken(userData)
+          setUser(true)
           localStorage.setItem('token', userData)
 
         } else {
@@ -71,6 +71,7 @@ export const AuthProvider = ({ children }) => {
         //regUser data is the jwt in stringform
         const regUser = await res.text()
         setJwtToken(regUser)
+        setUser(true)
         localStorage.setItem('token', regUser)
 
       } else {
@@ -89,6 +90,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setJwtToken(null);
     localStorage.removeItem('token');
+    setUser(false)
   };
 
   

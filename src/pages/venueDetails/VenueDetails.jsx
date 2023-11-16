@@ -24,6 +24,8 @@ import TimeInput from '../../components/inputs/TimeInput';
 import Checkbox from '../../components/checkbox/Checkbox';
 import QuantityInputBooking from '../../components/inputs/QuantityInputBooking';
 import DateInputBooking from '../../components/inputs/DateInputBooking';
+import { useAuth } from "../../context/AuthContext"
+import { useModal } from "../../context/ModalContext"
 
 const VenueDetails = () => {
 
@@ -32,8 +34,8 @@ const VenueDetails = () => {
   const [selectedHours, setSelectedHours] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(null);
 
-
-  // const formattedDate = selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '';
+  const { jwtToken, loginComplete } = useAuth();
+  const { openModal } = useModal();
 
   const { id } = useParams();
   const location = useLocation();
@@ -52,7 +54,7 @@ const VenueDetails = () => {
   const longitude = venue?.longitude;
 
   const recommendedVenues = recVenues?.filter(data => {
-   if (venue.numberOfPeople <= data.numberOfPeople){
+   if (venue?.numberOfPeople <= data.numberOfPeople){
     return true
    }
    return false
@@ -132,7 +134,14 @@ const VenueDetails = () => {
   ];
 
   const handleClick = () => {
-    navigate(`/venues/${id}/booking-summary`);
+    if(jwtToken){
+
+      navigate(`/venues/${id}/booking-summary`);
+    }else{
+
+      openModal('login');
+    }
+    
   }
 
   // adding thumbnail and images to display in slider
@@ -167,9 +176,8 @@ const VenueDetails = () => {
               asNavFor={nav2}
               ref={slider => (setSlider1(slider))}
             >
-            {allImages.map((slide) =>
-
-              <div className="slider-image-container-main" key={slide.id}>
+            {allImages.map((slide, index) =>
+              <div className="slider-image-container-main" key={index}>
                 <img className="slick-slide-image" src={slide} />
               </div>
 
@@ -189,9 +197,9 @@ const VenueDetails = () => {
               asNavFor={nav1}
               ref={slider => (setSlider2(slider))}>
 
-              {allImages.map((slide) =>
+              {allImages.map((slide, index) =>
 
-                <div className="slider-image-container" key={slide.id} >
+                <div className="slider-image-container" key={index} >
                   <img className="slick-slide-image" src={slide} />
                 </div>
 
@@ -219,7 +227,7 @@ const VenueDetails = () => {
               <h2>Amenities</h2>
               <div className='amenity-icons-container'>
                 {venue && venue.amenities.map(am => (
-                  <div key={am.id}>
+                  <div key={am._id}>
                     {amenityIcons[am.service]}
                     <p>{am.service.split('_').join(' ')}</p>
                   </div>
@@ -238,7 +246,7 @@ const VenueDetails = () => {
               <h2>Arrangements</h2>
               <div className='arr-icons-container'>
                 {venue && venue.arrangements.map(arr => (
-                  <div key={arr.id}>
+                  <div key={arr._id}>
                     <img src={seatingIcons[arr.seating]} className='arr-icons'/>
                     <p className='seating-type'>{arr.seating.split('_').join(' ')}</p>
                     <p>{arr.capacity}</p>
@@ -320,8 +328,8 @@ const VenueDetails = () => {
             <div className='other-venues'>
               <h2>Other venues you might like</h2>
               <div className="other-venues-container VenueCards-container">
-                {recommendedVenues && recommendedVenues.map((recVenue) => (
-                <VenueCard key={recVenue.id} venue={recVenue} />
+                {recommendedVenues && recommendedVenues.map((recVenue, index) => (
+                <VenueCard key={index} venue={recVenue} />
                 ))}
               </div>
             </div>

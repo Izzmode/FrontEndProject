@@ -22,7 +22,6 @@ const BookingDetails = () => {
   
         // const token = localStorage.getItem('token');
         const token = localStorage.getItem('token').replace(/['"]+/g, '');
-        console.log(token)
   
         const res = await fetch('http://localhost:9999/api/bookings/' + id, {
           method: 'GET',
@@ -53,8 +52,12 @@ const BookingDetails = () => {
   }, [])
   
   const date = new Date(booking?.date);
+  const paymentDueDate = new Date (date)
+  paymentDueDate.setDate(paymentDueDate.getDate() + 30)
+
   let formattedDate;
   let formattedDateTwo;
+  let formattedPaymentDueDate
   if (!isNaN(date)) {
     // Format the date as "Month Day, Year"
       formattedDate = date.toLocaleDateString('en-US', {
@@ -63,11 +66,18 @@ const BookingDetails = () => {
       day: 'numeric',
     });
     
+    console.log(formattedDate); 
     formattedDateTwo = date.toLocaleDateString('en-US', {
       month: 'long',
       day: 'numeric',
     });
-    console.log(formattedDate); 
+    console.log(formattedDateTwo); 
+    formattedPaymentDueDate = paymentDueDate.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+    console.log(formattedPaymentDueDate); 
   } else {
     console.log("Invalid date");
   }
@@ -86,6 +96,7 @@ const BookingDetails = () => {
     Gaming_Stations: <MdOutlineVideogameAsset className='am-icons'/>
   };
 
+  console.log(booking?.hours)
 
   const addToCalendar = (bookingDetails) => {
     const { title, description, startDateTime, endDateTime, location } = bookingDetails;
@@ -113,6 +124,11 @@ const BookingDetails = () => {
     startDateTime: booking?.date, // Replace with the actual start time in ISO format
     location: booking?.venue.address
   };  
+
+  const longitude = booking?.venue.longitude;
+  const latitude = booking?.venue.latitude;
+
+  console.log(longitude)
 
   return (
     <div className='BookingDetails'>
@@ -160,7 +176,7 @@ const BookingDetails = () => {
           <div className='bottom-left'>
             <div className='confirm-am'>
               {booking && booking.venue.amenities.map(am => (
-                <div key={am.id}>
+                <div key={am._id}>
                       {amenityIcons[am.service]}
                       <p>{am.service.split('_').join(' ')}</p>
                   </div>
@@ -240,9 +256,44 @@ const BookingDetails = () => {
                   </div>
               </div>
               <div className='booking-details-map'>
-                <Map longitude={booking?.venue.longitude} latitude={booking?.venue.latitude}/>
+                { booking ? <Map latitude={latitude} longitude={longitude}/> : <div>Loading...</div>}
               </div>
-              <div className='booking-details-billing'></div>
+              <div className='booking-details-billing'>
+                <div className='billing-download'>
+                  <div className='billing-due-date'>
+                  <h2>Billing</h2>
+                  <p>{formattedPaymentDueDate}</p>
+                  </div>
+                  <button className='btn-dark'>DOWNLOAD PDF</button>
+                </div>
+                <div className='billing-details'>
+                  <section className='bill-description'>
+                    <h3>Description</h3>
+                    <p>Venue Rent</p>
+                  </section>
+                  <section className='bill-quantity'>
+                    <h3>Quantity</h3>
+                    <p>Hämta med value från bokning</p>
+                  </section>
+                  <section className='bill-unit'>
+                    <h3>Unit</h3>
+                    <p>Price</p>
+                  </section>
+                  <section className='bill-unit-price'>
+                    <h3>Unit Price</h3>
+                    <p>Price per hour</p>
+                  </section>
+                  <section className='bill-vat'>
+                    <h3>VAT 20%</h3>
+                    <p>momsen</p>
+                  </section>
+                  <section className='bill-total'>
+                    <h3>Total Price</h3>
+                    <p>{booking?.totalPrice}</p>
+                  </section>
+                </div>
+                <hr />
+              </div>
         </div>
       </section>
       </div>

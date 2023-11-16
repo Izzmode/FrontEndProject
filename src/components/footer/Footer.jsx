@@ -6,6 +6,12 @@ import Login from '../login/Login';
 import Register from '../register/Register';
 import { useModal } from '../../context/ModalContext';
 import { useAuth } from '../../context/AuthContext';
+import iconInsta from '../../images/icon-insta.png';
+import iconFacebook from '../../images/icon-facebook.png';
+import visaLogo from '../../images/visa-logo.png';
+import payPalLogo from '../../images/PayPal.png';
+import klarnaLogo from '../../images/klarna-logo.png';
+import whiteTechspaceLogo from '../../images/techspace-logo-white.png';
 
 
 const Footer = () => {
@@ -21,7 +27,7 @@ const Footer = () => {
     <div className='Footer'>
         <div className='footer-top'>
             <Link to="/">
-                <img src="src\images\techspace-logo-white.png" alt="techspace" width="120" height="30"/>
+                <img src={whiteTechspaceLogo} alt="techspace" width="120" height="30"/>
             </Link>
             <ul className="nav-links">
                   <li><NavLink to={`/venues`} className='nav-link'>All venues</NavLink></li>
@@ -32,8 +38,8 @@ const Footer = () => {
 
 
                 <div className='icons-footer'>
-                    <img src="src\images\icon-insta.png" alt="instagram icon" />
-                    <img src="src\images\icon-facebook.png" alt="facebook icon" className='fb-icon'/>
+                    <img src={iconInsta} alt="instagram icon" />
+                    <img src={iconFacebook}alt="facebook icon" className='fb-icon'/>
                 </div>
         </div>
         <hr />
@@ -41,9 +47,9 @@ const Footer = () => {
             <div className='filler'></div>
             <p>All rights reserved copyright</p>
             <div className='icons-footer'>
-                    <img src="src\images\visa-logo.png" alt="instagram icon" />
-                    <img src="src\images\PayPal.png" alt="facebook icon"/>
-                    <img src="src\images\klarna-logo.png" alt="facebook icon"/>
+                    <img src={visaLogo} alt="visa logo" />
+                    <img src={payPalLogo} alt="paypal logo"/>
+                    <img src={klarnaLogo} alt="klarna logo"/>
                 </div>
         </div>
         {currentModal === 'login' && <Login />}

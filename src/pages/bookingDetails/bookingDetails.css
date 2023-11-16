@@ -176,3 +176,39 @@ font-size: .9rem;
     flex: 2;
 }
 
+
+
+
+
+.booking-details-billing{
+    padding: 2rem;
+    background-color: var(--divider);
+    border-radius: 8px;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.billing-download{
+    display: flex;
+    justify-content: space-between;
+}
+
+.billing-details{
+    display: flex;
+    margin-top: 3rem;
+}
+
+.billing-details h3{
+    margin-bottom: 1rem;
+}
+
+.bill-quantity, .bill-unit, .bill-vat, .bill-total, .bill-unit-price{
+    flex: 1;
+}
+
+.bill-description{
+    flex: 3;
+}
+
