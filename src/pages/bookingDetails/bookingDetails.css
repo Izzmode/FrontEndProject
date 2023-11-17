@@ -152,6 +152,17 @@ font-size: .9rem;
     font-weight: 600;
 }
 
+.booking-venue-location-wrapper{
+margin-top: 3rem;
+}
+
+.venue-location-text{
+    margin-bottom: 1rem;
+}
+.venue-location-text p{
+    margin-top: .3rem;
+}
+
 .img-transport img{
    /* width: 300px; */
    width: 100%;
@@ -168,12 +179,44 @@ font-size: .9rem;
 .transport-wrapper{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     background: var(--background-gradient);
-    flex: 3;
+    /* flex: 5; */
     border-radius: 8px;
+    padding-block: 1rem;
+    padding-inline: 2rem;
+    width: 55%;
 }
+
+.transport-map .am-icons{
+    margin-top: .5rem;
+    margin-bottom: .3rem;
+}
+
 .img-transport{
-    flex: 2;
+    width: 45%;
+}
+.transport-wrapper p{
+font-weight: 600;
+
+}
+
+.transport-wrapper .thinner{
+    font-weight: 300;
+}
+
+.transport-icons-wrapper{
+    display: flex;
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    gap: 3rem;
+}
+
+.transport-map{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-top: 1.5rem;
 }
 
 
@@ -190,6 +233,19 @@ font-size: .9rem;
     justify-content: space-between;
 }
 
+.booking-details-billing h2{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.billing-details h3{
+    font-size: 1rem;
+    font-weight: 600;
+}
+.billing-detail-bottom h2{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
 .billing-download{
     display: flex;
     justify-content: space-between;
@@ -198,6 +254,10 @@ font-size: .9rem;
 .billing-details{
     display: flex;
     margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+.billing-details p, .billing-detail-bottom p{
+    font-size: .7rem;
 }
 
 .billing-details h3{
@@ -206,9 +266,37 @@ font-size: .9rem;
 
 .bill-quantity, .bill-unit, .bill-vat, .bill-total, .bill-unit-price{
     flex: 1;
+    text-align: end;
 }
 
 .bill-description{
     flex: 3;
 }
+
+.BookingDetails .classMap{
+    border-radius: 8px;
+    height: 400px;
+    margin-top: 1rem;
+}
+
+.bottom-top, .bottom-bottom{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.billing-due-date p{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.billing-detail-bottom{
+    display: flex;
+    justify-content: end;
+    text-align: end;
+    gap: 3rem;
+    margin-top: 1rem;
+}
+
+
 

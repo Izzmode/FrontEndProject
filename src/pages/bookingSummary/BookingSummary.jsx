@@ -133,7 +133,7 @@ const BookingSummary = () => {
         <div className='confirm-info-catering'>
           <div className='confirm-am'>
              {venue && venue.amenities.map(am => (
-               <div key={am.id}>
+               <div key={am._id}>
                     {amenityIcons[am.service]}
                     <p>{am.service.split('_').join(' ')}</p>
                 </div>

@@ -17,6 +17,8 @@ klara
 * fixa like inne på venuedetails
 * ta bort root
 * Snygga till koden
+* fixa så att när man försöker access protected route att man hindrar navigeringen
+* fixa protectedroute
 
 
 
@@ -32,7 +34,5 @@ klara
 * Lägg till mer venues i backend
 * gör technical equipment dropdown snyggare
 * fixa token
-* fixa så att när man försöker access protected route att man hindrar navigeringen
 * fixa hamburgarmeny vid mobile
-* fixa protectedroute
 

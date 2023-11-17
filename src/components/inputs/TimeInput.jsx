@@ -5,10 +5,10 @@ import './inputs.css';
 const TimeInput = ({ venue, selectedHours, setSelectedHours, setTotalAmount }) => {
 
   const optionsTime = [
-    { value: 4, label: '08 - 12 AM' },
-    { value: 4, label: '12 - 04 PM' },
-    { value: 4, label: '04 - 08 PM' },
-    { value: 8, label: '08 AM - 04 PM'},
+    { value: 4, label: '08 - 12' },
+    { value: 4, label: '12 - 16' },
+    { value: 4, label: '16 - 20' },
+    { value: 8, label: '08 - 16'},
   ];
   
   const customStyles = {
@@ -47,7 +47,6 @@ const TimeInput = ({ venue, selectedHours, setSelectedHours, setTotalAmount }) =
     updateTotalAmount(selectedOption.value);
     setSelectedHours(selectedOption)
     localStorage.setItem('hours', selectedOption.label)
-
   };
   
   const updateTotalAmount = (selectedTimeValue) => {

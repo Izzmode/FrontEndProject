@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './bookingDetails.css'
-import { FaWifi, FaParking, FaCoffee, FaWheelchair, FaChalkboard, FaMapMarkerAlt, FaClock, FaUserAlt, FaCoins, FaCalendarCheck } from "react-icons/fa";
-import { MdOutlineSupportAgent, MdHeadsetMic, MdOutlineVideogameAsset, MdDinnerDining } from "react-icons/md"
+import { FaWifi, FaParking, FaCoffee, FaWheelchair, FaChalkboard, FaMapMarkerAlt, FaClock, FaUserAlt, FaCoins, FaCalendarCheck, FaBus, FaCar, FaSubway, FaRegClock } from "react-icons/fa";
+import { MdOutlineSupportAgent, MdHeadsetMic, MdOutlineVideogameAsset, MdDinnerDining, MdTram } from "react-icons/md"
 import { BsProjector, BsCalendarDateFill } from "react-icons/bs"
 import { CgScreen } from "react-icons/cg"
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -51,10 +51,24 @@ const BookingDetails = () => {
       getBooking();
   }, [])
   
+  //to get a value 30 days from booking date
   const date = new Date(booking?.date);
   const paymentDueDate = new Date (date)
   paymentDueDate.setDate(paymentDueDate.getDate() + 30)
 
+  //to calculate the amount of hours without having it in booking
+  const hoursStart = +booking?.hours.split('-')[0]
+  const hoursEnd = +booking?.hours.split('-')[1]
+
+  const hoursValue = hoursEnd - hoursStart;
+
+  const totalAmount = booking?.totalPrice;
+
+  const vat = totalAmount * 0.25;
+
+  console.log(booking?.venue.transportation)
+
+  //to format all dates to be more readlabe
   let formattedDate;
   let formattedDateTwo;
   let formattedPaymentDueDate
@@ -96,7 +110,12 @@ const BookingDetails = () => {
     Gaming_Stations: <MdOutlineVideogameAsset className='am-icons'/>
   };
 
-  console.log(booking?.hours)
+  const transportIcons = {
+    Bus: <FaBus className='am-icons' />,
+    Tram: <MdTram className='am-icons'/>,
+    Subway: <FaSubway className='am-icons'/>,
+    Car: <FaCar className='am-icons'/>,
+  };
 
   const addToCalendar = (bookingDetails) => {
     const { title, description, startDateTime, endDateTime, location } = bookingDetails;
@@ -121,21 +140,20 @@ const BookingDetails = () => {
     link.click();
   };
   const bookingDetails = {
-    startDateTime: booking?.date, // Replace with the actual start time in ISO format
+    startDateTime: booking?.date, 
     location: booking?.venue.address
   };  
 
   const longitude = booking?.venue.longitude;
   const latitude = booking?.venue.latitude;
 
-  console.log(longitude)
-
   return (
     <div className='BookingDetails'>
       <section className='booking-top'>
         <div className='booking-nr'>
-          <h1>Booking Number #{id}</h1>
-          <p>{formattedDateTwo} - {booking?.hours}</p>
+          <h1>Booking Number #{booking?.bookingNumber}</h1>
+          <p>{formattedDateTwo}</p>
+          <p className='hours-clock'>{booking?.hours}</p>
         </div>
         <div>
           <button className='btn btn-add-to-calender' onClick={() => addToCalendar(bookingDetails)}><FaCalendarCheck/>  ADD TO CALENDER</button>
@@ -238,7 +256,7 @@ const BookingDetails = () => {
               </div>
         
       </section>
-      <section className='booking-venue-location'>
+      <section className='booking-venue-location-wrapper'>
         <div className='venue-location-text'>
           <h2>Venue Location</h2>
           <p>{booking?.venue.address}, {booking?.venue.area}</p>
@@ -248,11 +266,15 @@ const BookingDetails = () => {
                 <div className='img-transport'><img src={booking?.venue.images[2]} alt="" /></div>
                   <div className='transport-wrapper'>
                   <p>Directions</p>
-                  <div className='transport-icon-wrapper'>
-                    <p>mappa</p>
-                    <p>ut</p>
-                    <p>här</p>
+                  <div className='transport-icons-wrapper'>
+                {booking && booking.venue.transportation.map(transport => (
+                  <div key={transport._id} className='transport-map'>
+                    {transportIcons[transport.mode]}
+                    <p>{transport.stop}</p>
+                    <p className='thinner'>{transport.distance} m</p>
                   </div>
+                 ))}
+              </div>
                   </div>
               </div>
               <div className='booking-details-map'>
@@ -262,7 +284,7 @@ const BookingDetails = () => {
                 <div className='billing-download'>
                   <div className='billing-due-date'>
                   <h2>Billing</h2>
-                  <p>{formattedPaymentDueDate}</p>
+                  <p>Due Date: {formattedPaymentDueDate}</p>
                   </div>
                   <button className='btn-dark'>DOWNLOAD PDF</button>
                 </div>
@@ -272,27 +294,44 @@ const BookingDetails = () => {
                     <p>Venue Rent</p>
                   </section>
                   <section className='bill-quantity'>
-                    <h3>Quantity</h3>
-                    <p>Hämta med value från bokning</p>
+                    <h3>Qty</h3>
+                    <p>{String(hoursValue)}</p>
                   </section>
                   <section className='bill-unit'>
                     <h3>Unit</h3>
-                    <p>Price</p>
+                    <p>Hours</p>
                   </section>
                   <section className='bill-unit-price'>
                     <h3>Unit Price</h3>
-                    <p>Price per hour</p>
+                    <p>SEK {booking?.venue.pricePerHour}</p>
                   </section>
                   <section className='bill-vat'>
-                    <h3>VAT 20%</h3>
-                    <p>momsen</p>
+                    <h3>VAT 25%</h3>
+                    <p>{String(vat)}</p>
                   </section>
                   <section className='bill-total'>
                     <h3>Total Price</h3>
-                    <p>{booking?.totalPrice}</p>
+                    <p>SEK {booking?.totalPrice}</p>
                   </section>
                 </div>
                 <hr />
+                <div className='billing-detail-bottom'>
+              <div className='bottom-top'>
+                <p>Sub Total</p>
+                <p>Total VAT</p>
+                <h2>Total Amount Due</h2>
+
+              </div>
+              <div className='bottom-bottom'>
+                <p>SEK {booking?.totalPrice}</p>
+                {/* <p>Total VAT</p> */}
+                <p>SEK {String(vat)}</p>
+                <h2>SEK {booking?.totalPrice}</h2>
+              </div>
+              {/* <div className='bottom-total'>
+                <h2>Total Amount Due</h2>
+              </div> */}
+                </div>
               </div>
         </div>
       </section>
