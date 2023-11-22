@@ -10,8 +10,7 @@ const VenueCard = ({ venue }) => {
     // const [toggleFavourite, setToggleFavourite] = useState(false)
     const [isLiked, setIsLiked] = useState(false);
     const token = localStorage.getItem('token')?.replace(/['"]+/g, '');
-
-
+    // const token = localStorage.getItem('token');
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);

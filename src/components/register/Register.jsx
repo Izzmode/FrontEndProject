@@ -24,7 +24,8 @@ const Register = () => {
     });
   };
 
-  const handleRegister = async () => {
+  const handleRegister = async (e) => {
+    e.preventDefault();
     try {
       if (formData.passwordReg !== formData.passwordAgain) {
         setError('Passwords do not match');

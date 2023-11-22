@@ -16,9 +16,9 @@ const Navbar = () => {
   const { jwtToken, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
+  // const toggleMobileMenu = () => {
+  //   setMobileMenuOpen(!mobileMenuOpen);
+  // };
 
   const handleLogin = () => {
     openModal('login')

@@ -66,10 +66,10 @@ export const AuthProvider = ({ children }) => {
           'content-type': 'application/json'
         }
       })
-
       if (res.ok) {
         //regUser data is the jwt in stringform
         const regUser = await res.text()
+        console.log('Received token:', regUser);
         setJwtToken(regUser)
         setUser(true)
         localStorage.setItem('token', regUser)
@@ -117,7 +117,7 @@ export const AuthProvider = ({ children }) => {
 
 
   return (
-    <AuthContext.Provider value={{ jwtToken, loginUser, registerUser, logout, loginComplete }}>
+    <AuthContext.Provider value={{ jwtToken: jwtToken || false, loginUser, registerUser, logout, loginComplete }}>
       {children}
     </AuthContext.Provider>
   );
