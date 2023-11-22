@@ -19,20 +19,21 @@ klara
 * Snygga till koden
 * fixa så att när man försöker access protected route att man hindrar navigeringen
 * fixa protectedroute
+* Lägg till mer venues i backend
+* gör alla sidor responsiva
+* fixa slider till venuedetails popular venues 
+* fixa hamburgarmeny vid mobile
+* fixa så att det bara visas fyra eller åtta popular venues
 
 
 
 * ta bort all console.log
-* gör alla sidor responsiva
-* fixa slider till venuedetails popular venues 
 * fixa färg till text
 * fixa stylingen på date i sökning, kanske går om jag nu har annan cta i booking.
 * kolla hur det ser ut i firefox.
 * lägg till more options
 * lägg till filtrering/sortering
 * Lägg till edit profile
-* Lägg till mer venues i backend
 * gör technical equipment dropdown snyggare
 * fixa token
-* fixa hamburgarmeny vid mobile
-
+* pdf download

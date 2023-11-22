@@ -12,6 +12,8 @@ import visaLogo from '../../images/visa-logo.png';
 import payPalLogo from '../../images/PayPal.png';
 import klarnaLogo from '../../images/klarna-logo.png';
 import whiteTechspaceLogo from '../../images/techspace-logo-white.png';
+import { FaEnvelope, FaSearch, FaUser } from "react-icons/fa";
+
 
 
 const Footer = () => {
@@ -24,7 +26,8 @@ const Footer = () => {
   }
 
   return (
-    <div className='Footer'>
+    <div className='Footer'> 
+
         <div className='footer-top'>
             <Link to="/">
                 <img src={whiteTechspaceLogo} alt="techspace" width="120" height="30"/>
@@ -54,6 +57,30 @@ const Footer = () => {
         </div>
         {currentModal === 'login' && <Login />}
         {currentModal === 'registerUser' && <Register />}
+        <div className='fixed-menu-mobile'>
+      <div className='mobile-icons'>
+      <NavLink to={`/venues`} className='icon-link'>
+      <div>
+      <FaSearch className='icon-mobile'/>
+      <p>Venues</p>
+      </div>
+      </NavLink>
+      
+      { jwtToken && <NavLink to={`/profile`} className='icon-link'>
+      <div>
+      <FaUser className='icon-mobile'/>
+      <p>Profile</p>
+      </div>
+      </NavLink> 
+      }
+      <HashLink smooth to='/#contact-us' className='nav-link'>
+        <div>
+        <FaEnvelope className='icon-mobile'/>
+        <p>Contact</p>
+        </div>
+      </HashLink>
+      </div>
+    </div>
     </div>
   )
 }

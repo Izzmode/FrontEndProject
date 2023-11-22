@@ -37,7 +37,7 @@ const CurrentBookingsCard = ({ booking, style }) => {
             <p className='bookings-price'>SEK {booking.totalPrice}</p>
         </section>
 
-        <section className='middle'>
+        <section className='middle' id='booking-middle'>
             <p>{formattedDate}</p>
             <p>{booking.hours}</p>
         </section>

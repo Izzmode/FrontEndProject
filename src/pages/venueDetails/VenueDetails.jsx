@@ -90,6 +90,27 @@ const VenueDetails = () => {
     focusOnSelect: true,
     // centerPadding: '10px'
   };
+
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    dots: true,
+    swipeToSlide: true,
+
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          dots: true,
+          swipeToSlide: true,
+          // arrows: false,
+        }
+      }
+    ]
+  };
   const settingsMain = {
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -123,6 +144,7 @@ const VenueDetails = () => {
     if(am.service === 'Catering'){
     return true
     }
+
     return false
   })
 
@@ -167,10 +189,9 @@ const VenueDetails = () => {
                />
           </div> 
         </section>
-        <div className='top-img-map'>
+        <div className='top-img-map'>  
           
-          
-          <div className="slider-wrapper">
+          <div className="slider-wrapper slider-desktop">
             <Slider
               {...settingsMain}
               asNavFor={nav2}
@@ -186,12 +207,24 @@ const VenueDetails = () => {
             </Slider>
           </div>
 
+          <div className="slider-wrapper slider-mobile">
+
+            <Slider {...settings}>
+            {allImages.map((slide, index) => 
+              <div className="slider-image-container-main" key={index}>
+                <img className="slick-slide-image" src={slide} />
+              </div>
+            )}
+            </Slider>
+          </div>
+
+
           <div className='map-container'>
             { venue ? <Map latitude={latitude} longitude={longitude}/> : <div>Loading...</div>}
           </div>
         </div>
 
-        <div className="thumbnail-slider-wrap">
+        <div className="thumbnail-slider-wrap slider-desktop">
             <Slider
               {...settingsThumbs}
               asNavFor={nav1}
@@ -276,7 +309,7 @@ const VenueDetails = () => {
                   <DateInputBooking className='test' selectedDate={selectedDate} setSelectedDate={setSelectedDate}/>
                   <TimeInput venue={venue} selectedHours={selectedHours} setSelectedHours={setSelectedHours} setTotalAmount={setTotalAmount}/> 
                 </div>
-                {offersCatering && (
+                {offersCatering && offersCatering.length > 0 && (
                 <div className='checkbox-container'>
                   <Checkbox label='Add catering to booking'/>
                   <span>

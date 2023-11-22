@@ -68,3 +68,20 @@
 .profile-liked-venues{
     margin-top: 2rem;
 }
+
+@media (max-width: 600px) {
+    
+    .Profile{
+    margin-top: -20rem;
+    }
+
+    .profile-like-wrapper{
+        display: block;
+    }
+
+    .profile-like-wrapper .VenueCard {
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+
+}

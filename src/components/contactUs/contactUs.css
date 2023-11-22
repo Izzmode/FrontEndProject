@@ -128,19 +128,21 @@
     }
 
 
-
       .address-phone-wrapper{
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        gap: 2rem;
-        align-items: baseline;
+        align-items: center;
+        margin-top: 1rem;
+        gap: .5rem;
+        /* align-items: baseline; */
       }
       .address-phone-wrapper p{
         font-size: 1rem;
         text-align: start;
       }
-      .address-phone-wrapper h3{
-        font-size: 1.2rem;
-        text-align: start;
+
+      .d-none-contact, .h3adress{
+        display: none;
       }
 }

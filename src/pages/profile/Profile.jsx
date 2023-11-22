@@ -147,7 +147,7 @@ const Profile = () => {
              { limitedLikesToShow &&
               limitedLikesToShow
             .filter(like => like.venue).map(like => (
-              <VenueCard key={like._id} venue={like.venue} isLiked={true} />
+              <VenueCard key={like._id} venue={like.venue} />
             ))}
           </div>
         ) : (

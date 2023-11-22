@@ -349,3 +349,55 @@
 .thumbnail-slider-wrap{
   padding-top: 1rem;
 }
+
+.slider-mobile{
+  display: none;
+}
+
+@media (max-width: 600px) {
+
+  .VenueDetails{
+    margin-top: -19rem;
+  }
+
+  .top-img-map{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+    opacity: .9;
+  }
+
+  .adress-container{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .slider-wrapper {
+    width: 100%;
+  }
+
+  .slider-mobile{
+    display: block;
+  }
+
+  .slider-desktop{
+    display: none;
+  }
+
+  .slick-dots{
+    margin-bottom: 1rem;
+    background-color: var(--secondary);
+    color: white;
+  }
+
+  .slick-dots li button::before{
+    color: white;
+  }
+
+  .information-containers{
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+  }
+}

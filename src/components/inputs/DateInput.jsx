@@ -54,6 +54,7 @@ const DateInput = ({ selectedDate, setSelectedDate }) => {
         onChange={handleDateChange}
         dateFormat="dd/MM/yyyy" 
         className='date-picker'
+        placeholderText={'Select Date'} 
         />
   </div>
   )

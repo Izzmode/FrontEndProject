@@ -136,11 +136,11 @@ body{
 
   }
 
-  @media (max-width: 1180px) {
+  /* @media (max-width: 1180px) {
     .venues-container {
       width: 95%;
     }
-  }
+  } */
 
   /* @media (max-width: 1120px) {
     .VenueCards-container{
@@ -154,9 +154,9 @@ body{
 
   @media (max-width: 936px) {
 
-    .venues-container {
+    /* .venues-container {
       width: 100%;
-    }
+    } */
     .VenueCards-container{
       /* justify-content: center; */
       justify-content: center;
@@ -175,11 +175,32 @@ body{
   }
   @media (max-width: 600px) {
     .CTA{
-      width: 100%;
+      /* width: 100%; */
       /* margin-top: -16rem; */
-      margin-top: -20rem;
+      margin-top: -19rem;
       height: 350px;
 
+    }
+
+    .SBO-options {
+      width: 90%;
+      margin-top: -19rem;
+      height: auto;
+      padding-block: 1rem;
+    }
+
+    .SBO-options .date-picker{
+      padding-block: 1rem;
+    }
+
+    .SBO-options label{
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .sbo-container .dropdowns-sbo{
+      display: flex;
+      flex-direction: column;
     }
 
     .CTA label {
@@ -214,7 +235,7 @@ body{
     }
     .css-b62m3t-container, .css-1w51wga-control, .css-b9akh4-control, div.css-betzke-control, .css-fswcfb-control{
       width: 100% !important;
-      padding: .5rem;
+      padding-block: .5rem;
     }
     
     .VenueCards-container a {

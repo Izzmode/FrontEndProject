@@ -28,10 +28,10 @@ const SearchBarOptions = () => {
   return (
 
     
-    <div className='CTA-options'>
+    <div className='CTA-options SBO-options'>
         <p>What kind of venues are you looking for?</p>
-        <div className='cta-container'>
-        <div className="dropdowns">
+        <div className='cta-container sbo-container'>
+        <div className="dropdowns dropdowns-sbo">
           <DateInput selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
           <LocationInput selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation}/>
           <QuantityInput selectedQuantity={selectedQuantity} setSelectedQuantity={setSelectedQuantity}/>

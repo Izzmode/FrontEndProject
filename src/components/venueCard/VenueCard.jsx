@@ -7,8 +7,11 @@ import './venueCard.css'
 
 const VenueCard = ({ venue }) => {
 
-    const [toggleFavourite, setToggleFavourite] = useState(false)
-    
+    // const [toggleFavourite, setToggleFavourite] = useState(false)
+    const [isLiked, setIsLiked] = useState(false);
+    const token = localStorage.getItem('token')?.replace(/['"]+/g, '');
+
+
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -31,6 +34,7 @@ const VenueCard = ({ venue }) => {
         }
 
         const data = await response.json();
+        //returning the venues that are liked
         return data.map(like => like.venue);
       } catch (error) {
         console.error('Error fetching likes:', error);
@@ -42,19 +46,16 @@ const VenueCard = ({ venue }) => {
   };
 
 
-  const [isLiked, setIsLiked] = useState(false);
-
+  //using the venue that is liked to check and see if they have the same id as the current venu
+  //if so setIsLiked
   useEffect(() => {
     fetchUserLikes().then(userLikes => {
+      //some returns a bolean
       const isVenueLiked = userLikes.some(like => like._id === venue?._id);
       setIsLiked(isVenueLiked);
     });
   }, [venue]);
   
-    // Rest of your VenueCard component remains the same
-  
-    
-    const token = localStorage.getItem('token')?.replace(/['"]+/g, '');
 
     const handleFavourite = async (e) => {
       console.log('klickade')
@@ -91,8 +92,6 @@ const VenueCard = ({ venue }) => {
     
     <NavLink to={`/venues/${venue?._id}?date=${selectedDateParam}` } style={{ textDecoration: 'none' }}>
     
-    {/* <NavLink to={`/venues/${venue._id}` } style={{ textDecoration: 'none' }}> */}
-
     <li className='VenueCard' style={{ textDecoration: 'none' }}>
     {isLiked ? (
         <AiFillHeart
@@ -109,7 +108,6 @@ const VenueCard = ({ venue }) => {
       )}
       
       <img src={venue?.thumbnail} alt={venue?.name} className='VenueCard-img' />
-      {/* <div className="shadow"></div> */}
 
       <section className='info-wrapper'>
 

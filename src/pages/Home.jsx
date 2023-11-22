@@ -20,7 +20,8 @@ const Home = () => {
             return true;
         }
         return false;
-    });
+    }).slice(0, 4);
+
 
   return (
     <div>

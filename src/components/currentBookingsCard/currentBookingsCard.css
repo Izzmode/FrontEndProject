@@ -57,3 +57,33 @@
     border-radius: 8px;
 }
 
+
+@media (max-width: 600px) {
+    
+    .CurrentBookingsCard{
+    display: flex;
+    flex-direction: column-reverse;
+    }
+    .CurrentBookingsCard .middle{
+        display: flex ;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .CurrentBookingsCard img{
+        width: 90%;
+        height: 200px;
+    }
+
+    .CurrentBookingsCard .middle, .CurrentBookingsCard .left{
+        width: 90%;
+        padding: .5rem;
+        height: auto;
+    }
+    .CurrentBookingsCard .CBC-address{
+        gap: 0;
+        margin-block: .5rem;
+    }
+
+   
+
+}

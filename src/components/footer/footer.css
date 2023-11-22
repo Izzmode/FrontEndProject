@@ -64,3 +64,64 @@
   .icons-footer .fb-icon{
     padding-left: 1rem;
   }
+
+  .fixed-menu-mobile{
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    .footer-top, .Footer .nav-links, .footer-bottom{
+        /* display: flex; */
+        flex-direction: column;
+        /* justify-content: space-between; */
+        /* align-items: center; */
+        /* width: 95%; */
+        /* margin: 0 auto; */
+    }
+    .Footer{
+        margin-bottom: 3rem;
+    }
+    .Footer .nav-link{
+        font-size: 1rem;
+    }
+
+    .footer-bottom p{
+        margin-left: 0;
+    }
+
+    .icons-footer{
+        margin-bottom: 1rem;
+    }
+
+    .fixed-menu-mobile{
+        display: block;
+        /* background-color: var(--third-grey); */
+        background-color: var(--secondary);
+        opacity: 0.9;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        padding: 1rem 2rem;
+        z-index: 100;
+        border-radius: 8px 8px 0px 0px;
+    }
+
+    .mobile-icons{
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+        color: white;
+     
+    }
+
+    .icon-mobile{
+        font-size: 33px;
+    }
+
+    .mobile-icons p{
+        font-size: .9rem;
+    }
+    .icon-link{
+        text-decoration: none;
+    }
+  }

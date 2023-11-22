@@ -33,7 +33,7 @@ const ContactUs = () => {
             <h2>Find Us</h2>
             <div className='address-phone-wrapper'>
             <div className='contact-phone'>
-            <h3>Phone</h3>
+            <h3 className='d-none-contact'>Phone</h3>
             <p>08 321 123</p>
             </div>
             <div className='contact-address'>

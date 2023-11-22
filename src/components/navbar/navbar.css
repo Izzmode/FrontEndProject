@@ -54,3 +54,29 @@
   .nav-user-icon{
     cursor: pointer;
   }
+
+  .mobile-navbar-login{
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    .Navbar .nav-links{
+      display: none;
+    }
+
+    .mobile-navbar-login{
+      display: inline;
+      color: white;
+      text-align: center;
+
+    }
+
+    .Navbar .icon-mobile{
+      color: white;
+      font-size: 25px;
+    }
+
+    .mobile-navbar-login p {
+      font-size: .8rem;
+    }
+  }

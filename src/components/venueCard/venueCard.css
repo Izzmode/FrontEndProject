@@ -114,7 +114,7 @@
     @media (max-width: 600px) {
   
       .VenueCard {
-        width: 95%;
+        width: 100%;
         margin: 0 auto;
       }
 
@@ -129,7 +129,10 @@
         font-size: 18px;
       }
 
-
+      /* ul.VenueCards-container{
+        width: 90%;
+        margin: 0 auto;
+      } */
 
       .bottom-container{
         display: flex;

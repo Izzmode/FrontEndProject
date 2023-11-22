@@ -6,6 +6,9 @@ import { BsProjector, BsCalendarDateFill } from "react-icons/bs"
 import { CgScreen } from "react-icons/cg"
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import Map from '../../components/Map'
+import Slider from 'react-slick'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 
 const BookingDetails = () => {
@@ -59,14 +62,12 @@ const BookingDetails = () => {
   //to calculate the amount of hours without having it in booking
   const hoursStart = +booking?.hours.split('-')[0]
   const hoursEnd = +booking?.hours.split('-')[1]
-
   const hoursValue = hoursEnd - hoursStart;
 
   const totalAmount = booking?.totalPrice;
 
   const vat = totalAmount * 0.25;
 
-  console.log(booking?.venue.transportation)
 
   //to format all dates to be more readlabe
   let formattedDate;
@@ -80,18 +81,18 @@ const BookingDetails = () => {
       day: 'numeric',
     });
     
-    console.log(formattedDate); 
+    // console.log(formattedDate); 
     formattedDateTwo = date.toLocaleDateString('en-US', {
       month: 'long',
       day: 'numeric',
     });
-    console.log(formattedDateTwo); 
+    // console.log(formattedDateTwo); 
     formattedPaymentDueDate = paymentDueDate.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
     });
-    console.log(formattedPaymentDueDate); 
+    // console.log(formattedPaymentDueDate); 
   } else {
     console.log("Invalid date");
   }
@@ -144,6 +145,27 @@ const BookingDetails = () => {
     location: booking?.venue.address
   };  
 
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    dots: true,
+    swipeToSlide: true,
+
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          dots: true,
+          swipeToSlide: true,
+          // arrows: false,
+        }
+      }
+    ]
+  };
+
   const longitude = booking?.venue.longitude;
   const latitude = booking?.venue.latitude;
 
@@ -165,6 +187,16 @@ const BookingDetails = () => {
 
         <div className='booking-details-venue-top'>
           <div className='top-left'>
+          <div className="slider-wrapper slider-mobile">
+
+            <Slider {...settings}>
+            {booking?.venue.images.map((slide, index) => 
+              <div className="slider-image-container-main" key={index}>
+                <img className="slick-slide-image" src={slide} />
+              </div>
+            )}
+            </Slider>
+            </div>
 
             <h2>{booking?.venue.name}</h2>
             {booking &&
@@ -295,7 +327,7 @@ const BookingDetails = () => {
                   </section>
                   <section className='bill-quantity'>
                     <h3>Qty</h3>
-                    <p>{String(hoursValue)}</p>
+                    <p>{hoursValue}</p>
                   </section>
                   <section className='bill-unit'>
                     <h3>Unit</h3>
