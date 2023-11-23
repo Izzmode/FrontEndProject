@@ -22,6 +22,8 @@
     background-color: var(--third-grey);
     font-size: .8rem;
     padding: 1rem;
+    /* position: absolute; */
+
   }
 
   .accordion-content li{

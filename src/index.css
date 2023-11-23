@@ -260,6 +260,29 @@ body{
     display: block;
   }
 
+  p.btn-show-more-options{
+    text-decoration: underline;
+    margin-top: 1rem;
+    font-size: .9rem;
+    font-weight: 400;
+  }
+
+  .btn-and-options{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .more-options-wrapper{
+    color: white;
+  }
+  .more-options-container{
+    margin-top: .2rem;
+    position: absolute;
+  }
+  .more-options-container .checkbox-wrapper{
+    margin-top: .2rem;
+  }
+
 
   .classMap{
     width: 100%;

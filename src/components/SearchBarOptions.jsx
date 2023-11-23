@@ -59,7 +59,9 @@ const SearchBarOptions = () => {
           <QuantityInput selectedQuantity={selectedQuantity} setSelectedQuantity={setSelectedQuantity}/>
           <PriceInput selectedPrice={selectedPrice} setSelectedPrice={setSelectedPrice}/>
         </div>
+        <div className='btn-and-options'>
           {/* Toggle "More options" */}
+          <div className='more-options-wrapper'>
           <p
           className='btn-show-more-options'
           onClick={() => setShowMoreOptions(!showMoreOptions)}
@@ -74,7 +76,9 @@ const SearchBarOptions = () => {
             <Checkbox label='Catering' initState={false} identifier='searchCatering'/>
           </div>
         )}
+        </div>
         <button className='btn-search' onClick={handleSearch}>SEARCH</button>
+        </div>
         </div>
         </div>
 
