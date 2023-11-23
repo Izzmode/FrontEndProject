@@ -41,6 +41,9 @@ const VenueDetails = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  //from checkbox. 
+  // const initState = localStorage.getItem('catering') === true ? true : false;
+
   //the idea is to add the date they searched for, but not working? Check again now you changed inputs
   const params = new URLSearchParams(location.search);
   const dateParamString = params.get('date');
@@ -144,9 +147,11 @@ const VenueDetails = () => {
     if(am.service === 'Catering'){
     return true
     }
-
     return false
   })
+  if (!offersCatering) {
+    localStorage.setItem('catering', false);
+  }
 
   const accContent = [
     {  content: 'Barco ClickShare Wireless' },
@@ -311,7 +316,7 @@ const VenueDetails = () => {
                 </div>
                 {offersCatering && offersCatering.length > 0 && (
                 <div className='checkbox-container'>
-                  <Checkbox label='Add catering to booking'/>
+                  <Checkbox label='Add catering to booking' initState={false} identifier='catering'/>
                   <span>
                   <MdDinnerDining className='food-icon'/>
                   </span>

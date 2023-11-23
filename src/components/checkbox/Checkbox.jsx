@@ -2,16 +2,17 @@ import React from 'react'
 import './checkbox.css'
 import { useState, useEffect } from 'react'
 
-const Checkbox = ({ label, checked, onChange }) => {
+const Checkbox = ({ label, initState, identifier }) => {
 
   const [isChecked, setIsChecked] = useState(
-    localStorage.getItem('catering') === true ? true : false
+    initState
+    // localStorage.getItem(identifier) === 'true' ? true : initState
   );
 
   useEffect(() => {
     // Update localStorage whenever the state changes
-    localStorage.setItem('catering', isChecked);
-  }, [isChecked]);
+    localStorage.setItem(identifier, isChecked);
+  }, [isChecked, identifier]);
 
   const handleCheckboxChange = () => {
     // Update state based on the current state

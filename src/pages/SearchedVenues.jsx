@@ -11,6 +11,13 @@ const SearchedVenues = () => {
     const selectedQuantity = searchParams.get('quantity');
     const selectedPrice = searchParams.get('price');
     const selectedDate = searchParams.get('date');
+    const breakoutRooms = searchParams.get('breakoutRooms');
+    const catering = searchParams.get('catering');
+    // const cateringParam = searchParams.get('catering');
+// const catering = cateringParam === 'true';
+
+console.log(catering)
+console.log(breakoutRooms)
 
     let selectedQuantityNumber;
     if (selectedQuantity){
@@ -42,20 +49,32 @@ const SearchedVenues = () => {
       const selectedQuantityRange = selectedQuantity?.split('-').map(Number);
       
         const selectedPricePerHour = parseInt(selectedPrice, 10);
-
         if (
-            //if the user didnt select a location/q or...
-            // if the location of the venue/q matches the one they did select - return true
-             (!selectedLocation || venue.area === selectedLocation) &&
-             (!selectedQuantity ||
-               (selectedQuantityRange[0] <= venue.numberOfPeople && selectedQuantityRange[1] >= venue.numberOfPeople)) &&
-             (!selectedPrice || selectedPricePerHour >= venue.pricePerHour)
-            ) {
-                return true;
-            }
-            return false;
-        });
+          // Condition 1: Location
+          (!selectedLocation || venue.area === selectedLocation) &&
+      
+          // Condition 2: Quantity
+          (!selectedQuantity ||
+            (selectedQuantityRange[0] <= venue.numberOfPeople && selectedQuantityRange[1] >= venue.numberOfPeople)) &&
+      
+          // Condition 3: Price
+          (!selectedPrice || selectedPricePerHour >= venue.pricePerHour) &&
+      
+          // Condition 4: Breakout Rooms
+          (!breakoutRooms || breakoutRooms && venue.arrangements.some(arrangement => arrangement.seating === 'Breakout_Rooms')) &&
+      
+          // Condition 5: Catering
+          (!catering || catering && venue.amenities.some(amenity => amenity.service === 'Catering'))
+        ) {
+          return true;
+        }
+        
+        return false;
+      });
+        
 
+        // const breakoutRooms = searchParams.get('breakoutRooms');
+        // const catering = searchParams.get('catering');
         
   return (
     <div>
