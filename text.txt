@@ -1,8 +1,0 @@
-//Nyckel till google maps, lägg in den efter key= i index.html
-
-AIzaSyByaZ0G8E4agiR23dGjjVDJQEznJ-YnGA0
-
-
-//Om du behöver logga in
-"email@email.test"
-test
