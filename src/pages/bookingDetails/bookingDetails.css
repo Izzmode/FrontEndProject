@@ -231,6 +231,7 @@ font-weight: 600;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    
 }
 
 .booking-details-billing h2{
@@ -356,4 +357,15 @@ font-weight: 600;
         display: none;
     }
     
+    .pdf-styles{
+        /* padding: 2rem; */
+        /* background-color: var(--divider); */
+        /* border-radius: 8px; */
+        /* margin-top: 2rem; */
+        /* display: flex; */
+        /* flex-direction: column; */
+        /* justify-content: space-between; */
+        width: 590px;
+        
+    }
 }

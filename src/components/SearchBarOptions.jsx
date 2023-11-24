@@ -18,12 +18,8 @@ const SearchBarOptions = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(null);
   const formattedDate = selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '';
-  // const [searchBreakout, setSearchBreakout] = useState(false);
-  // const [searchCatering, setSearchCatering] = useState(false);
-  const searchBreakoutLS = localStorage.getItem('searchBreakout')
-  const searchCateringLS = localStorage.getItem('searchCatering')
-
-
+  const searchBreakoutLS = localStorage.getItem('searchBreakout') === 'true';
+  const searchCateringLS = localStorage.getItem('searchCatering') === 'true';
 
       // const handleSearch = () => {
       // if (selectedLocation && selectedQuantity && selectedPrice && formattedDate) {
@@ -34,12 +30,11 @@ const SearchBarOptions = () => {
       const handleSearch = () => {
         let queryParams = `location=${selectedLocation.value}&quantity=${selectedQuantity.value}&price=${selectedPrice.value}&date=${formattedDate}`;
     
-        if (searchBreakoutLS === 'true') {
+        if (searchBreakoutLS) {
           queryParams += '&breakoutRooms=true';
-          console.log('hej')
         }
     
-        if (searchCateringLS === 'true') {
+        if (searchCateringLS) {
           queryParams += '&catering=true';
         }
     

@@ -6,6 +6,7 @@ const Checkbox = ({ label, initState, identifier }) => {
 
   const [isChecked, setIsChecked] = useState(
     initState
+    
     // localStorage.getItem(identifier) === 'true' ? true : initState
   );
 

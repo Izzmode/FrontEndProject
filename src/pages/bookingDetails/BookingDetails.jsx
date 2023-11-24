@@ -9,12 +9,26 @@ import Map from '../../components/Map'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 
 
 const BookingDetails = () => {
 
   const { id } = useParams();
   const [booking, setBooking] = useState(null)
+
+  const downloadPdfDocument = () => {
+    const input = document.getElementById('divToDownload');
+    input.classList.add('pdf-styles'); 
+    html2canvas(input)
+      .then((canvas) => {
+          const imgData = canvas.toDataURL('image/png');
+          const pdf = new jsPDF();
+          pdf.addImage(imgData, 'JPEG', 0, 0);
+          pdf.save("download.pdf");
+      })
+  }
 
   useEffect(() => {
 
@@ -312,13 +326,13 @@ const BookingDetails = () => {
               <div className='booking-details-map'>
                 { booking ? <Map latitude={latitude} longitude={longitude}/> : <div>Loading...</div>}
               </div>
-              <div className='booking-details-billing'>
+              <div className='booking-details-billing' id="divToDownload">
                 <div className='billing-download'>
                   <div className='billing-due-date'>
                   <h2>Billing</h2>
                   <p>Due Date: {formattedPaymentDueDate}</p>
                   </div>
-                  <button className='btn-dark'>DOWNLOAD PDF</button>
+                  <button className='btn-dark' onClick={downloadPdfDocument}>DOWNLOAD PDF</button>
                 </div>
                 <div className='billing-details'>
                   <section className='bill-description'>

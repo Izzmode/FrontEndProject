@@ -13,11 +13,7 @@ const SearchedVenues = () => {
     const selectedDate = searchParams.get('date');
     const breakoutRooms = searchParams.get('breakoutRooms');
     const catering = searchParams.get('catering');
-    // const cateringParam = searchParams.get('catering');
-// const catering = cateringParam === 'true';
 
-console.log(catering)
-console.log(breakoutRooms)
 
     let selectedQuantityNumber;
     if (selectedQuantity){
@@ -25,7 +21,7 @@ console.log(breakoutRooms)
 
       if(selectedQuantity.includes('-')){
        maxQuantity = selectedQuantity.split('-')[1]
-       console.log(maxQuantity)
+      //  console.log(maxQuantity)
 
       }
       else{
@@ -40,7 +36,6 @@ console.log(breakoutRooms)
       }
     } 
 
-    console.log(selectedQuantityNumber)
 
     const { data: venues, isLoading, error } = useFetch('http://localhost:9999/api/venues')
 

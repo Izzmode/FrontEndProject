@@ -5,16 +5,17 @@ import { MdOutlineSupportAgent, MdHeadsetMic, MdOutlineVideogameAsset, MdDinnerD
 import { BsProjector, BsCalendarDateFill } from "react-icons/bs"
 import { CgScreen } from "react-icons/cg"
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useState } from 'react';
 
 
 const BookingSummary = () => {
  
   //Getting the values the user chose in VenueDetails booking from localStorage
+  const catering = localStorage.getItem('catering') === 'true';
   const hours = localStorage.getItem('hours')
   const totalAmountLS = localStorage.getItem('totalAmount')
   const dateLS = localStorage.getItem('date')
   const attendees = localStorage.getItem('quantity')
-  const catering = localStorage.getItem('catering') ? true : false;
   const date = dateLS === "null" ? null : new Date(dateLS);
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,7 +30,7 @@ const BookingSummary = () => {
       day: 'numeric',
     });
   
-    console.log(formattedDate); 
+    // console.log(formattedDate); 
   } else {
     console.log("Invalid date");
   }
@@ -52,7 +53,6 @@ const BookingSummary = () => {
 
       // const token = localStorage.getItem('token');
       const token = localStorage.getItem('token').replace(/['"]+/g, '');
-      console.log(token)
 
       const res = await fetch('http://localhost:9999/api/bookings', {
         method: 'POST',
