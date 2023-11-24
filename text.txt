@@ -1,39 +1,8 @@
-tbd
-
-skapa backend
-mongo db
-strukturera upp hur ett objekt ska se ut
-behöver det vara ordrar? Lägger man till objekten i en array, det är ju bara en åt gången
-inloggning och jwt
+//Nyckel till google maps, lägg in den efter key= i index.html
 
 AIzaSyByaZ0G8E4agiR23dGjjVDJQEznJ-YnGA0
 
+
+//Om du behöver logga in
 "email@email.test"
 test
-
-klara
-* styla liked venues
-* fixa add to calender
-* fixa like inne på venuedetails
-* ta bort root
-* Snygga till koden
-* fixa så att när man försöker access protected route att man hindrar navigeringen
-* fixa protectedroute
-* Lägg till mer venues i backend
-* gör alla sidor responsiva
-* fixa slider till venuedetails popular venues 
-* fixa hamburgarmeny vid mobile
-* fixa så att det bara visas fyra eller åtta popular venues
-
-
-
-* ta bort all console.log
-* fixa färg till text
-* fixa stylingen på date i sökning, kanske går om jag nu har annan cta i booking.
-* kolla hur det ser ut i firefox.
-* lägg till more options
-* lägg till filtrering/sortering
-* Lägg till edit profile
-* gör technical equipment dropdown snyggare
-* fixa token
-* pdf download
